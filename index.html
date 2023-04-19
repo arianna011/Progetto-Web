@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NotaMi</title>
+
+  <link rel="stylesheet" href="bootstrap/scss/bootstrap.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg" style="background-color: #640062;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <img class="d-none d-md-block" src="images/logo.png" alt="NotaMi">
+          <img class="d-block d-md-none" src="images/logo-mobile.png" alt="NotaMi">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><span class="text-white"> Band </span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><span class="text-white"> Artisti </span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><span class="text-white"> Eventi </span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><span class="text-white"> Host </span></a>
+            </li>
+          </ul>
+          <button type="button" class="d-flex btn btn-outline-primary">Accedi/Registrati</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div id="presentation" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="w-100 d-none d-md-block" style="background: url('/images/pres1.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('/images/pres1.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="carousel-caption text-white text-md-start">
+          <span class="d-none d-md-block pres-descr"> <h5>Sound di qualità</h5> <br> per i tuoi eventi </span>
+          <span class="d-block d-md-none pres-descr-mob"> <h5>Sound di qualità</h5> <br> per i tuoi eventi </span>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="w-100 d-none d-md-block" style="background: url('/images/pres2.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('/images/pres2.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="carousel-caption  text-white text-md-start">
+          <span class="d-none d-md-block pres-descr"> <h5>Visibilità</h5> <br> per il tuo gruppo </span>
+          <span class="d-block d-md-none pres-descr-mob"> <h5>Visibilità</h5> <br> per il tuo gruppo </span>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="w-100 d-none d-md-block" style="background: url('/images/pres0.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('/images/pres0.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="carousel-caption text-white text-md-start">
+          <span class="d-none d-md-block pres-descr"> <h5>Musica dal vivo</h5> <br> per serate speciali</span>
+          <span class="d-block d-md-none pres-descr-mob"> <h5>Musica dal vivo</h5> <br> per serate speciali</span>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#presentation" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#presentation" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+  
+  <br><br>
+
+  <span class="text-purple text-center text-title"><h1>Find Bands&Stages</h1></span>
+  <p class="text-center text-descr d-none d-md-block"> <b>NotaMi</b> è una piattaforma italiana dedicata ad artisti e host di eventi musicali:
+     <br> il suo obiettivo è quello di far conoscere band emergenti e facilitare l'ingaggio di gruppi per vivacizzare le serate nei locali</p>
+  <p class="text-center text-descr-mob d-block d-md-none"> <b>NotaMi</b> è una piattaforma italiana dedicata ad artisti e host di eventi musicali:
+      il suo obiettivo è quello di far conoscere band emergenti e facilitare l'ingaggio di gruppi per vivacizzare le serate nei locali</p>
+
+  <br>
+
+
+  <div class="showcase">
+
+    <div class="card-group">
+      <div class="card">
+        <div class="w-100 d-none d-md-block" style="background: url('/images/band2.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('/images/band2.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="card-body">
+          <h5 class="card-title">Ingaggia Band</h5>
+          <p class="card-text">Trova il gruppo con il sound migliore per le tue necessità</p>
+          <button type="button" class="btn btn-outline-primary">Vai</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="w-100 d-none d-md-block" style="background: url('/images/musicista.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('/images/musicista.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="card-body">
+          <h5 class="card-title">Trova Artisti</h5>
+          <p class="card-text">Scopri nuovi componenti per la tua band</p>
+          <button type="button" class="btn btn-outline-primary">Vai</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="w-100 d-none d-md-block" style="background: url('/images/evento2.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('/images/evento2.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="card-body">
+          <h5 class="card-title">Cerca Eventi</h5>
+          <p class="card-text">Trova il palco su cui esibirti</p>
+          <button type="button" class="btn btn-outline-primary">Vai</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <br><br class="d-none d-md-block">
+  <span class="text-purple text-center text-title"><h1>In primo piano </h1></span>
+  <p class="text-center text-descr d-none d-md-block">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti</p>
+  <p class="text-center text-descr-mob d-block d-md-none">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti<br></p>
+  
+
+  <div class="card text-center" style="background: #e6dde6;">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background: #640062;">
+      <button class="nav-link active" id="nav-band-tab" data-bs-toggle="tab" data-bs-target="#nav-band" type="button"
+        role="tab" aria-controls="nav-band" aria-selected="true">Band</button>
+      <button class="nav-link" id="nav-artist-tab" data-bs-toggle="tab" data-bs-target="#nav-artist" type="button"
+        role="tab" aria-controls="nav-artist" aria-selected="false">Artisti</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-band" role="tabpanel" aria-labelledby="nav-band-tab" tabindex="0">
+    <div class="card-group">
+      <div class="card m-3">
+        <div style="background: url('/images/profile.jpg') no-repeat; background-position: center center; height:300px;"></div>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-body-secondary">Last updated 3 mins ago</small>
+        </div>
+      </div>
+      <div class="card m-3">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-body-secondary">Last updated 3 mins ago</small>
+        </div>
+      </div>
+      <div class="card m-3">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This card has even longer content than the first to show that equal height action.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-body-secondary">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="tab-pane fade" id="nav-artist" role="tabpanel" aria-labelledby="nav-artist-tab" tabindex="0">
+      <div class="card-group">
+        <div class="card m-3">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+              content. This content is a little bit longer.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-body-secondary">Last updated 3 mins ago</small>
+          </div>
+        </div>
+        <div class="card m-3">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-body-secondary">Last updated 3 mins ago</small>
+          </div>
+        </div>
+        <div class="card m-3">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+              content. This card has even longer content than the first to show that equal height action.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-body-secondary">Last updated 3 mins ago</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+  <br><br>
+  <span class="text-purple text-center text-title"><h1>Eventi imminenti</h1></span>
+  <p class="text-center text-descr d-none d-md-block">Le prossime <b>occasioni</b> di musica dal vivo da non perdere</p>
+  <p class="text-center text-descr-mob d-block d-md-none">Le prossime <b>occasioni</b> di musica dal vivo da non perdere</p></p>
+
+
+
+  <footer class="footer pt-lg-5 pt-4 pb-4">
+    <div class="container">
+      <div class="row gy-md-5 gy-4 mb-md-5 mb-4 pb-lg-2">
+        <div class="col-lg-3"><a class="navbar-brand d-inline-flex align-items-center mb-lg-4 mb-3" href="index.html">
+          <span class="text-nav text-white">NotaMi</span></a>
+          <p class="mb-4 pb-lg-3 fs-xs text-muted" style="max-width: 306px;">NotaMi nasce come piccolo progetto italiano per promuovere la condivisione di emozioni e momenti speciali tramite la musica </p>
+        </div>
+        <div class="col-xl-8 offset-xl-1 col-lg-9">
+          <div class="row row-cols-sm-4 row-cols-1">
+            <div class="col">
+              <ul class="nav flex-column mb-0">
+                <li class="nav-item mb-2"><span class="nav-title">Pagine</span></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Band</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Artisti</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Eventi</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Host</a></li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="nav flex-column mb-0">
+                <li class="nav-item mb-2"><span class="nav-title">Autori</span></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Arianna Paolini</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Flavio Sammarini</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Federica Sinisi</a></li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="nav flex-column mb-0">
+                <li class="nav-item mb-2"><span class="nav-title">Contatti</span></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">esempioemail@gmail.com</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">+39 123 456 789</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

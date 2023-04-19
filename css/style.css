@@ -1,0 +1,87 @@
+.bg-beige
+{
+    background-color: #e6dde6;
+}
+
+.bg-purple
+{
+    background-color: #640062;
+}
+
+.text-purple
+{
+   color: #640062;
+}
+
+.my-text-muted
+{
+    color: #3d013cdc;
+}
+
+.text-title
+{
+    font-size:x-large;
+}
+
+.text-descr
+{
+    font-size: large; 
+    margin: 50px;
+    margin-top: 30px;
+}
+
+.text-descr-mob
+{
+    font-size: medium; 
+    margin: 30px;
+}
+
+.pres-descr
+{
+    font-size: large;
+}
+
+.pres-descr>h5
+{
+    font-size: larger;
+    text-shadow: black;
+    background-color: rgba(0,0,0,0.2);
+    padding: 3px;
+    display: inline;
+}
+
+.pres-descr-mob
+{
+    font-size: medium;
+    text-shadow: black;
+}
+
+.pres-descr-mob>h5
+{
+    font-size: larger;
+    text-shadow: black;
+    background-color: rgba(0,0,0,0.2);
+    padding: 1px;
+    display: inline;
+}
+
+.mycontainer
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+footer
+{
+    background-color: rgb(91, 6, 91);
+}
+
+.nav-title
+{
+    color: rgb(179, 178, 178);
+    font-size: large;
+}
+
