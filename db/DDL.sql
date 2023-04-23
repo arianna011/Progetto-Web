@@ -1,3 +1,20 @@
+-- Database: NotaMi
+
+--DROP DATABASE IF EXISTS "NotaMi";
+
+/*CREATE DATABASE "NotaMi"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Italian_Italy.1252'
+    LC_CTYPE = 'Italian_Italy.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+COMMENT ON DATABASE "NotaMi"
+    IS 'progetto LTW';
+*/
+
 --GESTIONE IMMAGINI
 CREATE TABLE IF NOT EXISTS Immagine(
 	PRIMARY KEY(id_immagine),
@@ -9,8 +26,8 @@ CREATE TABLE IF NOT EXISTS Immagine(
 CREATE TABLE IF NOT EXISTS Raccolta_immagini(
 	PRIMARY KEY(id_raccolta),
 	id_raccolta 	INT				GENERATED ALWAYS AS IDENTITY,
-	nome			VARCHAR(20),
-	descrizione		VARCHAR(100)	
+	nome_raccolta	VARCHAR(64),
+	descrizione		VARCHAR(256)	
 );
 
 --stessa immagine puo appartenere a galleria una volta sola? (andrebbe caricata 2 volte) (evitare casini)
@@ -28,57 +45,89 @@ CREATE TABLE IF NOT EXISTS Citta
 (
 	PRIMARY KEY (id_citta),
     id_citta	INT 		GENERATED ALWAYS AS IDENTITY,
-    nome		VARCHAR(40)	NOT NULL
+    nome_citta	VARCHAR(64)	UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Utente(
+CREATE TABLE IF NOT EXISTS Profilo_utente(
 	PRIMARY KEY (id_utente),
 	id_utente		INT			GENERATED ALWAYS AS IDENTITY,
-	nome			VARCHAR(50)	NOT NULL,
-	cognome			VARCHAR(50)	NOT NULL,
+	nome			VARCHAR(64)	NOT NULL,
+	cognome			VARCHAR(64)	NOT NULL,
 	dataN			DATE		NOT NULL,
-	nickname		VARCHAR(50) NOT NULL,
-	passwd			VARCHAR(30)	NOT NULL,
-	mail			VARCHAR(70)	NOT NULL
+	nickname		VARCHAR(64) UNIQUE NOT NULL,
+	passwd			VARCHAR(32)	UNIQUE NOT NULL,
+	mail			VARCHAR(64)	--nullable
 					CONSTRAINT validazione_mail
 					CHECK(mail LIKE '%_@%_.__%'),
 	id_citta		INT			--nullable
 					REFERENCES Citta(id_citta),	--spostato da 'Artista' a qui (potrebbe essere utile sapere la citta anche di utenti non artisti)
 	foto_profilo	INT			--nullable
 					REFERENCES Immagine(id_immagine),
-	galleria_utente	INT			--nullable
-					REFERENCES Raccolta_immagini(id_raccolta)
+	
+	/*galleria_utente	INT			--nullable
+					REFERENCES Raccolta_immagini(id_raccolta),*/
+	
+	descrizione		VARCHAR(1024) --nullable
 );
 
 --ROBA ARTISTI
 CREATE TABLE IF NOT EXISTS Profilo_artista(
 	PRIMARY KEY (id_artista),
 	id_artista			INT
-						REFERENCES Utente(id_utente)	--NB: la chiave del profilo artista è la stessa del profilo utente; card(1,1)
+						REFERENCES Profilo_utente(id_utente)	--NB: la chiave del profilo artista è la stessa del profilo utente; cardinalità(1,1)
 						ON UPDATE CASCADE
 						ON DELETE CASCADE,
-	nomedarte			VARCHAR(20),
-	galleria_artista	INT				--nullable
-						REFERENCES Raccolta_immagini(id_raccolta)	
-	--link social? video e immagini esclusive del profilo artista? per ora non contiene molto ma più avanti verrà "rimpolpata"
+	nomedarte			VARCHAR(32),
+	
+	--idea: se assente potrebbe essere sostituita per default dall'immagine del profilo principale
+	foto_profilo		INT			--nullable
+						REFERENCES Immagine(id_immagine),
+	galleria_artista	INT			--nullable
+						REFERENCES Raccolta_immagini(id_raccolta),
+	
+	descrizione			VARCHAR(1024), --nullable
+	
+	range_prezzo		int4range	--nullable
+	--link social? 
 );
+
+--alla creazione del profilo artista, se la foto non è presente, viene impostata quella del profilo utente per default
+CREATE OR REPLACE FUNCTION set_default_profpic_artista() RETURNS TRIGGER AS $$
+BEGIN
+	IF NEW.foto_profilo IS NULL THEN
+		SELECT foto_profilo
+		INTO NEW.foto_profilo
+		FROM Profilo_utente
+		WHERE id_utente = NEW.id_artista;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER TR_set_default_profpic_artista
+BEFORE INSERT ON Profilo_artista		--Rischio confutato: il trigger BEFORE non da problemi nell'evenienza in cui profilo utente e profilo artista siano creati nella stessa query (per essere sicuro di trovare il profilo utente da cui prendere l'immagine, facendo la select)
+FOR EACH ROW
+EXECUTE FUNCTION set_default_profpic_artista();
 
 CREATE TABLE IF NOT EXISTS Genere_musicale(
 	PRIMARY KEY(id_genere),
 	id_genere	SMALLINT		GENERATED ALWAYS AS IDENTITY,
-	nome_genere	VARCHAR(30)		UNIQUE NOT NULL
+	nome_genere	VARCHAR(32)		UNIQUE NOT NULL
 );
 
 INSERT INTO Genere_musicale (nome_genere) VALUES
 ('Jazz'), ('Rock'),
 ('Pop'), ('Blues'), ('Rap'), ('Country'), ('Indie'),
 ('R&B'), ('Metal'), ('Musica classica'), ('Ballad'),
-('Folk'), ('Ambient'), ('Elettronica'), ('Irlandese');
+('Folk'), ('Ambient'), ('Elettronica'), ('Irlandese'),
+
+('Dance & EDM'), ('Etnica'), ('Italiana'), ('Latina')
+;
 
 CREATE TABLE IF NOT EXISTS Strumento_musicale(
 	PRIMARY KEY(id_strumento),
 	id_strumento	SMALLINT		GENERATED ALWAYS AS IDENTITY,
-	nome_strumento	VARCHAR(30)		UNIQUE NOT NULL
+	nome_strumento	VARCHAR(32)		UNIQUE NOT NULL
 );
 
 --forse andrebbe rinominato "competenza musicale"
@@ -95,7 +144,7 @@ INSERT INTO Strumento_musicale (nome_strumento) VALUES
 CREATE TABLE IF NOT EXISTS Servizio_musicale(
 	PRIMARY KEY(id_servizio),
 	id_servizio		SMALLINT		GENERATED ALWAYS AS IDENTITY,
-	nome_servizio	VARCHAR(30)		UNIQUE NOT NULL
+	nome_servizio	VARCHAR(32)		UNIQUE NOT NULL
 );
 
 INSERT INTO Servizio_musicale(nome_servizio) VALUES
@@ -138,10 +187,14 @@ CREATE TABLE IF NOT EXISTS Servizio_artista_lookup
 CREATE TABLE IF NOT EXISTS Profilo_band
 (
 	PRIMARY KEY(id_band),
-	id_band		INT				GENERATED ALWAYS AS IDENTITY,
-	nome_band	VARCHAR(20)		NOT NULL,
-	id_sede		INT				--nullable
-				REFERENCES Citta(id_citta)	--sede principale della band
+	id_band			INT				GENERATED ALWAYS AS IDENTITY,
+	nome_band		VARCHAR(64)		NOT NULL,
+	range_prezzo	int4range,	--nullable
+	foto_profilo	INT			--nullable
+					REFERENCES Immagine(id_immagine),
+	id_sede			INT				--nullable
+					REFERENCES Citta(id_citta)	--sede principale della band
+
 );
 
 --necessaria per rappresentare anche membri senza profilo
@@ -149,16 +202,16 @@ CREATE TABLE IF NOT EXISTS Membro_band
 (
 	PRIMARY KEY(id_membro),
 	id_membro	INT		GENERATED ALWAYS AS IDENTITY,
-	nome		VARCHAR(50),							--NB:trigger, se profilo è not null, nome e cognome sono uguali a quelli del profilo (in questo caso la ridondanza è opportuna e la consistenza è facile da implementare)
-	cognome		VARCHAR(50),
-	nomedarte	VARCHAR(50),
+	nome		VARCHAR(64),							--NB:trigger, se profilo è not null, nome e cognome sono uguali a quelli del profilo (in questo caso la ridondanza è opportuna e la consistenza è facile da implementare)
+	cognome		VARCHAR(64),
+	nomedarte	VARCHAR(64),
 	profilo		INT			--nullable (per membri non registrati)
 				REFERENCES Profilo_artista(id_artista)
 				ON DELETE SET NULL
 );
 
---garantisce si che il collegamento fra il membro di una band e un profilo artista avvenga correttamente, nel caso sia presente
-CREATE OR REPLACE FUNCTION set_membro_registrato() RETURNS TRIGGER AS $$
+--garantisce si che il collegamento fra il membro di una band e un profilo artista avvenga correttamente, nel caso ques'ultimo sia presente
+CREATE OR REPLACE FUNCTION set_default_membro_registrato() RETURNS TRIGGER AS $$
 DECLARE nomedarte_profilo VARCHAR;
 BEGIN
 	
@@ -167,14 +220,14 @@ BEGIN
 		--se ci sono gia nome e/o cognome do errore
 		IF NEW.nome IS NOT NULL OR NEW.cognome IS NOT NULL THEN 
 			RAISE EXCEPTION
-				'Non è permesso specificare un profilo e un nome/cognome contemporaneamente: questi dati vengono reperiti direttamente dal profilo onde evitare incoerenze (id profilo: %, ''% %'')',
+				'Non è permesso specificare nome/cognome per un membro già registrato (id profilo già specificato); tali dati vengono reperiti direttamente dal profilo onde evitare incoerenze (id profilo: %, ''% %'')',
 				NEW.profilo, NEW.nome, NEW.cognome;
 		END IF;
 		
 		--reperisco i dati del membro direttamente dal profilo indicato
 		SELECT nome, cognome, nomedarte
 		INTO NEW.nome, NEW.cognome, nomedarte_profilo
-		FROM Utente JOIN Profilo_artista ON id_utente = id_artista
+		FROM Profilo_utente JOIN Profilo_artista ON id_utente = id_artista
 		WHERE id_artista = NEW.profilo;
 		
 		--se manca il nomedarte, prova a prenderlo dal profilo artista (forse non desiderabile?)
@@ -187,10 +240,10 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER TR_set_membro_registrato
+CREATE OR REPLACE TRIGGER TR_set_default_membro_registrato
 BEFORE INSERT ON Membro_band
 FOR EACH ROW
-EXECUTE FUNCTION set_membro_registrato();
+EXECUTE FUNCTION set_default_membro_registrato();
 
 
 	
@@ -231,94 +284,112 @@ CREATE TABLE IF NOT EXISTS Profilo_locale
 	PRIMARY KEY(id_locale),
 	id_locale		INT				GENERATED ALWAYS AS IDENTITY,	--chiave generata, perchè ad un profilo utente possono essere associati più locali (capitalisti dello show business >:( ))
 	
-	nome_locale		VARCHAR(50)		NOT NULL,
+	nome_locale		VARCHAR(64)		NOT NULL,
 	titolare		INT				NOT NULL
-					REFERENCES Utente(id_utente)
-					ON DELETE CASCADE,
+					REFERENCES Profilo_utente(id_utente)
+					ON DELETE CASCADE
+					ON UPDATE CASCADE,
 	
 	id_citta		INT				NOT NULL
 					REFERENCES Citta(id_citta)
-					ON DELETE NO ACTION,
-	indirizzo		VARCHAR(50),	--nullable
+					ON DELETE NO ACTION
+					ON UPDATE CASCADE,
+	indirizzo		VARCHAR(64),	--nullable
+	
+	foto_profilo	INT			--nullable
+					REFERENCES Immagine(id_immagine)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	galleria_locale	INT				--nullable
 					REFERENCES Raccolta_immagini(id_raccolta)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
+	descrizione		VARCHAR(512) --nullable
 );
 	
-CREATE TABLE IF NOT EXISTS Evento
+CREATE TABLE IF NOT EXISTS Ingaggio
 (
-	PRIMARY KEY(id_evento),
-	id_evento		INT				GENERATED ALWAYS AS IDENTITY,
+	PRIMARY KEY(id_ingaggio),
+	id_ingaggio				INT				GENERATED ALWAYS AS IDENTITY,
 	
-	titolo			VARCHAR(50)		NOT NULL,
-	descrizione		VARCHAR(200)	NOT NULL,
-	data_evento		DATE			NOT NULL,
+	datore					INT				NOT NULL
+							REFERENCES Profilo_utente(id_utente)
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
+	
+	titolo					VARCHAR(64)		NOT NULL,
+	descrizione				VARCHAR(512)	NOT NULL,
+	data_ingaggio			DATE			NOT NULL,
 	--ora evento?
-	id_luogo		INT				NOT NULL
-					REFERENCES Profilo_locale(id_locale)
-					ON DELETE NO ACTION,
-	immagine		INT				--nullable
-					REFERENCES Immagine(id_immagine)
+	id_luogo				INT				--nullable
+							REFERENCES Profilo_locale(id_locale)
+							ON DELETE NO ACTION,
+	immagine				INT				--nullable
+							REFERENCES Immagine(id_immagine)
+							ON DELETE SET NULL,
+
+	compenso_indicativo		NUMERIC(10,2)	--nullable
 );
 
 --RECENSIONI
 CREATE TABLE IF NOT EXISTS Recensione_artista(
-	PRIMARY KEY (id_utente, oggetto),
-	valutazione		INT		NOT NULL				--votazione in decimi
+	PRIMARY KEY (id_utente, id_oggetto),
+	valutazione		SMALLINT		NOT NULL				--votazione in decimi
 					CONSTRAINT rating_range_artista
-					CHECK(valutazione < 10 AND valutazione > 0),
+					CHECK(valutazione BETWEEN 0 AND 10),
 	
-	testo			VARCHAR(200)	NOT NULL,
-	data_recensione	DATE	NOT NULL
+	testo			VARCHAR(512)	NOT NULL,
+	data_recensione	DATE			NOT NULL
 					DEFAULT NOW(),
 	
 	id_utente		INT		NOT NULL
-					REFERENCES Utente(id_utente)
+					REFERENCES Profilo_utente(id_utente)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL,
 	
-	oggetto			INT		NOT NULL
+	id_oggetto			INT		NOT NULL
 					REFERENCES Profilo_artista(id_artista)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS Recensione_band(
-	PRIMARY KEY (id_utente, oggetto),
+	PRIMARY KEY (id_utente, id_oggetto),
 	valutazione		INT		NOT NULL				--votazione in decimi
 					CONSTRAINT rating_range_band
-					CHECK(valutazione < 10 AND valutazione > 0),
+					CHECK(valutazione BETWEEN 0 AND 10),
 	
-	testo			VARCHAR(200)	NOT NULL,
-	data_recensione	DATE	NOT NULL
+	testo			VARCHAR(512)	NOT NULL,
+	data_recensione	DATE			NOT NULL
 					DEFAULT NOW(),
 	
 	id_utente		INT		NOT NULL
-					REFERENCES Utente(id_utente)
+					REFERENCES Profilo_utente(id_utente)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL,
 		
-	oggetto			INT		NOT NULL
+	id_oggetto			INT		NOT NULL
 					REFERENCES Profilo_band(id_band)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS Recensione_locale(
-	PRIMARY KEY (id_utente, oggetto),
+	PRIMARY KEY (id_utente, id_oggetto),
 	valutazione		INT		NOT NULL				--votazione in decimi
 					CONSTRAINT rating_range_locale
-					CHECK(valutazione < 10 AND valutazione > 0),
+					CHECK(valutazione BETWEEN 0 AND 10),
 	
-	testo			VARCHAR(200)	NOT NULL,
+	testo			VARCHAR(512)	NOT NULL,
 	data_recensione	DATE	NOT NULL
 					DEFAULT NOW(),
 	
 	id_utente		INT		NOT NULL
-					REFERENCES Utente(id_utente)
+					REFERENCES Profilo_utente(id_utente)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL,
 	
-	oggetto			INT		NOT NULL
+	id_oggetto			INT		NOT NULL
 					REFERENCES Profilo_locale(id_locale)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL
