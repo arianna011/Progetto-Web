@@ -34,9 +34,11 @@ CREATE TABLE IF NOT EXISTS Raccolta_immagini(
 CREATE TABLE IF NOT EXISTS Immagine_appartiene_raccolta(
 	PRIMARY KEY(id_immagine, id_raccolta),
 	id_immagine		INT
-					REFERENCES Immagine(id_immagine),
+					REFERENCES Immagine(id_immagine)
+					ON DELETE CASCADE,
 	id_raccolta		INT
 					REFERENCES Raccolta_immagini(id_raccolta)
+					ON DELETE CASCADE
 );
 
 
@@ -60,9 +62,13 @@ CREATE TABLE IF NOT EXISTS Profilo_utente(
 					CONSTRAINT validazione_mail
 					CHECK(mail LIKE '%_@%_.__%'),
 	id_citta		INT			--nullable
-					REFERENCES Citta(id_citta),	--spostato da 'Artista' a qui (potrebbe essere utile sapere la citta anche di utenti non artisti)
+					REFERENCES Citta(id_citta)	--spostato da 'Artista' a qui (potrebbe essere utile sapere la citta anche di utenti non artisti)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	foto_profilo	INT			--nullable
-					REFERENCES Immagine(id_immagine),
+					REFERENCES Immagine(id_immagine)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	
 	/*galleria_utente	INT			--nullable
 					REFERENCES Raccolta_immagini(id_raccolta),*/
@@ -81,9 +87,14 @@ CREATE TABLE IF NOT EXISTS Profilo_artista(
 	
 	--idea: se assente potrebbe essere sostituita per default dall'immagine del profilo principale
 	foto_profilo		INT			--nullable
-						REFERENCES Immagine(id_immagine),
+						REFERENCES Immagine(id_immagine)
+						ON DELETE SET NULL
+						ON UPDATE CASCADE,
+		
 	galleria_artista	INT			--nullable
-						REFERENCES Raccolta_immagini(id_raccolta),
+						REFERENCES Raccolta_immagini(id_raccolta)
+						ON DELETE SET NULL
+						ON UPDATE CASCADE,
 	
 	descrizione			VARCHAR(1024), --nullable
 	
@@ -159,27 +170,34 @@ CREATE TABLE IF NOT EXISTS Genere_artista_lookup
 (
 	PRIMARY KEY(id_artista, id_genere),
 	id_artista		INT		REFERENCES Profilo_artista(id_artista)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_genere		INT		REFERENCES Genere_musicale(id_genere)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Strumento_artista_lookup
 (
 	PRIMARY KEY(id_artista, id_strumento),
 	id_artista		INT		REFERENCES Profilo_artista(id_artista)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_strumento	INT		REFERENCES Strumento_musicale(id_strumento)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
+	
 );
 
 CREATE TABLE IF NOT EXISTS Servizio_artista_lookup
 (
 	PRIMARY KEY(id_artista, id_servizio),
 	id_artista		INT		REFERENCES Profilo_artista(id_artista)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_servizio		INT		REFERENCES Servizio_musicale(id_servizio)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
 );
 
 --ROBA BAND
@@ -191,9 +209,13 @@ CREATE TABLE IF NOT EXISTS Profilo_band
 	nome_band		VARCHAR(64)		NOT NULL,
 	range_prezzo	int4range,	--nullable
 	foto_profilo	INT			--nullable
-					REFERENCES Immagine(id_immagine),
+					REFERENCES Immagine(id_immagine)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	id_sede			INT				--nullable
 					REFERENCES Citta(id_citta)	--sede principale della band
+					ON DELETE SET NULL
+					ON UPDATE CASCADE
 
 );
 
@@ -208,6 +230,7 @@ CREATE TABLE IF NOT EXISTS Membro_band
 	profilo		INT			--nullable (per membri non registrati)
 				REFERENCES Profilo_artista(id_artista)
 				ON DELETE SET NULL
+				ON UPDATE CASCADE
 );
 
 --garantisce si che il collegamento fra il membro di una band e un profilo artista avvenga correttamente, nel caso ques'ultimo sia presente
@@ -251,20 +274,25 @@ CREATE TABLE IF NOT EXISTS Partecipazione_band
 (
 	PRIMARY KEY(id_membro, id_band, id_ruolo),
 	id_membro		INT		REFERENCES Membro_band(id_membro)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_band			INT		REFERENCES Profilo_band(id_band)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_ruolo		INT		REFERENCES Strumento_musicale(id_strumento)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
 );
 	
 CREATE TABLE IF NOT EXISTS Servizio_band_lookup
 (
 	PRIMARY KEY(id_band, id_servizio),
 	id_band		INT		REFERENCES Profilo_band(id_band)
-						ON DELETE CASCADE,
+						ON DELETE CASCADE
+						ON UPDATE CASCADE,
 	id_servizio	INT		REFERENCES Servizio_musicale(id_servizio)
 						ON DELETE CASCADE
+						ON UPDATE CASCADE
 );
 
 
@@ -272,9 +300,11 @@ CREATE TABLE IF NOT EXISTS Genere_band_lookup
 (
 	PRIMARY KEY(id_band, id_genere),
 	id_band		INT		REFERENCES Profilo_band(id_band)
-						ON DELETE CASCADE,
+						ON DELETE CASCADE
+						ON UPDATE CASCADE,
 	id_genere	INT		REFERENCES Genere_musicale(id_genere)
 						ON DELETE CASCADE
+						ON UPDATE CASCADE
 );
 	
 --ROBA LOCALI/HOST
@@ -323,10 +353,12 @@ CREATE TABLE IF NOT EXISTS Ingaggio
 	--ora evento?
 	id_luogo				INT				--nullable
 							REFERENCES Profilo_locale(id_locale)
-							ON DELETE NO ACTION,
+							ON DELETE NO ACTION
+							ON UPDATE CASCADE,
 	immagine				INT				--nullable
 							REFERENCES Immagine(id_immagine)
-							ON DELETE SET NULL,
+							ON DELETE SET NULL
+							ON UPDATE CASCADE,
 
 	compenso_indicativo		NUMERIC(10,2)	--nullable
 );
