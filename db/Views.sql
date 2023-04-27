@@ -10,7 +10,7 @@ cose da evitare durante definizione di view:
 */
 
 --dati utente joinati
-CREATE OR REPLACE VIEW v_dati_utente AS
+CREATE OR REPLACE VIEW v_profilo_utente AS
 SELECT
 	id_utente,
 	
@@ -18,7 +18,8 @@ SELECT
 	nome,
 	cognome,
 	dataN,
-	--usr.id_citta,
+	
+	id_citta,
 	nome_citta,
 	
 	--dati sito
@@ -36,6 +37,12 @@ JOIN Immagine ON foto_profilo = id_immagine;
 
 --versione joinata della raccolta_immagini/galleria
 CREATE OR REPLACE VIEW v_raccolta_immagini AS
+WITH grouped_imgs AS (
+	SELECT id_raccolta, ARRAY_AGG(src) AS immagini
+	FROM Immagine
+	JOIN Immagine_appartiene_raccolta USING(id_immagine)
+	GROUP BY id_raccolta
+)
 SELECT 
 	id_raccolta,
 	nome_raccolta,
@@ -43,13 +50,7 @@ SELECT
 	immagini
 
 FROM Raccolta_immagini 
-JOIN(
-	SELECT id_raccolta, ARRAY_AGG(src) AS immagini
-	FROM Immagine
-	JOIN Immagine_appartiene_raccolta USING(id_immagine)
-	GROUP BY id_raccolta
-	ORDER BY id_raccolta
-) AS grouped USING(id_raccolta)
+JOIN grouped_imgs USING(id_raccolta)
 ;
 
 
@@ -138,19 +139,26 @@ FROM profilo_band pb
 
 
 CREATE OR REPLACE VIEW v_profilo_artista AS
+WITH valutazioni_artista AS (
+	SELECT id_oggetto AS id_artista, ROUND(AVG(valutazione)) AS valutazione_media
+	FROM Recensione_artista
+	GROUP BY id_oggetto
+)
 SELECT
 	pa.id_artista,
 	
 	--restituisce il nomedarte, nome e cognome altrimenti
 	COALESCE (
 		nomedarte, 
-		(SELECT nome || ' ' || cognome FROM Profilo_utente WHERE id_utente = id_artista)
-		--(SELECT nickname FROM Profilo_utente WHERE id_utente = id_artista)
+		nome || ' ' || cognome,
+		nickname
 	) AS nome,
 	
 	pa.descrizione,
 	LOWER(range_prezzo) AS min_prezzo,
 	UPPER(range_prezzo) AS max_prezzo,
+	
+	valutazione_media,
 	
 	--immagini
 	fp.src AS foto_profilo,
@@ -160,23 +168,37 @@ SELECT
 	
 	generi_musicali,
 	strumenti_musicali,
-	servizi_forniti
+	servizi_forniti,
+	
+	id_citta,
+	nome_citta
 
 FROM Profilo_artista pa
-JOIN Immagine fp ON foto_profilo = id_immagine
+JOIN v_profilo_utente ON id_utente = id_artista
+JOIN Immagine fp ON pa.foto_profilo = id_immagine
 JOIN v_raccolta_immagini ON galleria_artista = id_raccolta
+
 JOIN v_strumenti_musicali_per_artista USING (id_artista)
 JOIN v_generi_musicali_per_artista USING (id_artista)
 JOIN v_servizi_musicali_per_artista USING (id_artista)
+
+LEFT JOIN valutazioni_artista USING(id_artista)		--una valutazione media null indica che non ha ancora avuto recensioni
 ;
 
 
 CREATE OR REPLACE VIEW v_profilo_band AS
+WITH valutazioni_band AS (
+	SELECT id_oggetto AS id_band, ROUND(AVG(valutazione)) AS valutazione_media
+	FROM Recensione_band
+	GROUP BY id_oggetto
+)
 SELECT
 	id_band,
 	nome_band,
 	LOWER(range_prezzo) AS min_prezzo,
 	UPPER(range_prezzo) AS max_prezzo,
+	
+	valutazione_media,
 	
 	fp.src AS foto_profilo,
 	id_citta AS id_sede,
@@ -190,6 +212,38 @@ JOIN Immagine fp ON foto_profilo = id_immagine
 JOIN Citta ON id_sede = id_citta
 JOIN v_generi_musicali_per_band USING (id_band)
 JOIN v_servizi_musicali_per_band USING (id_band)
+LEFT JOIN valutazioni_band USING(id_band)		--una valutazione media null indica che non ha ancora avuto recensioni
+;
+
+
+CREATE OR REPLACE VIEW v_profilo_locale AS
+WITH valutazioni_locale AS (
+	SELECT id_oggetto AS id_locale, ROUND(AVG(valutazione)) AS valutazione_media
+	FROM Recensione_locale
+	GROUP BY id_oggetto
+)
+SELECT
+	id_locale,
+	nome_locale,
+	pl.descrizione AS descrizione_locale,
+	valutazione_media,
+	
+	titolare AS id_titolare,
+	(SELECT nome || ' ' || cognome FROM Profilo_utente WHERE id_utente = titolare) AS titolare,
+	
+	pl.id_citta,
+	nome_citta,
+	indirizzo,
+	
+	fp.src AS foto_profilo,
+	imgs.immagini AS foto_galleria
+
+FROM Profilo_locale pl
+JOIN Profilo_utente ON titolare = id_utente
+JOIN Immagine fp ON pl.foto_profilo = id_immagine
+JOIN v_raccolta_immagini imgs ON galleria_locale = id_raccolta
+JOIN Citta ON pl.id_citta = Citta.id_citta
+LEFT JOIN valutazioni_locale USING(id_locale)		--una valutazione media null indica che non ha ancora avuto recensioni
 ;
 
 
