@@ -1,6 +1,6 @@
 
 <?php 
-  include 'connection.php';
+  include '../../../connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,70 +9,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./bootstrap/scss/bootstrap.css" >
-    <link rel="stylesheet" href="./bootstrap-icons-1.10.4/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/pagination.css">
-    <link rel="stylesheet" href="./css/accordion.css">
-    <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../../bootstrap/scss/bootstrap.css" >
+    <link rel="stylesheet" href="../../../bootstrap-icons-1.10.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../common/style.css">
+    <link rel="stylesheet" href="../style_vetrine.css">
+    <script src="../../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <title>Artisti</title>
-
-    <style>
-
-        #foto_profilo {
-            padding : 5px;
-            border-radius: 10px;
-            width: 300px;
-            height: 200px;
-        }
-
-          @media screen and (max-width: 600px) {
-            .item-list-fed {
-                flex-direction: column;
-            }
-            #foto_profilo {
-                width: 100%;
-            }
-
-          }
-          @media screen and (max-width: 1000px) {
-            #row2 {
-                flex-direction: column;
-            }
-            .col-3 {
-                width: 100%;
-            }
-
-            .col-9 {
-                width: 100%;
-            }
-          }      
-
-          @media screen and (min-width:1000px) and (max-width: 1248px) {
-            #sez_1 {
-                grid-template-columns: 1fr;
-            }
-          }
-
-          .d-flex {
-            flex-flow: column wrap;
-          }
-
-          .badge {
-            margin: 1px;
-          }
-          
-
-    </style>
 
 </head>
 <body class="bg-beige">
  <header>
-  <?php include 'navbar.php'; ?>
+  <?php include '../../common/navbar.php'; ?>
   </header>
-  <div class="row " id="cover"  style="background: url('/images/pres1.jpg') no-repeat; background-size: cover; height:100px;">
-          <h1 class="text-center text-white p-4" >Artisti</h2>
+  <div class="col-12" id="cover"  style="background: url('../../../site_images/guitar.jpg') no-repeat; background-size: cover; height:500px;">
+          <h1 class="text-center align-bottom text-white " >Artisti</h2>
   </div>
   <div class="container-fed">
 
@@ -209,7 +160,7 @@
 
 
 <footer>
-<?php include('./footer.php'); ?>
+<?php include('../../common/footer.php'); ?>
 </footer>
 
 <script>
@@ -224,7 +175,7 @@ let servizi = new Array();
 
 function fetch_data(page){
   $.ajax({
-    url:"fetch_artisti.php",
+    url:"./fetch_artisti.php",
     method:"POST",
     data:{page:page, search:search, ordine:ordine, strumenti:strumenti, generi:generi, citta:citta, servizi:servizi},
     success:function(data){
@@ -256,12 +207,6 @@ $(".form-select").change(function() {
   fetch_data(1);
 });
 
-/*
-$(document).on('click', '[name="ordine"]', function(){
-  let ordine = $(this).val();
-  fetch_data(1, search, ordine);
-});
-*/
 document.getElementsByName("ordine").forEach(function(element) {
   element.addEventListener('click', function() {
     ordine = $(this).val();

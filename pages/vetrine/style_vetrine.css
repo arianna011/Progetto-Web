@@ -1,0 +1,94 @@
+
+.container-fed {
+    padding: 2%;
+}
+
+
+.section-fed {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.item-list-fed {
+    display: flex; 
+    flex-direction: row;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.accordion-button {
+    border:rgba(0, 0, 0, 0.19) 3px solid;
+    background-color: #640062;
+    color: #fff;
+  }
+
+.accordion-body{
+    background-color: #e6dde6;
+    border: #4b4b4b 1px solid;
+
+}
+
+.accordion-button:focus{
+    background-color: #640062; 
+    color: #fff;
+}
+
+.pagination > li > a {
+    background-color: #640062;
+    color: #fff;
+  }
+
+  .pagination > li > a:hover {
+    background-color: #fd7e14;
+    color: #000;
+  }
+
+  .pagination .active > a {
+    background-color: #fd7e14;
+    color: #000;
+  }
+  
+  #foto_profilo {
+    padding : 5px;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+}
+
+  @media screen and (max-width: 600px) {
+    .item-list-fed {
+        flex-direction: column;
+    }
+    #foto_profilo {
+        width: 100%;
+    }
+
+  }
+  @media screen and (max-width: 1000px) {
+    #row2 {
+        flex-direction: column;
+    }
+    .col-3 {
+        width: 100%;
+    }
+
+    .col-9 {
+        width: 100%;
+    }
+  }      
+
+  @media screen and (min-width:1000px) and (max-width: 1248px) {
+    #sez_1 {
+        grid-template-columns: 1fr;
+    }
+  }
+
+  .d-flex {
+    flex-flow: column wrap;
+  }
+
+  .badge {
+    margin: 1px;
+  }

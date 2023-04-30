@@ -1,5 +1,5 @@
 <?php
-include 'connection.php'; 
+include '../../../connection.php'; 
 $limit = 5;
 $page = 0;
 $display = "";
@@ -106,9 +106,19 @@ if($count_artisti> 0) {
         <div class="col-md-4 p-2">
           <h5 class="nome artista"  >'. $row['nome'] .' </h5>';
             if($row['valutazione_media']){
-                $display .= '<h6 class="valutazione" style="color:#fd7e14"> 
-                 <i class="bi bi-star-fill"></i> <i class="bi bi-star"></i> 
-                 </h6>';
+                $display .= '<h6 class="valutazione" style="color:#fd7e14">';
+                 for ($i=1; $i < $row['valutazione_media']; $i+=2) { 
+                    $display .= '<i class="bi bi-star-fill"></i>';
+                 }
+                 if($row['valutazione_media'] % 2 != 0){
+                    $display .= '<i class="bi bi-star-half"></i>';
+                 }
+                 if($row['valutazione_media'] < 9){
+                    for ($i=1; $i < 10 - $row['valutazione_media']; $i+=2) { 
+                        $display .= '<i class="bi bi-star"></i>';
+                     }
+                 }
+                $display .= ' </h6>';
             }else{
                 $display .= '<h6 class="valutazione" style="color:#fd7e14"> nessuna valutazione </h6>';
             }
@@ -121,14 +131,20 @@ if($count_artisti> 0) {
 
           $s = explode(",",substr($row['strumenti_musicali'],1,-1));
           foreach($s as $str) {
-            if ($str != "")
-            $display .= '<span class="badge bg-secondary"> '. $str .' </span>';
+            if ($str != ""){
+                if($str[0] == '"' && $str[-1] =='"')
+                $str = substr($str,1,-1);
+                $display .= '<span class="badge bg-secondary text-wrap"> '. $str .' </span>';
+            }
           }
 
           $s = explode(",",substr($row['generi_musicali'],1,-1));
             foreach($s as $str) {
-                if ($str != "")
-                $display .= '<span class="badge bg-info"> '. $str .' </span>';
+                if ($str != "") {
+                    if($str[0] == '"' && $str[-1] =='"')
+                    $str = substr($str,1,-1);
+                    $display .= '<span class="badge bg-info text-wrap"> '. $str .' </span>';
+                }
           }
 
             $s = explode(",",substr($row['servizi_forniti'],1,-1));
@@ -136,7 +152,7 @@ if($count_artisti> 0) {
                 if ($str != ""){
                     if($str[0] == '"' && $str[-1] =='"')
                     $str = substr($str,1,-1);
-                    $display .= '<span class="badge bg-primary"> '. $str .' </span>';
+                    $display .= '<span class="badge bg-primary text-wrap"> '. $str .' </span>';
                 }
             }
 
