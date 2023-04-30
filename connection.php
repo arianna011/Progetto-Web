@@ -1,4 +1,4 @@
 <?php 
-    $dbconn = pg_connect("host=localhost port=5432 dbname=NotaMi user=postgres password=federica")
-    or die('Could not connect: ' . pg_last_error());
+    $dbconn = pg_connect("host=localhost user=postgres password=arianna11gaia13 port=5432 dbname=NotaMi") 
+                or die("Errore di connessione: " . pg_last_error());
 ?>

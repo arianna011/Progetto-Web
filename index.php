@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="bootstrap/scss/bootstrap.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/animations.js"></script>
 
 </head>
 
@@ -26,24 +28,42 @@
         <div class="w-100 d-none d-md-block" style="background: url('./images/pres1.jpg') no-repeat; background-size: cover; height:400px;"></div>
         <div class="w-100 d-block d-md-none" style="background: url('./images/pres1.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption text-white text-md-start">
-          <span class="d-none d-md-block pres-descr"> <h5>Sound di qualità</h5> <br> per i tuoi eventi </span>
-          <span class="d-block d-md-none pres-descr-mob"> <h5>Sound di qualità</h5> <br> per i tuoi eventi </span>
+          <span class="d-none d-md-block pres-descr"> 
+            <span class="pres-slide" style="display: None;"> <h5>Sound di qualità</h5> </span> 
+            <span class="pres-fade" style="display: None;"><br> per i tuoi eventi </span>
+          </span>
+          <span class="d-block d-md-none pres-descr-mob"> 
+            <span class="pres-slide" style="display: None;"> <h5>Sound di qualità</h5> </span> 
+            <span class="pres-fade" style="display: None;"><br> per i tuoi eventi </span>
+          </span>
         </div>
       </div>
       <div class="carousel-item">
         <div class="w-100 d-none d-md-block" style="background: url('./images/pres2.jpg') no-repeat; background-size: cover; height:400px;"></div>
         <div class="w-100 d-block d-md-none" style="background: url('./images/pres2.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption  text-white text-md-start">
-          <span class="d-none d-md-block pres-descr"> <h5>Visibilità</h5> <br> per il tuo gruppo </span>
-          <span class="d-block d-md-none pres-descr-mob"> <h5>Visibilità</h5> <br> per il tuo gruppo </span>
+          <span class="d-none d-md-block pres-descr"> 
+            <span class="pres-slide" style="display: None;"><h5>Visibilità</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per il tuo gruppo </span>
+          </span>
+          <span class="d-block d-md-none pres-descr-mob"> 
+            <span class="pres-slide" style="display: None;"><h5>Visibilità</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per il tuo gruppo </span>
+          </span>
         </div>
       </div>
       <div class="carousel-item">
         <div class="w-100 d-none d-md-block" style="background: url('./images/pres0.jpg') no-repeat; background-size: cover; height:400px;"></div>
         <div class="w-100 d-block d-md-none" style="background: url('./images/pres0.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption text-white text-md-start">
-          <span class="d-none d-md-block pres-descr"> <h5>Musica dal vivo</h5> <br> per serate speciali</span>
-          <span class="d-block d-md-none pres-descr-mob"> <h5>Musica dal vivo</h5> <br> per serate speciali</span>
+          <span class="d-none d-md-block pres-descr"> 
+            <span class="pres-slide" style="display: None;"> <h5>Musica dal vivo</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per serate speciali </span>
+          </span>
+          <span class="d-block d-md-none pres-descr-mob"> 
+            <span class="pres-slide" style="display: None;"> <h5>Musica dal vivo</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per serate speciali </span>
+          </span>
         </div>
       </div>
     </div>
@@ -108,7 +128,7 @@
   <p class="text-center text-descr d-none d-md-block">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti</p>
   <p class="text-center text-descr-mob d-block d-md-none">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti<br></p>
   
-
+  <?php include 'showcase.php' ?>
   <div class="card text-center bg-beige">
   <nav>
     <div class="nav nav-tabs bg-purple" id="nav-tab" role="tablist">
@@ -120,51 +140,54 @@
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-band" role="tabpanel" aria-labelledby="nav-band-tab" tabindex="0">
-    <?php 
-        $dbconn = pg_connect("host=localhost user=postgres password=arianna11gaia13 port=5432 dbname=NotaMi") or die("Errore di connessione: " . pg_last_error());
-        $query = "SELECT nome_band FROM profilo_band;";
-        $result = pg_query($dbconn, $query);
-    ?>
+    
     <div class="card-group">
+      
       <div class="card m-3">
-        <div style="background: url('./images/profile.jpg') no-repeat; background-position: center center; height:300px;"></div>
+        <?php echo '<div style="background: url(', $band1["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
-          <?php 
-            $tuple = pg_fetch_array($result, null, PGSQL_ASSOC);
-            $name = $tuple["nome_band"];
-          ?>
-          <h5 class="card-title"> <?php echo $name ?> </h5>
+          <h5 class="card-title"> <?php echo $band1["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item">recensioni</li>
-              <li class="list-group-item">genere</li>
-              <li class="list-group-item">città</li>
-              <li class="list-group-item">carnet</li>
+              <li class="list-group-item"> recensioni </li>
+              <li class="list-group-item"> genere </li>
+              <li class="list-group-item"> <?php echo $band1["sede"] ?> </li>
+              <li class="list-group-item"> <?php echo $band1["min_prezzo"], " € - ", $band1["max_prezzo"], " €" ?></li>
               <li class="list-group-item"><a href="#" class="btn btn-primary">Vedi profilo</a></li>
           </ul>
         </div>
       </div>
+
       <div class="card m-3">
-        <img src="..." class="card-img-top" alt="...">
+        <?php echo '<div style="background: url(', $band2["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-body-secondary">Last updated 3 mins ago</small>
+          <h5 class="card-title"> <?php echo $band2["nome_band"] ?> </h5>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item"> recensioni </li>
+              <li class="list-group-item"> genere </li>
+              <li class="list-group-item"> <?php echo $band2["sede"] ?> </li>
+              <li class="list-group-item"> <?php echo $band2["min_prezzo"], " € - ", $band2["max_prezzo"], " €" ?></li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">Vedi profilo</a></li>
+          </ul>
         </div>
       </div>
+
       <div class="card m-3">
-        <img src="..." class="card-img-top" alt="...">
+        <?php echo '<div style="background: url(', $band3["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-body-secondary">Last updated 3 mins ago</small>
+          <h5 class="card-title"> <?php echo $band3["nome_band"] ?> </h5>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item"> recensioni </li>
+              <li class="list-group-item"> genere </li>
+              <li class="list-group-item"> <?php echo $band3["sede"] ?> </li>
+              <li class="list-group-item"> <?php echo $band3["min_prezzo"], " € - ", $band3["max_prezzo"], " €" ?></li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">Vedi profilo</a></li>
+          </ul>
         </div>
       </div>
-    </div>
+    
+    </div> 
+ 
+
     </div>
     <div class="tab-pane fade" id="nav-artist" role="tabpanel" aria-labelledby="nav-artist-tab" tabindex="0">
       <div class="card-group">
@@ -205,7 +228,7 @@
 
   </div>
   </div>
-
+  
 
   <br><br>
   <span class="text-purple text-center text-title"><h1>Eventi imminenti</h1></span>
