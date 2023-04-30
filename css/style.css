@@ -13,6 +13,11 @@
     background-color: #640062;
 }
 
+.bg-gradient
+{
+    background: linear-gradient(-90deg, #640062, #9c5d06);
+}
+
 .text-purple
 {
    color: #640062;

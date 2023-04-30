@@ -25,9 +25,12 @@
               <a class="nav-link" href="#"><span class="text-white"> Host </span></a>
             </li>
           </ul>
-          <a href="./login_page.php" class="d-flex btn btn-outline-secondary">
+          <a href="./login_page.php" class="d-flex d-none btn btn-outline-secondary">
             Accedi/Registrati
           </a>
+          <img class="m-3 d-none d-md-block d-flex" src="images/user.png" alt="Account">
+          <a class="d-flex btn btn-outline-secondary" href="#"> Il mio Profilo </a>
+
         </div>
       </div>
     </nav>
