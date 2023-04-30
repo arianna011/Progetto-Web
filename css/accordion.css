@@ -1,0 +1,16 @@
+.accordion-button {
+    border:rgba(0, 0, 0, 0.19) 3px solid;
+    background-color: #640062;
+    color: #fff;
+  }
+
+.accordion-body{
+    background-color: #e6dde6;
+    border: #4b4b4b 1px solid;
+
+}
+
+.accordion-button:focus{
+    background-color: #640062; 
+    color: #fff;
+}

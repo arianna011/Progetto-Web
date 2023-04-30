@@ -16,7 +16,7 @@
               <a class="nav-link" href="#"><span class="text-white"> Band </span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><span class="text-white"> Artisti </span></a>
+              <a class="nav-link" href="Artisti.php"><span class="text-white"> Artisti </span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><span class="text-white"> Eventi </span></a>

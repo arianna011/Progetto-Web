@@ -1,8 +1,8 @@
 -- Database: NotaMi
 
--- DROP DATABASE IF EXISTS "NotaMi";
+--DROP DATABASE IF EXISTS "NotaMi";
 
-CREATE DATABASE "NotaMi"
+/*CREATE DATABASE "NotaMi"
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -13,6 +13,7 @@ CREATE DATABASE "NotaMi"
 
 COMMENT ON DATABASE "NotaMi"
     IS 'progetto LTW';
+*/
 
 --GESTIONE IMMAGINI
 CREATE TABLE IF NOT EXISTS Immagine(
@@ -25,17 +26,19 @@ CREATE TABLE IF NOT EXISTS Immagine(
 CREATE TABLE IF NOT EXISTS Raccolta_immagini(
 	PRIMARY KEY(id_raccolta),
 	id_raccolta 	INT				GENERATED ALWAYS AS IDENTITY,
-	nome_citta		VARCHAR(20),
-	descrizione		VARCHAR(100)	
+	nome_raccolta	VARCHAR(64),
+	descrizione		VARCHAR(256)	
 );
 
 --stessa immagine puo appartenere a galleria una volta sola? (andrebbe caricata 2 volte) (evitare casini)
 CREATE TABLE IF NOT EXISTS Immagine_appartiene_raccolta(
 	PRIMARY KEY(id_immagine, id_raccolta),
 	id_immagine		INT
-					REFERENCES Immagine(id_immagine),
+					REFERENCES Immagine(id_immagine)
+					ON DELETE CASCADE,
 	id_raccolta		INT
 					REFERENCES Raccolta_immagini(id_raccolta)
+					ON DELETE CASCADE
 );
 
 
@@ -44,29 +47,33 @@ CREATE TABLE IF NOT EXISTS Citta
 (
 	PRIMARY KEY (id_citta),
     id_citta	INT 		GENERATED ALWAYS AS IDENTITY,
-    nome		VARCHAR(40)	NOT NULL
+    nome_citta	VARCHAR(64)	UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Profilo_utente(
 	PRIMARY KEY (id_utente),
 	id_utente		INT			GENERATED ALWAYS AS IDENTITY,
-	nome			VARCHAR(50)	NOT NULL,
-	cognome			VARCHAR(50)	NOT NULL,
+	nome			VARCHAR(64)	NOT NULL,
+	cognome			VARCHAR(64)	NOT NULL,
 	dataN			DATE		NOT NULL,
-	nickname		VARCHAR(50) NOT NULL,
-	passwd			VARCHAR(30)	NOT NULL,
-	mail			VARCHAR(70)	--nullable
+	nickname		VARCHAR(64) UNIQUE NOT NULL,
+	passwd			VARCHAR(32)	UNIQUE NOT NULL,
+	mail			VARCHAR(64)	--nullable
 					CONSTRAINT validazione_mail
 					CHECK(mail LIKE '%_@%_.__%'),
 	id_citta		INT			--nullable
-					REFERENCES Citta(id_citta),	--spostato da 'Artista' a qui (potrebbe essere utile sapere la citta anche di utenti non artisti)
+					REFERENCES Citta(id_citta)	--spostato da 'Artista' a qui (potrebbe essere utile sapere la citta anche di utenti non artisti)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	foto_profilo	INT			--nullable
-					REFERENCES Immagine(id_immagine),
+					REFERENCES Immagine(id_immagine)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	
 	/*galleria_utente	INT			--nullable
 					REFERENCES Raccolta_immagini(id_raccolta),*/
 	
-	descrizione		VARCHAR(500) --nullable
+	descrizione		VARCHAR(1024) --nullable
 );
 
 --ROBA ARTISTI
@@ -76,15 +83,20 @@ CREATE TABLE IF NOT EXISTS Profilo_artista(
 						REFERENCES Profilo_utente(id_utente)	--NB: la chiave del profilo artista è la stessa del profilo utente; cardinalità(1,1)
 						ON UPDATE CASCADE
 						ON DELETE CASCADE,
-	nomedarte			VARCHAR(20),
+	nomedarte			VARCHAR(32),
 	
 	--idea: se assente potrebbe essere sostituita per default dall'immagine del profilo principale
 	foto_profilo		INT			--nullable
-						REFERENCES Immagine(id_immagine),
+						REFERENCES Immagine(id_immagine)
+						ON DELETE SET NULL
+						ON UPDATE CASCADE,
+		
 	galleria_artista	INT			--nullable
-						REFERENCES Raccolta_immagini(id_raccolta),
+						REFERENCES Raccolta_immagini(id_raccolta)
+						ON DELETE SET NULL
+						ON UPDATE CASCADE,
 	
-	descrizione			VARCHAR(500), --nullable
+	descrizione			VARCHAR(1024), --nullable
 	
 	range_prezzo		int4range	--nullable
 	--link social? 
@@ -111,19 +123,22 @@ EXECUTE FUNCTION set_default_profpic_artista();
 CREATE TABLE IF NOT EXISTS Genere_musicale(
 	PRIMARY KEY(id_genere),
 	id_genere	SMALLINT		GENERATED ALWAYS AS IDENTITY,
-	nome_genere	VARCHAR(30)		UNIQUE NOT NULL
+	nome_genere	VARCHAR(32)		UNIQUE NOT NULL
 );
 
 INSERT INTO Genere_musicale (nome_genere) VALUES
 ('Jazz'), ('Rock'),
 ('Pop'), ('Blues'), ('Rap'), ('Country'), ('Indie'),
 ('R&B'), ('Metal'), ('Musica classica'), ('Ballad'),
-('Folk'), ('Ambient'), ('Elettronica'), ('Irlandese');
+('Folk'), ('Ambient'), ('Elettronica'), ('Irlandese'),
+
+('Dance & EDM'), ('Etnica'), ('Italiana'), ('Latina')
+;
 
 CREATE TABLE IF NOT EXISTS Strumento_musicale(
 	PRIMARY KEY(id_strumento),
 	id_strumento	SMALLINT		GENERATED ALWAYS AS IDENTITY,
-	nome_strumento	VARCHAR(30)		UNIQUE NOT NULL
+	nome_strumento	VARCHAR(32)		UNIQUE NOT NULL
 );
 
 --forse andrebbe rinominato "competenza musicale"
@@ -140,7 +155,7 @@ INSERT INTO Strumento_musicale (nome_strumento) VALUES
 CREATE TABLE IF NOT EXISTS Servizio_musicale(
 	PRIMARY KEY(id_servizio),
 	id_servizio		SMALLINT		GENERATED ALWAYS AS IDENTITY,
-	nome_servizio	VARCHAR(30)		UNIQUE NOT NULL
+	nome_servizio	VARCHAR(32)		UNIQUE NOT NULL
 );
 
 INSERT INTO Servizio_musicale(nome_servizio) VALUES
@@ -155,27 +170,34 @@ CREATE TABLE IF NOT EXISTS Genere_artista_lookup
 (
 	PRIMARY KEY(id_artista, id_genere),
 	id_artista		INT		REFERENCES Profilo_artista(id_artista)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_genere		INT		REFERENCES Genere_musicale(id_genere)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Strumento_artista_lookup
 (
 	PRIMARY KEY(id_artista, id_strumento),
 	id_artista		INT		REFERENCES Profilo_artista(id_artista)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_strumento	INT		REFERENCES Strumento_musicale(id_strumento)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
+	
 );
 
 CREATE TABLE IF NOT EXISTS Servizio_artista_lookup
 (
 	PRIMARY KEY(id_artista, id_servizio),
 	id_artista		INT		REFERENCES Profilo_artista(id_artista)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_servizio		INT		REFERENCES Servizio_musicale(id_servizio)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
 );
 
 --ROBA BAND
@@ -184,12 +206,16 @@ CREATE TABLE IF NOT EXISTS Profilo_band
 (
 	PRIMARY KEY(id_band),
 	id_band			INT				GENERATED ALWAYS AS IDENTITY,
-	nome_band		VARCHAR(20)		NOT NULL,
+	nome_band		VARCHAR(64)		NOT NULL,
 	range_prezzo	int4range,	--nullable
 	foto_profilo	INT			--nullable
-					REFERENCES Immagine(id_immagine),
+					REFERENCES Immagine(id_immagine)
+					ON DELETE SET NULL
+					ON UPDATE CASCADE,
 	id_sede			INT				--nullable
 					REFERENCES Citta(id_citta)	--sede principale della band
+					ON DELETE SET NULL
+					ON UPDATE CASCADE
 
 );
 
@@ -198,12 +224,13 @@ CREATE TABLE IF NOT EXISTS Membro_band
 (
 	PRIMARY KEY(id_membro),
 	id_membro	INT		GENERATED ALWAYS AS IDENTITY,
-	nome		VARCHAR(50),							--NB:trigger, se profilo è not null, nome e cognome sono uguali a quelli del profilo (in questo caso la ridondanza è opportuna e la consistenza è facile da implementare)
-	cognome		VARCHAR(50),
-	nomedarte	VARCHAR(50),
+	nome		VARCHAR(64),							--NB:trigger, se profilo è not null, nome e cognome sono uguali a quelli del profilo (in questo caso la ridondanza è opportuna e la consistenza è facile da implementare)
+	cognome		VARCHAR(64),
+	nomedarte	VARCHAR(64),
 	profilo		INT			--nullable (per membri non registrati)
 				REFERENCES Profilo_artista(id_artista)
 				ON DELETE SET NULL
+				ON UPDATE CASCADE
 );
 
 --garantisce si che il collegamento fra il membro di una band e un profilo artista avvenga correttamente, nel caso ques'ultimo sia presente
@@ -247,20 +274,25 @@ CREATE TABLE IF NOT EXISTS Partecipazione_band
 (
 	PRIMARY KEY(id_membro, id_band, id_ruolo),
 	id_membro		INT		REFERENCES Membro_band(id_membro)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_band			INT		REFERENCES Profilo_band(id_band)
-							ON DELETE CASCADE,
+							ON DELETE CASCADE
+							ON UPDATE CASCADE,
 	id_ruolo		INT		REFERENCES Strumento_musicale(id_strumento)
 							ON DELETE CASCADE
+							ON UPDATE CASCADE
 );
 	
 CREATE TABLE IF NOT EXISTS Servizio_band_lookup
 (
 	PRIMARY KEY(id_band, id_servizio),
 	id_band		INT		REFERENCES Profilo_band(id_band)
-						ON DELETE CASCADE,
+						ON DELETE CASCADE
+						ON UPDATE CASCADE,
 	id_servizio	INT		REFERENCES Servizio_musicale(id_servizio)
 						ON DELETE CASCADE
+						ON UPDATE CASCADE
 );
 
 
@@ -268,9 +300,11 @@ CREATE TABLE IF NOT EXISTS Genere_band_lookup
 (
 	PRIMARY KEY(id_band, id_genere),
 	id_band		INT		REFERENCES Profilo_band(id_band)
-						ON DELETE CASCADE,
+						ON DELETE CASCADE
+						ON UPDATE CASCADE,
 	id_genere	INT		REFERENCES Genere_musicale(id_genere)
 						ON DELETE CASCADE
+						ON UPDATE CASCADE
 );
 	
 --ROBA LOCALI/HOST
@@ -280,7 +314,7 @@ CREATE TABLE IF NOT EXISTS Profilo_locale
 	PRIMARY KEY(id_locale),
 	id_locale		INT				GENERATED ALWAYS AS IDENTITY,	--chiave generata, perchè ad un profilo utente possono essere associati più locali (capitalisti dello show business >:( ))
 	
-	nome_locale		VARCHAR(50)		NOT NULL,
+	nome_locale		VARCHAR(64)		NOT NULL,
 	titolare		INT				NOT NULL
 					REFERENCES Profilo_utente(id_utente)
 					ON DELETE CASCADE
@@ -290,7 +324,7 @@ CREATE TABLE IF NOT EXISTS Profilo_locale
 					REFERENCES Citta(id_citta)
 					ON DELETE NO ACTION
 					ON UPDATE CASCADE,
-	indirizzo		VARCHAR(50),	--nullable
+	indirizzo		VARCHAR(64),	--nullable
 	
 	foto_profilo	INT			--nullable
 					REFERENCES Immagine(id_immagine)
@@ -300,7 +334,7 @@ CREATE TABLE IF NOT EXISTS Profilo_locale
 					REFERENCES Raccolta_immagini(id_raccolta)
 					ON DELETE SET NULL
 					ON UPDATE CASCADE,
-	descrizione		VARCHAR(500) --nullable
+	descrizione		VARCHAR(512) --nullable
 );
 	
 CREATE TABLE IF NOT EXISTS Ingaggio
@@ -313,29 +347,31 @@ CREATE TABLE IF NOT EXISTS Ingaggio
 							ON DELETE CASCADE
 							ON UPDATE CASCADE,
 	
-	titolo					VARCHAR(50)		NOT NULL,
-	descrizione				VARCHAR(500)	NOT NULL,
+	titolo					VARCHAR(64)		NOT NULL,
+	descrizione				VARCHAR(512)	NOT NULL,
 	data_ingaggio			DATE			NOT NULL,
 	--ora evento?
 	id_luogo				INT				--nullable
 							REFERENCES Profilo_locale(id_locale)
-							ON DELETE NO ACTION,
+							ON DELETE NO ACTION
+							ON UPDATE CASCADE,
 	immagine				INT				--nullable
 							REFERENCES Immagine(id_immagine)
-							ON DELETE SET NULL,
+							ON DELETE SET NULL
+							ON UPDATE CASCADE,
 
 	compenso_indicativo		NUMERIC(10,2)	--nullable
 );
 
 --RECENSIONI
 CREATE TABLE IF NOT EXISTS Recensione_artista(
-	PRIMARY KEY (id_utente, oggetto),
+	PRIMARY KEY (id_utente, id_oggetto),
 	valutazione		SMALLINT		NOT NULL				--votazione in decimi
 					CONSTRAINT rating_range_artista
-					CHECK(valutazione < 10 AND valutazione > 0),
+					CHECK(valutazione BETWEEN 0 AND 10),
 	
-	testo			VARCHAR(200)	NOT NULL,
-	data_recensione	DATE	NOT NULL
+	testo			VARCHAR(512)	NOT NULL,
+	data_recensione	DATE			NOT NULL
 					DEFAULT NOW(),
 	
 	id_utente		INT		NOT NULL
@@ -343,20 +379,20 @@ CREATE TABLE IF NOT EXISTS Recensione_artista(
 					ON UPDATE CASCADE
 					ON DELETE SET NULL,
 	
-	oggetto			INT		NOT NULL
+	id_oggetto			INT		NOT NULL
 					REFERENCES Profilo_artista(id_artista)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS Recensione_band(
-	PRIMARY KEY (id_utente, oggetto),
+	PRIMARY KEY (id_utente, id_oggetto),
 	valutazione		INT		NOT NULL				--votazione in decimi
 					CONSTRAINT rating_range_band
-					CHECK(valutazione < 10 AND valutazione > 0),
+					CHECK(valutazione BETWEEN 0 AND 10),
 	
-	testo			VARCHAR(200)	NOT NULL,
-	data_recensione	DATE	NOT NULL
+	testo			VARCHAR(512)	NOT NULL,
+	data_recensione	DATE			NOT NULL
 					DEFAULT NOW(),
 	
 	id_utente		INT		NOT NULL
@@ -364,19 +400,19 @@ CREATE TABLE IF NOT EXISTS Recensione_band(
 					ON UPDATE CASCADE
 					ON DELETE SET NULL,
 		
-	oggetto			INT		NOT NULL
+	id_oggetto			INT		NOT NULL
 					REFERENCES Profilo_band(id_band)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS Recensione_locale(
-	PRIMARY KEY (id_utente, oggetto),
+	PRIMARY KEY (id_utente, id_oggetto),
 	valutazione		INT		NOT NULL				--votazione in decimi
 					CONSTRAINT rating_range_locale
-					CHECK(valutazione < 10 AND valutazione > 0),
+					CHECK(valutazione BETWEEN 0 AND 10),
 	
-	testo			VARCHAR(200)	NOT NULL,
+	testo			VARCHAR(512)	NOT NULL,
 	data_recensione	DATE	NOT NULL
 					DEFAULT NOW(),
 	
@@ -385,7 +421,7 @@ CREATE TABLE IF NOT EXISTS Recensione_locale(
 					ON UPDATE CASCADE
 					ON DELETE SET NULL,
 	
-	oggetto			INT		NOT NULL
+	id_oggetto			INT		NOT NULL
 					REFERENCES Profilo_locale(id_locale)
 					ON UPDATE CASCADE
 					ON DELETE SET NULL
