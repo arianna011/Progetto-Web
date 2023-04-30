@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="bootstrap/scss/bootstrap.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/animations.js"></script>
 
 </head>
 
@@ -26,24 +28,42 @@
         <div class="w-100 d-none d-md-block" style="background: url('./images/pres1.jpg') no-repeat; background-size: cover; height:400px;"></div>
         <div class="w-100 d-block d-md-none" style="background: url('./images/pres1.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption text-white text-md-start">
-          <span class="d-none d-md-block pres-descr"> <h5>Sound di qualità</h5> <br> per i tuoi eventi </span>
-          <span class="d-block d-md-none pres-descr-mob"> <h5>Sound di qualità</h5> <br> per i tuoi eventi </span>
+          <span class="d-none d-md-block pres-descr"> 
+            <span class="pres-slide" style="display: None;"> <h5>Sound di qualità</h5> </span> 
+            <span class="pres-fade" style="display: None;"><br> per i tuoi eventi </span>
+          </span>
+          <span class="d-block d-md-none pres-descr-mob"> 
+            <span class="pres-slide" style="display: None;"> <h5>Sound di qualità</h5> </span> 
+            <span class="pres-fade" style="display: None;"><br> per i tuoi eventi </span>
+          </span>
         </div>
       </div>
       <div class="carousel-item">
         <div class="w-100 d-none d-md-block" style="background: url('./images/pres2.jpg') no-repeat; background-size: cover; height:400px;"></div>
         <div class="w-100 d-block d-md-none" style="background: url('./images/pres2.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption  text-white text-md-start">
-          <span class="d-none d-md-block pres-descr"> <h5>Visibilità</h5> <br> per il tuo gruppo </span>
-          <span class="d-block d-md-none pres-descr-mob"> <h5>Visibilità</h5> <br> per il tuo gruppo </span>
+          <span class="d-none d-md-block pres-descr"> 
+            <span class="pres-slide" style="display: None;"><h5>Visibilità</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per il tuo gruppo </span>
+          </span>
+          <span class="d-block d-md-none pres-descr-mob"> 
+            <span class="pres-slide" style="display: None;"><h5>Visibilità</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per il tuo gruppo </span>
+          </span>
         </div>
       </div>
       <div class="carousel-item">
         <div class="w-100 d-none d-md-block" style="background: url('./images/pres0.jpg') no-repeat; background-size: cover; height:400px;"></div>
         <div class="w-100 d-block d-md-none" style="background: url('./images/pres0.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption text-white text-md-start">
-          <span class="d-none d-md-block pres-descr"> <h5>Musica dal vivo</h5> <br> per serate speciali</span>
-          <span class="d-block d-md-none pres-descr-mob"> <h5>Musica dal vivo</h5> <br> per serate speciali</span>
+          <span class="d-none d-md-block pres-descr"> 
+            <span class="pres-slide" style="display: None;"> <h5>Musica dal vivo</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per serate speciali </span>
+          </span>
+          <span class="d-block d-md-none pres-descr-mob"> 
+            <span class="pres-slide" style="display: None;"> <h5>Musica dal vivo</h5> </span>
+            <span class="pres-fade" style="display: None;"> <br> per serate speciali </span>
+          </span>
         </div>
       </div>
     </div>
@@ -121,18 +141,18 @@
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-band" role="tabpanel" aria-labelledby="nav-band-tab" tabindex="0">
     <?php 
-        $dbconn = pg_connect("host=localhost user=postgres password=arianna11gaia13 port=5432 dbname=NotaMi") or die("Errore di connessione: " . pg_last_error());
+        include "connection.php";
         $query = "SELECT nome_band FROM profilo_band;";
         $result = pg_query($dbconn, $query);
     ?>
     <div class="card-group">
+      <?php 
+            $tuple = pg_fetch_array($result, null, PGSQL_ASSOC);
+            $name = $tuple["nome_band"];
+       ?>
       <div class="card m-3">
         <div style="background: url('./images/profile.jpg') no-repeat; background-position: center center; height:300px;"></div>
         <div class="card-body">
-          <?php 
-            $tuple = pg_fetch_array($result, null, PGSQL_ASSOC);
-            $name = $tuple["nome_band"];
-          ?>
           <h5 class="card-title"> <?php echo $name ?> </h5>
           <ul class="list-group list-group-flush">
               <li class="list-group-item">recensioni</li>
