@@ -9,6 +9,7 @@
   <title>NotaMi</title>
   
   <link rel="stylesheet" href="../../bootstrap/scss/bootstrap.css" />
+  <link rel="stylesheet" href="../../bootstrap-icons-1.10.4/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../common/style.css" />
   <link rel="stylesheet" href="./homepage.css" />
   <script src="../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -150,40 +151,49 @@
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band1["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"> recensioni </li>
-              <li class="list-group-item"> genere </li>
-              <li class="list-group-item"> <?php echo $band1["sede"] ?> </li>
-              <li class="list-group-item"> <?php echo $band1["min_prezzo"], " € - ", $band1["max_prezzo"], " €" ?></li>
-              <li class="list-group-item"><a href="#" class="btn btn-primary">Vedi profilo</a></li>
+              <li class="list-group-item"> <?php echo $stars_band[0] ?>  </li>
+              <li class="list-group-item"> <?php echo $genres_band[0] ?> </li>
+              <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $band1["sede"] ?> </li>
+              <li class="list-group-item"> <?php echo $prices_band[0] ?></li>
+              <li class="list-group-item"> </li>
           </ul>
+        </div>
+        <div class="card-footer background-purple">
+            <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
 
       <div class="card m-3">
         <?php echo '<div style="background: url(', $band2["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
-          <h5 class="card-title"> <?php echo $band2["nome_band"] ?> </h5>
+          <h5 class="card-title showcase-title"> <?php echo $band2["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"> recensioni </li>
-              <li class="list-group-item"> genere </li>
-              <li class="list-group-item"> <?php echo $band2["sede"] ?> </li>
-              <li class="list-group-item"> <?php echo $band2["min_prezzo"], " € - ", $band2["max_prezzo"], " €" ?></li>
-              <li class="list-group-item"><a href="#" class="btn btn-primary">Vedi profilo</a></li>
+              <li class="list-group-item"> <?php echo $stars_band[1] ?> </li>
+              <li class="list-group-item"> <?php echo $genres_band[1] ?> </li>
+              <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $band2["sede"] ?> </li>
+              <li class="list-group-item"> <?php echo $prices_band[1] ?></li>
+              <li class="list-group-item"> </li>
           </ul>
+        </div>
+        <div class="card-footer background-purple">
+            <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
 
       <div class="card m-3">
         <?php echo '<div style="background: url(', $band3["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
-          <h5 class="card-title"> <?php echo $band3["nome_band"] ?> </h5>
+          <h5 class="card-title showcase-title"> <?php echo $band3["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"> recensioni </li>
-              <li class="list-group-item"> genere </li>
-              <li class="list-group-item"> <?php echo $band3["sede"] ?> </li>
-              <li class="list-group-item"> <?php echo $band3["min_prezzo"], " € - ", $band3["max_prezzo"], " €" ?></li>
-              <li class="list-group-item"><a href="#" class="btn btn-primary">Vedi profilo</a></li>
+              <li class="list-group-item"> <?php echo $stars_band[2] ?> </li>
+              <li class="list-group-item"> <?php echo $genres_band[2] ?> </li>
+              <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $band3["sede"] ?> </li>
+              <li class="list-group-item"> <?php echo $prices_band[2] ?></li>
+              <li class="list-group-item"> </li>
           </ul>
+        </div>
+        <div class="card-footer background-purple">
+            <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
     
