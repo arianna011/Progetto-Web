@@ -51,36 +51,40 @@
   }
   
   #foto_profilo {
-    padding : 5px;
-    border-radius: 10px;
-    width: 300px;
-    height: 200px;
+    display:block;
+    width: 250px;
+    height: 250px;
 }
 
   @media screen and (max-width: 600px) {
     .item-list-fed {
         flex-direction: column;
     }
-    #foto_profilo {
-        width: 100%;
+    .col-3 {
+      width: 100%;
     }
-
+    .col-9 {
+      width: 100%;
+    }
   }
-  @media screen and (max-width: 1000px) {
+  @media screen and (min-width: 600px) and (max-width: 1000px) {
     #row2 {
         flex-direction: column;
     }
     .col-3 {
         width: 100%;
     }
-
     .col-9 {
         width: 100%;
     }
+    #iframe-container {
+      width:50%;
+    }
+  
   }      
 
   @media screen and (min-width:1000px) and (max-width: 1248px) {
-    #sez_1 {
+    .section-fed {
         grid-template-columns: 1fr;
     }
   }

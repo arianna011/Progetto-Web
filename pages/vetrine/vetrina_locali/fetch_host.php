@@ -88,9 +88,9 @@ if($count_artisti> 0) {
           <a href="profilo_host.php?id='. $row['id_locale'] .'" class="btn btn-primary"> Vedi profilo </a>
         </div>
           <div class="col-md-3 p-4">
-           <h6> <i class="bi bi-geo-alt-fill"></i> '. $row['nome_citta'] .' 
-                 <small class="text-body-secondary"> '. $row['indirizzo'] .' </small> 
-            </h6>
+           <h6 class="mb-0" > <i class="bi bi-geo-alt-fill"></i> '. $row['nome_citta'] .' </h6>
+                 <p class="text-body-secondary small"> '. $row['indirizzo'] .' </p> 
+            
         </div>
       </div>';
     }

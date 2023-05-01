@@ -22,7 +22,7 @@
   <?php include '../../common/navbar.php'; ?>
   </header>
   <div class="col-12" id="cover"  style="background: url('../../../site_images/vetrina-host.jpg') no-repeat; background-size: cover; height:500px;">
-          <h1 class="text-center align-bottom text-white " > Host </h2>
+          <h1 class="text-center align-bottom text-white " > Host </h1>
   </div>
   <div class="container-fed">
 
@@ -62,6 +62,9 @@
           <div class="form-check m-2">
             <input class="form-check-input" type="radio" name="ordine" id="radio3"  value="prezzo">
             <label class="form-chekc-label" for="radio3"> Più economici </label>
+          </div>
+          <div class="ratio ratio-1x1 m-2" id="iframe-container">
+            <iframe src="https://www.google.com/maps/d/embed?mid=1vOuy-wYqzy1Yro3Jtp78XFdKmWWrXpU&hl=it&ehbc=2E312F" ></iframe>
           </div>
 
             

@@ -102,8 +102,8 @@ $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
         $display .= '<div class="item-list-fed">
-        <img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />
-        <div class="col-md-4 p-2">
+        <img id="foto_profilo" src="../../../site_images/picture.png" alt="foto profilo"  class="img-fluid" />
+        <div class="col-md-4 p-4">
           <h5 class="nome artista"  >'. $row['nome'] .' </h5>';
             if($row['valutazione_media']){
                 $display .= '<h6 class="valutazione" style="color:#fd7e14">';
@@ -118,12 +118,18 @@ if($count_artisti> 0) {
                         $display .= '<i class="bi bi-star"></i>';
                      }
                  }
-                $display .= ' </h6>';
+                $display .= '  </h6>';
             }else{
                 $display .= '<h6 class="valutazione" style="color:#fd7e14"> nessuna valutazione </h6>';
             }
         $display .= '
-          <p> '. substr($row['descrizione'],0,100) .' </p>
+        <h6 class="mb-0" > <i class="bi bi-geo-alt-fill"></i> '. $row['nome_citta'] .' </h6>'; 
+        if(strlen($row['descrizione'])> 80) {
+            $display .= ' <p> '. substr($row['descrizione'],0, 80) .'... </p> ';
+        } else {
+            $display .= '<p> '. $row['descrizione'] .' </p> '; 
+        }
+        $display .= '
           <a href="profilo_artista.php?id='. $row['id_artista'] .'" class="btn btn-primary"> Vedi profilo </a>
         </div>
         <div class="col-md-3 p-4">
@@ -152,7 +158,7 @@ if($count_artisti> 0) {
                 if ($str != ""){
                     if($str[0] == '"' && $str[-1] =='"')
                     $str = substr($str,1,-1);
-                    $display .= '<span class="badge bg-primary text-wrap"> '. $str .' </span>';
+                    $display .= '<span class="badge bg-danger text-wrap"> '. $str .' </span>';
                 }
             }
 

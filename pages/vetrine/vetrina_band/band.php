@@ -22,7 +22,7 @@
   <?php include '../../common/navbar.php'; ?>
   </header>
   <div class="col-12" id="cover"  style="background: url('../../../site_images/band-vetrina.jpg') no-repeat; background-size: cover; height:500px;">
-          <h1 class="text-center align-bottom text-white " > Band </h2>
+          <h1 class="text-center align-bottom text-white " > Band </h1>
   </div>
   <div class="container-fed">
 

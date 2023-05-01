@@ -63,7 +63,7 @@ $condition = substr($condition, 0, -4);
 
 if(isset($_POST['citta']) AND $_POST['citta'] != NULL) {
     $citta = $_POST['citta'];
-    $condition .= " AND id_citta = '".pg_escape_string($dbconn, $citta )."'";
+    $condition .= " AND id_sede = '".pg_escape_string($dbconn, $citta )."'";
 }
     
 
@@ -112,7 +112,14 @@ if($count_artisti> 0) {
                 $display .= '<h6 class="valutazione" style="color:#fd7e14"> nessuna valutazione </h6>';
             }
         $display .= '
-          <a href="profilo_band.php?id='. $row['id_band'] .'" class="btn btn-primary  style="padding:2%;"> Vedi profilo </a>
+            <h6 > <i class="bi bi-geo-alt-fill"></i> '. $row['sede'] .' </h6>';
+            if(strlen($row['descrizione'])> 80) {
+                $display .= ' <p> '. substr($row['descrizione'],0, 80) .'... </p> ';
+            } else {
+                $display .= '<p> '. $row['descrizione'] .' </p> '; 
+            }
+        $display .= '
+            <a href="profilo_band.php?id='. $row['id_band'] .'" class="btn btn-primary  style="padding:2%;"> Vedi profilo </a>
         </div>
         <div class="col-md-3 p-4">
             <h5 style="color:#fd7e14; margin-top:5%; text-align:end"> '. $row['min_prezzo'] .' - '. $row['max_prezzo'] .' € </h5>';

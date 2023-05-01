@@ -23,7 +23,7 @@
   <?php include '../../common/navbar.php'; ?>
   </header>
   <div class="col-12" id="cover"  style="background: url('../../../site_images/guitar.jpg') no-repeat; background-size: cover; height:500px;">
-          <h1 class="text-center align-bottom text-white " >Artisti</h2>
+          <h1 class="text-center align-bottom text-white " >Artisti</h1>
   </div>
   <div class="container-fed">
 
