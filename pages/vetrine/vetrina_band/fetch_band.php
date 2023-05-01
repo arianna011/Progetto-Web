@@ -90,9 +90,14 @@ $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 
 if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
-        $display .= '<div class="item-list-fed">
-        <img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />
-        <div class="col-md-4 p-2">
+        $display .= '<div class="item-list-fed">';
+        if(str_starts_with($row['foto_profilo'], "https://") || str_starts_with($row['foto_profilo'], "http://")){
+            $display .= '<img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
+        }else{
+            $display .= '<img id="foto_profilo" src="../../../data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="flex-shrink-0 me-3" />';
+        }
+        $display .= '
+        <div class="col-md-4 p-4">
           <h5 class="nome artista"  >'. $row['nome_band'] .' </h5>';
             if($row['valutazione_media']){
                 $display .= '<h6 class="valutazione" style="color:#fd7e14">';

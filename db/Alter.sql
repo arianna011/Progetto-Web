@@ -1,5 +1,5 @@
 ALTER TABLE ingaggio
-add indirizzio	 VARCHAR(64),
+add indirizzo	 VARCHAR(64),
 add ora_inizio TIME,	 
 add ora_fine TIME
 
