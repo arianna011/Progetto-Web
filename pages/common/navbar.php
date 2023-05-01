@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-purple">
       <div class="container-fluid">
-        <a class="navbar-brand" href="./index.php">
+        <a class="navbar-brand" href="../homepage/index.php">
           <img class="d-none d-md-block" src="images/logo.png" alt="NotaMi">
           <img class="d-block d-md-none" src="images/logo-mobile.png" alt="NotaMi">
         </a>
@@ -16,7 +16,7 @@
               <a class="nav-link" href="#"><span class="text-white"> Band </span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Artisti.php"><span class="text-white"> Artisti </span></a>
+              <a class="nav-link" href="../vetrine/vetrina_artisti/Artisti.php"><span class="text-white"> Artisti </span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><span class="text-white"> Eventi </span></a>
