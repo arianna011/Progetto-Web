@@ -8,25 +8,26 @@
 
   <title>NotaMi</title>
   
-  <link rel="stylesheet" href="bootstrap/scss/bootstrap.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./js/jquery.js"></script>
-  <script src="./js/animations.js"></script>
+  <link rel="stylesheet" href="../../bootstrap/scss/bootstrap.css" />
+  <link rel="stylesheet" href="../common/style.css" />
+  <link rel="stylesheet" href="./homepage.css" />
+  <script src="../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./jquery.js"></script>
+  <script src="./animations.js"></script>
 
 </head>
 
 <body class="bg-beige">
 
   <header class="bg-purple">
-    <?php include 'navbar.php' ?>
+    <?php include '../common/navbar.php' ?>
   </header>
 
   <div id="presentation" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <div class="w-100 d-none d-md-block" style="background: url('./images/pres1.jpg') no-repeat; background-size: cover; height:400px;"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('./images/pres1.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="w-100 d-none d-md-block" style="background: url('../../site_images/pres1.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/pres1.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption text-white text-md-start">
           <span class="d-none d-md-block pres-descr"> 
             <span class="pres-slide" style="display: None;"> <h5>Sound di qualità</h5> </span> 
@@ -39,8 +40,8 @@
         </div>
       </div>
       <div class="carousel-item">
-        <div class="w-100 d-none d-md-block" style="background: url('./images/pres2.jpg') no-repeat; background-size: cover; height:400px;"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('./images/pres2.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="w-100 d-none d-md-block" style="background: url('../../site_images/pres2.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/pres2.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption  text-white text-md-start">
           <span class="d-none d-md-block pres-descr"> 
             <span class="pres-slide" style="display: None;"><h5>Visibilità</h5> </span>
@@ -53,8 +54,8 @@
         </div>
       </div>
       <div class="carousel-item">
-        <div class="w-100 d-none d-md-block" style="background: url('./images/pres0.jpg') no-repeat; background-size: cover; height:400px;"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('./images/pres0.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="w-100 d-none d-md-block" style="background: url('../../site_images/pres3.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/pres3.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="carousel-caption text-white text-md-start">
           <span class="d-none d-md-block pres-descr"> 
             <span class="pres-slide" style="display: None;"> <h5>Musica dal vivo</h5> </span>
@@ -86,12 +87,12 @@
   <br>
 
 
-  <div class="showcase">
+  <div>
 
     <div class="card-group">
       <div class="card">
-        <div class="w-100 d-none d-md-block" style="background: url('./images/band2.jpg') no-repeat; background-size: cover; height:400px;"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('./images/band2.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="w-100 d-none d-md-block" style="background: url('../../site_images/band.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/band.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="card-body">
           <h5 class="card-title">Ingaggia Band</h5>
           <p class="card-text">Trova il gruppo con il sound migliore per le tue necessità</p>
@@ -100,8 +101,8 @@
       </div>
 
       <div class="card">
-        <div class="w-100 d-none d-md-block" style="background: url('./images/musicista.jpg') no-repeat; background-size: cover; height:400px;"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('./images/musicista.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="w-100 d-none d-md-block" style="background: url('../../site_images/artista.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/artista.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="card-body">
           <h5 class="card-title">Trova Artisti</h5>
           <p class="card-text">Scopri nuovi componenti per la tua band</p>
@@ -110,8 +111,8 @@
       </div>
 
       <div class="card">
-        <div class="w-100 d-none d-md-block" style="background: url('./images/evento2.jpg') no-repeat; background-size: cover; height:400px;"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('./images/evento2.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <div class="w-100 d-none d-md-block" style="background: url('../../site_images/evento.jpg') no-repeat; background-size: cover; height:400px;"></div>
+        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/evento.jpg') no-repeat; background-size: cover; height:300px;"></div>
         <div class="card-body">
           <h5 class="card-title">Cerca Eventi</h5>
           <p class="card-text">Trova il palco su cui esibirti</p>
@@ -128,7 +129,8 @@
   <p class="text-center text-descr d-none d-md-block">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti</p>
   <p class="text-center text-descr-mob d-block d-md-none">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti<br></p>
   
-  <?php include 'showcase.php' ?>
+  <?php include './showcase.php' ?>
+
   <div class="card text-center bg-beige">
   <nav>
     <div class="nav nav-tabs bg-purple" id="nav-tab" role="tablist">
@@ -146,7 +148,7 @@
       <div class="card m-3">
         <?php echo '<div style="background: url(', $band1["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
-          <h5 class="card-title"> <?php echo $band1["nome_band"] ?> </h5>
+          <h5 class="card-title showcase-title"> <?php echo $band1["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
               <li class="list-group-item"> recensioni </li>
               <li class="list-group-item"> genere </li>
@@ -282,7 +284,7 @@
 
 
   <footer class="footer pt-lg-5 pt-4 pb-4">
-    <?php include 'footer.php' ?>
+    <?php include '../common/footer.php' ?>
   </footer>
 
 </body>
