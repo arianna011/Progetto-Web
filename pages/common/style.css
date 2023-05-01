@@ -23,6 +23,11 @@
    color: #640062;
 }
 
+.text-grey
+{
+    color: grey;
+}
+
 .my-text-muted
 {
     color: #3d013cdc;
@@ -40,6 +45,12 @@
 footer
 {
     background-color: rgb(91, 6, 91);
+}
+
+.card-footer
+{
+    background-color: white;
+    border: 0px;
 }
 
 .nav-title
