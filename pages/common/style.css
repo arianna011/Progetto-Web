@@ -23,56 +23,14 @@
    color: #640062;
 }
 
+.text-grey
+{
+    color: grey;
+}
+
 .my-text-muted
 {
     color: #3d013cdc;
-}
-
-.text-title
-{
-    font-size:x-large;
-}
-
-.text-descr
-{
-    font-size: large; 
-    margin: 50px;
-    margin-top: 30px;
-}
-
-.text-descr-mob
-{
-    font-size: medium; 
-    margin: 30px;
-}
-
-.pres-descr>span
-{
-    font-size: large;
-}
-
-.pres-descr>span>h5
-{
-    font-size: larger;
-    text-shadow: black;
-    background-color: rgba(0,0,0,0.2);
-    padding: 3px;
-    display: inline;
-}
-
-.pres-descr-mob
-{
-    font-size: medium;
-    text-shadow: black;
-}
-
-.pres-descr-mob>span>h5
-{
-    font-size: larger;
-    text-shadow: black;
-    background-color: rgba(0,0,0,0.2);
-    padding: 1px;
-    display: inline;
 }
 
 .mycontainer
@@ -87,6 +45,12 @@
 footer
 {
     background-color: rgb(91, 6, 91);
+}
+
+.card-footer
+{
+    background-color: white;
+    border: 0px;
 }
 
 .nav-title

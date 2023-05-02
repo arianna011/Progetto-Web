@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-purple">
       <div class="container-fluid">
-        <a class="navbar-brand" href="./index.php">
+        <a class="navbar-brand" href="../homepage/index.php">
           <img class="d-none d-md-block" src="images/logo.png" alt="NotaMi">
           <img class="d-block d-md-none" src="images/logo-mobile.png" alt="NotaMi">
         </a>
@@ -28,8 +28,8 @@
           <a href="./login_page.php" class="d-flex d-none btn btn-outline-secondary">
             Accedi/Registrati
           </a>
-          <img class="m-3 d-none d-md-block d-flex" src="images/user.png" alt="Account">
-          <a class="d-flex btn btn-outline-secondary" href="#"> Il mio Profilo </a>
+          <!-- da rendere dinamico -->
+          <a class="d-flex btn btn-outline-secondary" href="#"> <i class="bi bi-person-circle"></i> <span class="ms-2"> Il mio Profilo </span> </a>
 
         </div>
       </div>

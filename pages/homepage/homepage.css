@@ -1,0 +1,65 @@
+.text-title
+{
+    font-size:x-large;
+}
+
+.text-descr
+{
+    font-size: large; 
+    margin: 50px;
+    margin-top: 30px;
+}
+
+.text-descr-mob
+{
+    font-size: medium; 
+    margin: 30px;
+}
+
+.pres-descr>span
+{
+    font-size: large;
+}
+
+.pres-descr>span>h5
+{
+    font-size: larger;
+    text-shadow: black;
+    background-color: rgba(0,0,0,0.2);
+    padding: 3px;
+    display: inline;
+}
+
+.pres-descr-mob
+{
+    font-size: medium;
+    text-shadow: black;
+}
+
+.pres-descr-mob>span>h5
+{
+    font-size: larger;
+    text-shadow: black;
+    background-color: rgba(0,0,0,0.2);
+    padding: 1px;
+    display: inline;
+}
+
+.showcase-title
+{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: large;
+    color: #640062;
+}
+
+.showcase-price
+{
+    font-size: large;
+    color: #fd7e14;
+}
+
+.showcase-descr
+{
+    font-size: medium;
+    color: #282628;
+}
