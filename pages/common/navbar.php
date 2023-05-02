@@ -13,16 +13,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#"><span class="text-white"> Band </span></a>
+              <a class="nav-link" href="/pages/vetrine/vetrina_band/Band.php"><span class="text-white"> Band </span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../vetrine/vetrina_artisti/Artisti.php"><span class="text-white"> Artisti </span></a>
+              <a class="nav-link" href="/pages/vetrine/vetrina_artisti/Artisti.php"><span class="text-white"> Artisti </span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><span class="text-white"> Eventi </span></a>
+              <a class="nav-link" href="/pages/vetrine/vetrina_eventi/eventi.php"><span class="text-white"> Eventi </span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><span class="text-white"> Host </span></a>
+              <a class="nav-link" href="/pages/vetrine/vetrina_locali/Host.php"><span class="text-white"> Host </span></a>
             </li>
           </ul>
           <a href="./login_page.php" class="d-flex d-none btn btn-outline-secondary">
