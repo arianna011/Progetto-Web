@@ -50,21 +50,7 @@ include '../../../connection.php';
               <?php
             }
           ?>
-          </select>
-          <div class="form-check m-2">
-            <input class="form-check-input" type="radio" name="ordine" id="radio1"  value="recenti" checked>
-            <label class="form-check-label" for="radio1"> Più recenti </label>
-          </div>
-          <div class="form-check m-2">
-            <input class="form-check-input" type="radio" name="ordine" id="radio2"  value="migliori">
-            <label class="form-chekc-label" for="radio2"> Migliori valutazioni</label>
-          </div>
-          <div class="form-check m-2">
-            <input class="form-check-input" type="radio" name="ordine" id="radio3"  value="prezzo">
-            <label class="form-chekc-label" for="radio3"> Più economici </label>
-          </div>
-
-            
+          </select> 
          </div>
         <div class="col-9" id="pull_data"></div>
     </div>

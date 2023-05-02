@@ -20,9 +20,7 @@ if (isset($_POST['search'])) {
 }
 
 if (isset($_POST['ordine'])) {
-    if($_POST['ordine'] == "prezzo"){
-        $ordine = "min_prezzo";
-    } else if($_POST['ordine'] == "migliori"){
+    if($_POST['ordine'] == "migliori"){
         $ordine = "valutazione_media DESC";
     }else {
         $ordine = "id_locale DESC";
