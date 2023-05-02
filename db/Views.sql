@@ -247,6 +247,32 @@ LEFT JOIN valutazioni_locale USING(id_locale)		--una valutazione media null indi
 ;
 
 
+CREATE OR REPLACE VIEW v_ingaggio AS
+
+SELECT
+	id_ingaggio,
+	src AS immagine,
+	titolo,
+	i.descrizione,
+	data_ingaggio,
+	ora_inizio,
+	ora_fine,
+	compenso_indicativo,
+	i.indirizzo,
+
+	datore AS id_datore,
+	nickname AS nick_datore,
+
+	(SELECT nome_locale
+	FROM Profilo_locale
+	WHERE id_locale = id_luogo) AS nome_locale
+
+FROM Ingaggio i
+JOIN Profilo_utente ON datore = id_utente
+JOIN Immagine ON i.immagine = id_immagine
+;
+
+
 
 
 
