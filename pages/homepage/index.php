@@ -151,14 +151,16 @@
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band1["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"> <?php echo $stars_band[0] ?>  </li>
+              <li class="list-group-item"> 
+                <?php echo $stars_band[0], '<br>', $descr_band[0]?> 
+              </li>
               <li class="list-group-item"> <?php echo $genres_band[0] ?> </li>
               <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $band1["sede"] ?> </li>
               <li class="list-group-item"> <?php echo $prices_band[0] ?></li>
               <li class="list-group-item"> </li>
           </ul>
         </div>
-        <div class="card-footer background-purple">
+        <div class="card-footer">
             <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
@@ -168,14 +170,14 @@
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band2["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"> <?php echo $stars_band[1] ?> </li>
+              <li class="list-group-item"> <?php echo $stars_band[1], '<br>', $descr_band[1] ?> </li>
               <li class="list-group-item"> <?php echo $genres_band[1] ?> </li>
               <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $band2["sede"] ?> </li>
               <li class="list-group-item"> <?php echo $prices_band[1] ?></li>
               <li class="list-group-item"> </li>
           </ul>
         </div>
-        <div class="card-footer background-purple">
+        <div class="card-footer">
             <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
@@ -185,58 +187,80 @@
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band3["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item"> <?php echo $stars_band[2] ?> </li>
+              <li class="list-group-item"> <?php echo $stars_band[2], '<br>', $descr_band[2] ?> </li>
               <li class="list-group-item"> <?php echo $genres_band[2] ?> </li>
               <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $band3["sede"] ?> </li>
               <li class="list-group-item"> <?php echo $prices_band[2] ?></li>
               <li class="list-group-item"> </li>
           </ul>
         </div>
-        <div class="card-footer background-purple">
+        <div class="card-footer">
             <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
     
     </div> 
- 
 
     </div>
+    
     <div class="tab-pane fade" id="nav-artist" role="tabpanel" aria-labelledby="nav-artist-tab" tabindex="0">
       <div class="card-group">
+      
         <div class="card m-3">
-          <img src="..." class="card-img-top" alt="...">
+          <?php echo '<div style="background: url(', $art1["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
+          <h5 class="card-title showcase-title"> <?php echo $art1["nome"] ?> </h5>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item"> 
+                <?php echo $stars_artist[0], '<br>', $descr_artist[0]?> 
+              </li>
+              <li class="list-group-item"> <?php echo $genres_artist[0] ?> </li>
+              <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $art1["nome_citta"] ?> </li>
+              <li class="list-group-item"> <?php echo $prices_artist[0] ?></li>
+              <li class="list-group-item"> </li>
+          </ul>
           </div>
           <div class="card-footer">
-            <small class="text-body-secondary">Last updated 3 mins ago</small>
+              <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
           </div>
         </div>
+
         <div class="card m-3">
-          <img src="..." class="card-img-top" alt="...">
+          <?php echo '<div style="background: url(', $art2["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          <h5 class="card-title showcase-title"> <?php echo $art2["nome"] ?> </h5>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item"> <?php echo $stars_artist[1], '<br>', $descr_artist[1] ?> </li>
+              <li class="list-group-item"> <?php echo $genres_artist[1] ?> </li>
+              <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $art2["nome_citta"] ?> </li>
+              <li class="list-group-item"> <?php echo $prices_artist[1] ?></li>
+              <li class="list-group-item"> </li>
+          </ul>
           </div>
           <div class="card-footer">
-            <small class="text-body-secondary">Last updated 3 mins ago</small>
+              <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
           </div>
         </div>
+
         <div class="card m-3">
-          <img src="..." class="card-img-top" alt="...">
+          <?php echo '<div style="background: url(', $art3["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">Last updated 3 mins ago</small>
-          </div>
+          <h5 class="card-title showcase-title"> <?php echo $art3["nome"] ?> </h5>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item"> <?php echo $stars_artist[2], '<br>', $descr_artist[2] ?> </li>
+              <li class="list-group-item"> <?php echo $genres_artist[2] ?> </li>
+              <li class="list-group-item"> <i class="bi bi-geo-alt-fill"></i> <?php echo $art3["nome_citta"] ?> </li>
+              <li class="list-group-item"> <?php echo $prices_artist[2] ?></li>
+              <li class="list-group-item"> </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="btn btn-primary m-3 mt-0">Vedi profilo</a>
         </div>
       </div>
-    </div>
+    
+    </div> 
+  </div>
 
   </div>
   </div>
@@ -247,48 +271,76 @@
   <p class="text-center text-descr d-none d-md-block">Le prossime <b>occasioni</b> di ingaggio per musica dal vivo da non perdere</p>
   <p class="text-center text-descr-mob d-block d-md-none">Le prossime <b>occasioni</b> di ingaggio per musica dal vivo da non perdere</p></p>
 
+  <?php include './events.php' ?>
+
   <div class="row row-cols-1 row-cols-md-2 g-4">
   <div class="col">
     <div class="card m-3">
-      <div style="background: url('./images/R.jpeg') no-repeat; background-position: center center; height:300px;"></div>
+      <?php echo '<div style="background: url(', $event1["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <ul class="list-group list-group-flush">
-              <li class="list-group-item">data</li>
+        <h5 class="card-title showcase-title mx-2"> <?php echo $event1["titolo"] ?></h5>
+        <p class="card-text mx-2"> <?php echo $descr_events[0] ?> </p>
+        <ul class="list-group list-group-flush mx-2">
+              <li class="list-group-item"> <?php echo $event1["data_ingaggio"] ?> </li>
               <li class="list-group-item">luogo</li>
-              <li class="list-group-item">retribuzione</li>
-              <li class="list-group-item"><a href="#" class="btn btn-primary">Contatta</a></li>
-          </ul>
+              <li class="list-group-item"> <?php echo $event1["compenso_indicativo"] ?> </li>
+        </ul>
+        <div class="card-footer" style="text-align: center;">
+            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+        </div>
       </div>
     </div>
   </div>
   <div class="col">
-    <div class="card m-3">
-      <img src="..." class="card-img-top" alt="...">
+  <div class="card m-3">
+      <?php echo '<div style="background: url(', $event2["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h5 class="card-title showcase-title mx-2"> <?php echo $event2["titolo"] ?></h5>
+        <p class="card-text mx-2"> <?php echo $descr_events[1] ?> </p>
+        <ul class="list-group list-group-flush mx-2">
+              <li class="list-group-item"> <?php echo $event2["data_ingaggio"] ?> </li>
+              <li class="list-group-item">luogo</li>
+              <li class="list-group-item"> <?php echo $event2["compenso_indicativo"] ?> </li>
+        </ul>
+        <div class="card-footer" style="text-align: center;">
+            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+        </div>
       </div>
-    </div>
+  </div>
   </div>
   <div class="col">
-    <div class="card m-3">
-      <img src="..." class="card-img-top" alt="...">
+  <div class="card m-3">
+      <?php echo '<div style="background: url(', $event3["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+        <h5 class="card-title showcase-title mx-2"> <?php echo $event3["titolo"] ?></h5>
+        <p class="card-text mx-2"> <?php echo $descr_events[2] ?> </p>
+        <ul class="list-group list-group-flush mx-2">
+              <li class="list-group-item"> <?php echo $event3["data_ingaggio"] ?> </li>
+              <li class="list-group-item">luogo</li>
+              <li class="list-group-item"> <?php echo $event3["compenso_indicativo"] ?> </li>
+        </ul>
+        <div class="card-footer" style="text-align: center;">
+            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+        </div>
       </div>
-    </div>
+  </div>
   </div>
   <div class="col">
-    <div class="card m-3">
-      <img src="..." class="card-img-top" alt="...">
+  <div class="card m-3">
+      <?php echo '<div style="background: url(', $event4["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h5 class="card-title showcase-title mx-2"> <?php echo $event4["titolo"] ?></h5>
+        <p class="card-text mx-2"> <?php echo $descr_events[3] ?> </p>
+        <ul class="list-group list-group-flush mx-2">
+              <li class="list-group-item"> <?php echo $event4["data_ingaggio"] ?> </li>
+              <li class="list-group-item">luogo</li>
+              <li class="list-group-item"> <?php echo $event4["compenso_indicativo"] ?> </li>
+        </ul>
+        <div class="card-footer" style="text-align: center;">
+            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+        </div>
       </div>
-    </div>
+  </div>
   </div>
   </div>
 
