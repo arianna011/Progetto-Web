@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-purple">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../homepage/index.php">
+        <a class="navbar-brand" href="/pages/homepage/index.php">
           <img class="d-none d-md-block" src="images/logo.png" alt="NotaMi">
           <img class="d-block d-md-none" src="images/logo-mobile.png" alt="NotaMi">
         </a>

@@ -96,9 +96,7 @@
     }
   }
 
-  .d-flex {
-    flex-flow: column wrap;
-  }
+
 
   .badge {
     margin: 1px;
