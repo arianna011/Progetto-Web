@@ -55,6 +55,16 @@
     height: 280px;
 }
 
+.calendar {
+  width: 300px;
+  padding: 10px;
+}
+
+.badge {
+  margin: 1px;
+}
+
+
   @media screen and (max-width: 600px) {
     .item-list-fed {
         flex-direction: column;
@@ -87,17 +97,22 @@
     #iframe-container {
       width:50%;
     }
-  
+      
+   
   }      
 
   @media screen and (min-width:1000px) and (max-width: 1248px) {
     .section-fed {
         grid-template-columns: 1fr;
     }
+
+    .calendar {
+      width: 240px;
+      padding: 2px;
+    }
+
+    .day {
+      font-size:13px;
+    }
   }
 
-
-
-  .badge {
-    margin: 1px;
-  }
