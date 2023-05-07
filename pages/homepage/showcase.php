@@ -4,6 +4,7 @@
     #band
     $query1 = "SELECT foto_profilo, nome_band, descrizione, valutazione_media, generi_musicali, sede, min_prezzo, max_prezzo 
               FROM v_profilo_band 
+              WHERE valutazione_media IS NOT NULL
               ORDER BY valutazione_media DESC;";
     
     $result1 = pg_query($dbconn, $query1);
