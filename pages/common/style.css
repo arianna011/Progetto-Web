@@ -13,14 +13,29 @@
     background-color: #640062;
 }
 
+.bg-trans-purple
+{
+    background-color: #6400624d;
+}
+
+.bg-trans-orange
+{
+    background-color: #fd7d1471;
+}
+
 .bg-gradient
 {
-    background: linear-gradient(-90deg, #640062, #9c5d06);
+    background-color: linear-gradient(-90deg, #640062, #9c5d06);
 }
 
 .text-purple
 {
    color: #640062;
+}
+
+.text-orange
+{
+    color: #fd7e14;
 }
 
 .text-grey
@@ -30,7 +45,7 @@
 
 .my-text-muted
 {
-    color: #3d013cdc;
+    color: #2b012adc;
 }
 
 .mycontainer

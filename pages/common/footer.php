@@ -1,6 +1,6 @@
 <div class="container p-3">
       <div class="row gy-md-5 gy-4 mb-md-5 mb-4 pb-lg-2">
-        <div class="col-lg-3"><a class="navbar-brand d-inline-flex align-items-center mb-lg-4 mb-3" href="../homepage/index.php">
+        <div class="col-lg-3"><a class="navbar-brand d-inline-flex align-items-center mb-lg-4 mb-3" href="/pages/homepage/index.php">
           <span class="text-nav text-white">NotaMi</span></a>
           <p class="mb-4 pb-lg-3 fs-xs my-text-muted" style="max-width: 306px;">NotaMi nasce come piccolo progetto italiano per promuovere la condivisione di emozioni e momenti speciali tramite la musica </p>
         </div>
@@ -9,10 +9,10 @@
             <div class="col">
               <ul class="nav flex-column mb-0">
                 <li class="nav-item mb-2"><span class="nav-title">Pagine</span></li>
-                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Band</a></li>
-                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Artisti</a></li>
-                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Eventi</a></li>
-                <li class="nav-item mb-2"><a class="nav-link p-0" href="#">Host</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="/pages/vetrine/vetrina_band/Band.php">Band</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="/pages/vetrine/vetrina_artisti/Artisti.php">Artisti</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="/pages/vetrine/vetrina_eventi/eventi.php">Eventi</a></li>
+                <li class="nav-item mb-2"><a class="nav-link p-0" href="/pages/vetrine/vetrina_locali/Host.php">Host</a></li>
               </ul>
             </div>
             <div class="col">

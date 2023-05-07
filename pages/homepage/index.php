@@ -97,7 +97,7 @@
         <div class="card-body">
           <h5 class="card-title">Ingaggia Band</h5>
           <p class="card-text">Trova il gruppo con il sound migliore per le tue necessità</p>
-          <button type="button" class="btn btn-outline-secondary">Vai</button>
+          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_band/band.php">Vai</a>
         </div>
       </div>
 
@@ -107,7 +107,7 @@
         <div class="card-body">
           <h5 class="card-title">Trova Artisti</h5>
           <p class="card-text">Scopri nuovi componenti per la tua band</p>
-          <button type="button" class="btn btn-outline-secondary">Vai</button>
+          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_artisti/Artisti.php">Vai</a>
         </div>
       </div>
 
@@ -117,7 +117,7 @@
         <div class="card-body">
           <h5 class="card-title">Cerca Eventi</h5>
           <p class="card-text">Trova il palco su cui esibirti</p>
-          <button type="button" class="btn btn-outline-secondary">Vai</button>
+          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_eventi/eventi.php">Vai</a>
         </div>
       </div>
 
@@ -276,68 +276,72 @@
   <div class="row row-cols-1 row-cols-md-2 g-4">
   <div class="col">
     <div class="card m-3">
+      <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event1["nick_datore"] ?> </span> </i> </h6></div>
       <?php echo '<div style="background: url(', $event1["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event1["titolo"] ?></h5>
+        <p class="card-text showcase-date mx-2"> <?php echo $event1["stringa_data"] ?> </p>
         <p class="card-text mx-2"> <?php echo $descr_events[0] ?> </p>
         <ul class="list-group list-group-flush mx-2">
-              <li class="list-group-item"> <?php echo $event1["data_ingaggio"] ?> </li>
-              <li class="list-group-item">luogo</li>
-              <li class="list-group-item"> <?php echo $event1["compenso_indicativo"] ?> </li>
+              <li class="list-group-item"> <?php echo $locations[0] ?></li>
+              <li class="list-group-item"> <?php echo $retribution[0] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+            <a href="#" class="btn btn-primary m-3 mt-0"> Partecipa </a>
         </div>
       </div>
     </div>
   </div>
   <div class="col">
   <div class="card m-3">
+  <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event2["nick_datore"] ?> </span> </i> </h6></div>
       <?php echo '<div style="background: url(', $event2["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event2["titolo"] ?></h5>
+        <p class="card-text showcase-date mx-2"> <?php echo $event2["stringa_data"] ?> </p>
         <p class="card-text mx-2"> <?php echo $descr_events[1] ?> </p>
         <ul class="list-group list-group-flush mx-2">
-              <li class="list-group-item"> <?php echo $event2["data_ingaggio"] ?> </li>
-              <li class="list-group-item">luogo</li>
-              <li class="list-group-item"> <?php echo $event2["compenso_indicativo"] ?> </li>
+              <li class="list-group-item"> <?php echo $locations[1] ?></li>
+              <li class="list-group-item"> <?php echo $retribution[1] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+            <a href="#" class="btn btn-primary m-3 mt-0"> Partecipa </a>
         </div>
       </div>
   </div>
   </div>
   <div class="col">
   <div class="card m-3">
+  <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event3["nick_datore"] ?> </span> </i> </h6></div>
       <?php echo '<div style="background: url(', $event3["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event3["titolo"] ?></h5>
+        <p class="card-text showcase-date mx-2"> <?php echo $event3["stringa_data"] ?> </p>
         <p class="card-text mx-2"> <?php echo $descr_events[2] ?> </p>
         <ul class="list-group list-group-flush mx-2">
-              <li class="list-group-item"> <?php echo $event3["data_ingaggio"] ?> </li>
-              <li class="list-group-item">luogo</li>
-              <li class="list-group-item"> <?php echo $event3["compenso_indicativo"] ?> </li>
+              <li class="list-group-item"> <?php echo $locations[2] ?></li>
+              <li class="list-group-item"> <?php echo $retribution[2] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+            <a href="#" class="btn btn-primary m-3 mt-0"> Partecipa </a>
         </div>
       </div>
   </div>
   </div>
   <div class="col">
   <div class="card m-3">
+  <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event4["nick_datore"] ?> </span> </i> </h6></div>
       <?php echo '<div style="background: url(', $event4["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event4["titolo"] ?></h5>
+        <p class="card-text showcase-date mx-2"> <?php echo $event4["stringa_data"] ?> </p>
         <p class="card-text mx-2"> <?php echo $descr_events[3] ?> </p>
         <ul class="list-group list-group-flush mx-2">
-              <li class="list-group-item"> <?php echo $event4["data_ingaggio"] ?> </li>
-              <li class="list-group-item">luogo</li>
-              <li class="list-group-item"> <?php echo $event4["compenso_indicativo"] ?> </li>
+              <li class="list-group-item"> <?php echo $locations[3] ?></li>
+              <li class="list-group-item"> <?php echo $retribution[3] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-            <a href="#" class="btn btn-primary m-3 mt-0"> Contatta </a>
+            <a href="#" class="btn btn-primary m-3 mt-0"> Partecipa </a>
         </div>
       </div>
   </div>
@@ -345,7 +349,7 @@
   </div>
 
 
-  <footer class="footer pt-lg-5 pt-4 pb-4">
+  <footer class="footer pt-lg-5 pt-4 pb-4 mt-4">
     <?php include '../common/footer.php' ?>
   </footer>
 

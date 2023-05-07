@@ -63,3 +63,15 @@
     font-size: medium;
     color: #282628;
 }
+
+.showcase-date
+{
+    color: rgb(255, 98, 0);
+    font-style: oblique;
+}
+
+.showcase-retr
+{
+    color: green;
+    font-style: bold;
+}
