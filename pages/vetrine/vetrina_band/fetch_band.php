@@ -7,22 +7,22 @@ $strum = "";
 $gen = "";
 $serv = "";
 
-if (isset($_POST['page'])) {
-    $page = $_POST['page'];
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
 }else{
     $page = 1;
 }
 
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
 }else{
     $search = "";
 }
 
-if (isset($_POST['ordine'])) {
-    if($_POST['ordine'] == "prezzo"){
+if (isset($_GET['ordine'])) {
+    if($_GET['ordine'] == "prezzo"){
         $ordine = "min_prezzo";
-    } else if($_POST['ordine'] == "migliori"){
+    } else if($_GET['ordine'] == "migliori"){
         $ordine = "valutazione_media DESC";
     }else {
         $ordine = "id_band DESC";
@@ -32,8 +32,8 @@ if (isset($_POST['ordine'])) {
 }
 
 
-if(isset($_POST['generi'])) {
-    $generi = $_POST['generi'];
+if(isset($_GET['generi'])) {
+    $generi = $_GET['generi'];
     $gen = 'OR ';
     foreach($generi as $genere) {
         $gen .= " '".pg_escape_string($dbconn, $genere )."' = any(generi_musicali) OR ";
@@ -41,15 +41,14 @@ if(isset($_POST['generi'])) {
     $gen = substr($gen, 0, -4);
 }
 
-if(isset($_POST['servizi'])) {
-    $servizi = $_POST['servizi'];
+if(isset($_GET['servizi'])) {
+    $servizi = $_GET['servizi'];
     $serv = 'OR ';
     foreach($servizi as $servizio) {
         $serv .= " '".pg_escape_string($dbconn, $servizio )."' = any(servizi_forniti) OR ";
     }
     $serv = substr($serv, 0, -4);
 }
-
 
 $start = ($page - 1) * $limit;
 
@@ -61,18 +60,18 @@ foreach($q as $text) {
 }
 $condition = substr($condition, 0, -4);
 
-if(isset($_POST['citta']) AND $_POST['citta'] != NULL) {
-    $citta = $_POST['citta'];
+if(isset($_GET['citta']) AND $_GET['citta'] != NULL) {
+    $citta = $_GET['citta'];
     $condition .= " AND id_sede = '".pg_escape_string($dbconn, $citta )."'";
 }
     
 
 
-if (isset($_POST['generi'])){  
+if (isset($_GET['generi'])){  
     $gen = substr($gen, 3);
     $query = "SELECT * FROM v_profilo_band WHERE ". $condition ." AND (".$gen." ".$serv.") ORDER BY ".$ordine." LIMIT $limit OFFSET $start" ;
     $query_2 = "SELECT COUNT(id_band) FROM v_profilo_band WHERE ". $condition ." AND (".$gen." ".$serv.")";
-}else if (isset($_POST['servizi'])){
+}else if (isset($_GET['servizi'])){
     $serv = substr($serv, 3);
     $query = "SELECT * FROM v_profilo_band WHERE ". $condition ." AND (".$serv.") ORDER BY ".$ordine." LIMIT $limit OFFSET $start" ;
     $query_2 = "SELECT COUNT(id_band) FROM v_profilo_band WHERE ". $condition ." AND (".$serv.")";
@@ -94,7 +93,7 @@ if($count_artisti> 0) {
         if(str_starts_with($row['foto_profilo'], "https://") || str_starts_with($row['foto_profilo'], "http://")){
             $display .= '<img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
         }else{
-            $display .= '<img id="foto_profilo" src="../../../data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="flex-shrink-0 me-3" />';
+            $display .= '<img id="foto_profilo" src="../../../data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="img-fluid" />';
         }
         $display .= '
         <div class="col-md-4 p-4">
@@ -183,7 +182,7 @@ $display .= '    <nav aria-label="Page navigation">
 
    $display .='</ol> </nav>';
 
-   echo $display;
+echo $display;
 
 
 

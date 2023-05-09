@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../style_vetrine.css">
     <script src="../../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="../vetrine.js"></script>
     <title>Artisti</title>
 
 </head>
@@ -22,18 +23,18 @@
  <header>
   <?php include '../../common/navbar.php'; ?>
   </header>
-  <div class="col-12" id="cover"  style="background: url('../../../site_images/guitar.jpg') no-repeat; background-size: cover; height:500px;">
-          <h1 class="text-center align-bottom text-white " >Artisti</h1>
+  <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/guitar-2.jpg') no-repeat; background-size: cover; height:500px;">
+          <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Artisti</h1>
   </div>
   <div class="container-fed">
 
     <div class= "row align-items-start" id="row2">
-        <div class="col-3">
+        <div class="col-3 width-100">
         <form class="row g-2" method="post" id="search-form">
-        <div class="col-auto">
+        <div class="col-9">
           <input type="search" class="form-control" id="inputsearch" placeholder="Cerca" name="search">
         </div>
-        <div class="col-auto">
+        <div class="col-3">
           <button type="submit" id='search' class="btn btn-secondary mb-3">
           <i class="bi bi-search" style="color: #640062" ></i>
           </button>
@@ -42,7 +43,7 @@
           <select class="form-select" id="citta">
           <option value="0" selected>Seleziona una città</option>
           <?php
-            $query = "SELECT * FROM citta";
+            $query = "SELECT * FROM citta Order by nome_citta ASC";
             $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
             $citta = pg_fetch_all($result);
             foreach ($citta as $c) {
@@ -154,7 +155,7 @@
             </div>
 
          </div>
-        <div class="col-9" id="pull_data"></div>
+        <div class="col-9 width-100" id="pull_data"></div>
     </div>
   </div>
 
@@ -176,7 +177,7 @@ let servizi = new Array();
 function fetch_data(page){
   $.ajax({
     url:"./fetch_artisti.php",
-    method:"POST",
+    method:"GET",
     data:{page:page, search:search, ordine:ordine, strumenti:strumenti, generi:generi, citta:citta, servizi:servizi},
     success:function(data){
       $('#pull_data').html(data);
@@ -186,34 +187,25 @@ function fetch_data(page){
 
 fetch_data();
 
-$(document).on('click', '.page-item', function(){
-  let page = $(this).attr("id");
-  //let search = $('#inputsearch').val();
-  fetch_data(page);
-});
-
-$("#search-form").submit(function(event) {
-  search = $('#inputsearch').val();
-  fetch_data(1);
-  event.preventDefault();
-});
+get_page();
 
 $(".form-select").change(function() {
-  if($(this).val() == "Seleziona una città"){
-    citta = NULL;
+  if($(this).val() == "0"){
+    citta = "";
   }else {
   citta = $(this).val();
   }
   fetch_data(1);
 });
 
+
 document.getElementsByName("ordine").forEach(function(element) {
-  element.addEventListener('click', function() {
-    ordine = $(this).val();
-    //let search = $('#inputsearch').val();
-    fetch_data(1);
+    element.addEventListener('click', function() {
+      ordine = $(this).val();
+      //let search = $('#inputsearch').val();
+      fetch_data(1);
+    });
   });
-});
 
 document.getElementsByName("strumento").forEach(function(element) {
   element.addEventListener('change', function() {
