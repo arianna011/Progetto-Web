@@ -93,7 +93,7 @@ if($count_artisti> 0) {
         if(str_starts_with($row['foto_profilo'], "https://") || str_starts_with($row['foto_profilo'], "http://")){
             $display .= '<img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
         }else{
-            $display .= '<img id="foto_profilo" src="../../../data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="img-fluid" />';
+            $display .= '<img id="foto_profilo" src="../../../user_data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="img-fluid" />';
         }
         $display .= '
         <div class="col-md-4 p-4">
