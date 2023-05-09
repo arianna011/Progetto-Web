@@ -14,45 +14,102 @@ include '../../../connection.php';
     <link rel="stylesheet" href="../style_vetrine.css">
     <script src="../../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <title>Host</title>
+    <script src="../vetrine.js"></script>
+    <title>Eventi</title>
 
 </head>
 <body class="bg-beige">
  <header>
   <?php include '../../common/navbar.php'; ?>
   </header>
-  <div class="col-12" id="cover"  style="background: url('../../../site_images/vetrina-host.jpg') no-repeat; background-size: cover; height:500px;">
-          <h1 class="text-center align-bottom text-white " > Eventi </h2>
+  <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/vetrina-evento-01.jpg') no-repeat; background-size: cover; height:500px;">
+          <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big" > Eventi </h2>
   </div>
   <div class="container-fed">
 
     <div class= "row align-items-start" id="row2">
-        <div class="col-3">
-        <form class="row g-2" method="post" id="search-form">
-        <div class="col-auto">
-          <input type="search" class="form-control" id="inputsearch" placeholder="Cerca" name="search">
-        </div>
-        <div class="col-auto">
-          <button type="submit" id='search' class="btn btn-secondary mb-3">
-          <i class="bi bi-search" style="color: #640062" ></i>
-          </button>
-        </div>
-        </form>
+        <div class="col-3 width-100">
+          <form class="row g-2" method="post" id="search-form">
+          <div class="col-9">
+            <input type="search" class="form-control" id="inputsearch" placeholder="Cerca" name="search">
+          </div>
+          <div class="col-3">
+            <button type="submit" id='search' class="btn btn-secondary mb-3">
+            <i class="bi bi-search" style="color: #640062" ></i>
+            </button>
+          </div>
+          </form>
           <select class="form-select" id="citta">
-          <option value="0" selected>Seleziona una città</option>
-          <?php
-            $query = "SELECT * FROM citta";
-            $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
-            $citta = pg_fetch_all($result);
-            foreach ($citta as $c) {
-              ?> 
-              <option value="<?= $c['id_citta']; ?>"> <?= $c['nome_citta']; ?> </option>
-              <?php
-            }
-          ?>
+            <option value="0" selected>Seleziona una città</option>
+            <?php
+              $query = "SELECT * FROM citta Order by nome_citta ASC";
+              $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
+              $citta = pg_fetch_all($result);
+              foreach ($citta as $c) {
+                ?> 
+                <option value="<?= $c['id_citta']; ?>"> <?= $c['nome_citta']; ?> </option>
+                <?php
+              }
+            ?>
           </select> 
-         </div>
-        <div class="col-9" id="pull_data"></div>
+          <div class="col-10 calendar bg-primary mt-4 pt-2 text-center"  >
+          <div class="row">
+            <div class="col-auto">
+            <i class="bi bi-chevron-left" id="prev" style="color:white;"></i> 
+            </div>
+            <div class="col-auto">
+            <h5 class="text-center text-white " id="year" >2023</h5>  
+            </div>
+            <div class="col-auto">
+            <i class="bi bi-chevron-right" id="next" style="color:white;"></i>    
+            </div>     
+            </div> 
+          </div>
+          <div class="col-10 calendar bg-primary">
+              <div class="row">
+              <div class="col-1">
+              <i class="bi bi-chevron-left" id="prev1" style="color:white;"></i> 
+              </div>
+              <div class="col-5">
+              <h5 class="text-center text-white pb-2" id="month" >Gennaio</h5>  
+              </div>
+              <div class="col-2">
+              <i class="bi bi-chevron-right" id="next1" style="color:white;"></i>    
+              </div>  
+            </div>       
+          </div>
+          <div class= "col-10 calendar">
+            <ul class="list-inline">
+              <?php for($i=1; $i<=7; $i++) {  ?>
+                <li class="list-inline-item px-2 py-1 day" id="0<?=$i?>"><?=$i?></li>
+              <?php } ?>
+            </ul>
+            <ul class="list-inline">
+              <li class="list-inline-item px-2 py-1 day" id="08">8</li>
+              <li class="list-inline-item px-2 py-1 day" id="09">9</li>
+              <?php for($i=10; $i<=14; $i++) {  ?>
+                <li class="list-inline-item p-1 day" id="<?=$i?>"><?=$i?></li>
+              <?php } ?>
+            </ul>
+            <ul class="list-inline ">
+              <?php for($i=15; $i<=21; $i++) {  ?>
+                <li class="list-inline-item p-1 day" id="<?=$i?>"><?=$i?></li>
+              <?php } ?>
+            </ul>
+            <ul class="list-inline ">
+              <?php for($i=22; $i<=28; $i++) {  ?>
+                <li class="list-inline-item p-1 day" id="<?=$i?>"><?=$i?></li>
+              <?php } ?>
+            </ul>
+            <ul class="list-inline ">
+              <li class="list-inline-item p-1 day" id="<?=$i?>">29</li>
+              <?php for($i=30; $i<=31; $i++) {  ?>
+                <li class="list-inline-item p-1 day" id="<?=$i?>"><?=$i?></li>
+              <?php } ?>
+            </ul>
+          </div>
+        </div>
+        <div class="col-9 width-100" id="pull_data"></div>
     </div>
   </div>
 
@@ -66,13 +123,16 @@ include '../../../connection.php';
 let ordine ;
 let search;
 let citta;
+let anno;
+let mese;
+let giorni = new Array();
 
 
 function fetch_data(page){
   $.ajax({
     url:"./fetch_eventi.php",
-    method:"POST",
-    data:{page:page, search:search, ordine:ordine, citta:citta},
+    method:"GET",
+    data:{page:page, search:search, ordine:ordine, citta:citta, anno:anno, mese:mese, giorni:giorni},
     success:function(data){
       $('#pull_data').html(data);
     }
@@ -81,11 +141,7 @@ function fetch_data(page){
 
 fetch_data();
 
-$(document).on('click', '.page-item', function(){
-  let page = $(this).attr("id");
-  //let search = $('#inputsearch').val();
-  fetch_data(page);
-});
+get_page();
 
 $("#search-form").submit(function(event) {
   search = $('#inputsearch').val();
@@ -94,8 +150,8 @@ $("#search-form").submit(function(event) {
 });
 
 $(".form-select").change(function() {
-  if($(this).val() == "Seleziona una città"){
-    citta = NULL;
+  if($(this).val() == "0"){
+    citta = "";
   }else {
   citta = $(this).val();
   }
@@ -110,8 +166,165 @@ document.getElementsByName("ordine").forEach(function(element) {
   });
 });
 
-</script>
-    
 
+$("#prev").on('click',function() {
+  anno = (parseInt($("#year").text())) - 1;
+  $("#year").text(anno);
+  fetch_data(1);
+})
+
+
+$("#next").on('click',function() {
+  anno = (parseInt($("#year").text())) + 1;
+  $("#year").text(anno);
+  fetch_data(1);
+})
+
+
+$("#next1").on('click', function(){
+  let year = parseInt($("#year").text());
+  //let month = $("#month").innerHTML;
+  let month = $("#month").text();
+  if(month == "Gennaio"){
+    $("#month").text("Febbraio");
+    $("#29").hide();
+    $("#30").hide();
+    $("#31").hide();
+    mese = "02";
+  }else if(month == "Febbraio"){
+    $("#month").text("Marzo");
+    $("#29").show();
+    $("#30").show();
+    $("#31").show();
+    mese = "03";
+  }else if(month == "Marzo"){
+    $("#month").text("Aprile");
+    $("#31").hide();
+    mese = "04";
+  }else if(month == "Aprile"){
+    $("#month").text("Maggio");
+    $("#31").show();
+    mese = "05";
+  }
+  else if(month == "Maggio"){
+    $("#month").text("Giugno");
+    $("#31").hide();
+    mese = "06";
+  }
+  else if(month == "Giugno"){
+    $("#month").text("Luglio");
+    $("#31").show();
+    mese = "07";
+  }
+  else if(month == "Luglio"){
+    $("#month").text("Agosto");
+    mese = "08";
+  }
+  else if(month == "Agosto"){
+    $("#month").text("Settembre");
+    $("#31").hide();
+    mese = "09";
+  }
+  else if(month == "Settembre"){
+    $("#month").text("Ottobre");
+    $("#31").show();
+    mese = "10";
+  }
+  else if(month == "Ottobre"){
+    $("#month").text("Novembre");
+    $("#31").hide();
+    mese = "11";
+  }
+  else if(month == "Novembre"){
+    $("#month").text("Dicembre");
+    $("#31").show();
+    mese = "12";
+  }
+  else if(month == "Dicembre"){
+    $("#month").text("Gennaio");
+    $("#year").text(year+1);
+    mese = "01";
+  }
+  fetch_data(1);
+
+});
+
+$("#prev1").on('click', function() {
+  let year = parseInt($("#year").text());
+  let month = $("#month").text();
+  if(month == "Gennaio"){
+    $("#year").text(year-1);
+    $("#month").text("Dicembre");
+    mese = "12";
+  }else if(month == "Febbraio"){
+    $("#month").text("Gennaio");
+    $("#29").show();
+    $("#30").show();
+    $("#31").show();
+    mese = "01";
+  }else if(month == "Marzo"){
+    $("#month").text("Febbraio");
+    $("#29").hide();
+    $("#30").hide();
+    $("#31").hide();
+    mese = "02";
+  }else if(month == "Aprile"){
+    $("#month").text("Marzo");
+    $("#31").show();
+    mese = "03";
+  }else if(month == "Maggio"){
+    $("#month").text("Aprile");
+    $("#31").hide();
+    mese = "04";
+  }else if(month == "Giugno"){
+    $("#month").text("Maggio");
+    $("#31").show();
+    mese = "05";
+  }else if(month == "Luglio"){
+    $("#month").text("Giugno");
+    $("#31").hide();
+    mese = "06";
+  }else if(month == "Agosto"){
+    $("#month").text("Luglio");
+    $("#31").show();
+    mese = "07";
+  }else if(month == "Settembre"){
+    $("#month").text("Agosto");
+    mese = "08";
+  }else if(month == "Ottobre"){
+    $("#month").text("Settembre");
+    $("#31").hide();
+    mese = "09";
+  }else if(month == "Novembre"){
+    $("#month").text("Ottobre");
+    $("#31").show();
+    mese = "10";
+  }else if(month == "Dicembre"){
+    $("#month").text("Novembre");
+    mese = "11";
+  }
+  fetch_data(1);
+});
+
+/*
+$(document).on('click', '.day', function() {
+  $(".day").css("background-color", "white");
+});
+*/
+
+$(".day").on('click', function() {
+  if ($(this).css("background-color") == "rgb(255, 165, 0)") {
+    $(this).css("background-color", "white");
+    giorni.splice(giorni.indexOf($(this).attr("id")), 1);
+    fetch_data(1);
+  }else {
+  $(this).css("background-color", "orange");
+  //let day = $(this).attr("id");
+  giorni.push($(this).attr("id"));
+  fetch_data(1);
+  }
+});
+
+</script>
 </body>
 </html>

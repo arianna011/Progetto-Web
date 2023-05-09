@@ -7,20 +7,20 @@ $strum = "";
 $gen = "";
 $serv = "";
 
-if (isset($_POST['page'])) {
-    $page = $_POST['page'];
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
 }else{
     $page = 1;
 }
 
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
 }else{
     $search = "";
 }
 
-if (isset($_POST['ordine'])) {
-    if($_POST['ordine'] == "migliori"){
+if (isset($_GET['ordine'])) {
+    if($_GET['ordine'] == "migliori"){
         $ordine = "valutazione_media DESC";
     }else {
         $ordine = "id_locale DESC";
@@ -40,8 +40,8 @@ foreach($q as $text) {
 }
 $condition = substr($condition, 0, -4);
 
-if(isset($_POST['citta']) AND $_POST['citta'] != NULL) {
-    $citta = $_POST['citta'];
+if(isset($_GET['citta']) AND $_GET['citta'] != NULL) {
+    $citta = $_GET['citta'];
     $condition .= " AND id_citta = '".pg_escape_string($dbconn, $citta )."'";
 }
     
@@ -62,7 +62,7 @@ if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
         $display .= '<div class="item-list-fed">
         <img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />
-        <div class="col-md-4 p-2">
+        <div class="col-md-4 p-4">
           <h5 class="nome artista"  >'. $row['nome_locale'] .' </h5>';
             if($row['valutazione_media']){
                 $display .= '<h6 class="valutazione" style="color:#fd7e14">';
@@ -81,8 +81,14 @@ if($count_artisti> 0) {
             }else{
                 $display .= '<h6 class="valutazione" style="color:#fd7e14"> nessuna valutazione </h6>';
             }
+
+            if(strlen($row['descrizione_locale'])> 80) {
+                $display .= ' <p> '. substr($row['descrizione_locale'],0, 80) .'... </p> ';
+            } else {
+                $display .= '<p> '. $row['descrizione_locale'] .' </p> '; 
+            }
+        
         $display .= '
-          <p> '. substr($row['descrizione_locale'],0,100) .' </p>
           <a href="profilo_host.php?id='. $row['id_locale'] .'" class="btn btn-primary"> Vedi profilo </a>
         </div>
           <div class="col-md-3 p-4">
