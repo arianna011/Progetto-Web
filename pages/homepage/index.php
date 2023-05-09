@@ -8,13 +8,13 @@
 
   <title>NotaMi</title>
   
-  <link rel="stylesheet" href="../../bootstrap/scss/bootstrap.css" />
-  <link rel="stylesheet" href="../../bootstrap-icons-1.10.4/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../common/style.css" />
-  <link rel="stylesheet" href="./homepage.css" />
-  <script src="../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./jquery.js"></script>
-  <script src="./animations.js"></script>
+  <link rel="stylesheet" href="/bootstrap/scss/bootstrap.css" />
+  <link rel="stylesheet" href="/bootstrap-icons-1.10.4/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/pages/common/style.css" />
+  <link rel="stylesheet" href="/pages/homepage/homepage.css" />
+  <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/pages/homepage/jquery.js"></script>
+  <script src="/pages/homepage/animations.js"></script>
 
 </head>
 

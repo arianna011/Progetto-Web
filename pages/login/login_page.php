@@ -8,23 +8,26 @@
 
   <title>NotaMi</title>
   
-  <link rel="stylesheet" href="bootstrap/scss/bootstrap.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <script src="./bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/bootstrap/scss/bootstrap.css" />
+  <link rel="stylesheet" href="/bootstrap-icons-1.10.4/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/pages/common/style.css" />
+  <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
 <body class="bg-beige">
 
   <header class="bg-purple">
-    <?php include 'navbar.php' ?>
+    <?php include '../common/navbar.php' ?>
   </header>
-
-  <div class="row">
-    <div class="col m-3">
+  <div class="col-12 position-relative" style="background: url('../../../site_images/login.jpg') no-repeat; background-size: cover; height:300px;">
+    <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Accedi a NotaMi</h1>
+  </div>
+  <div class="row m-2">
+    <div class="col m-3 p-3">
       <form name="login" action="login.php" method="POST" class="form-signin m-auto" >
       
-      <h2 class="text-purple mb-3">Login</h2>
+      <h2 class="text-purple mb-3"><i class="bi bi-person-circle"></i> <span class="ms-1"> Login </span></h2>
       <span>Inserisci i tuoi dati per accedere al profilo personale.</span>
 
       <br><br>
@@ -41,29 +44,29 @@
     </form>
     </div>
     
-    <div class="d-none d-md-block col m-3 p-3 purple-box" style="background: url('icons/login.png');">
-    <h2 class="text-purple mb-3">Non hai ancora un account?</h2>
-        <span>Registrati per gestire un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</span>
+    <div class="d-none d-md-block col m-3 p-3">
+    <h2 class="text-purple mb-3"> <i class="bi bi-person-exclamation"></i> Non hai ancora un account?</h2>
+        <span>Registrati per creare un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</span>
 
         <br><br>
         
-        <a href="" class="btn btn-primary">Registrati</a>
+        <a href="/pages/login/registration.php" class="btn btn-primary">Registrati</a>
     </div>
   </div>
   
-  <div class="d-block d-md-none col m-3 p-3 purple-box" style="background: url('icons/login.png');">
-    <h2 class="text-purple mb-3">Non hai ancora un account?</h2>
+  <div class="d-block d-md-none col m-3 p-3">
+    <h2 class="text-purple mb-3"><i class="bi bi-person-exclamation"></i> Non hai ancora un account?</h2>
         <span>Registrati per gestire un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</span>
 
         <br><br>
         
-        <a href="" class="btn btn-primary">Registrati</a>
+        <a href="/pages/login/registration.php" class="btn btn-primary">Registrati</a>
   </div>
   
   <br>
 
   <footer class="footer pt-lg-5 pt-4 pb-4">
-    <?php include 'footer.php' ?>
+    <?php include '../common/footer.php' ?>
   </footer>
 
 </body>

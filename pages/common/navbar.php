@@ -25,11 +25,11 @@
               <a class="nav-link" href="/pages/vetrine/vetrina_locali/Host.php"><span class="text-white"> Host </span></a>
             </li>
           </ul>
-          <a href="./login_page.php" class="d-flex d-none btn btn-outline-secondary">
+          <a href="/pages/login/login_page.php" class="d-flex btn btn-outline-secondary">
             Accedi/Registrati
           </a>
           <!-- da rendere dinamico -->
-          <a class="d-flex btn btn-outline-secondary" href="#"> <i class="bi bi-person-circle"></i> <span class="ms-2"> Il mio Profilo </span> </a>
+          <a class="d-flex btn btn-outline-secondary d-none" href="#"> <i class="bi bi-person-circle"></i> <span class="ms-2"> Il mio Profilo </span> </a>
 
         </div>
       </div>
