@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: /");
 }
 else {
-    include 'connection.php';
+    include '../../connection.php';
 }
 ?>
 <!DOCTYPE html>
