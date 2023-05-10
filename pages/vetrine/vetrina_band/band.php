@@ -65,7 +65,7 @@
             <label class="form-chekc-label" for="radio3"> Più economici </label>
           </div>
 
-            <div class="accordion" id="accordionFlushExample">
+            <div class="accordion " id="accordionFlushExample">
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">

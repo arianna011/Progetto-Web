@@ -60,7 +60,7 @@
             <input class="form-check-input" type="radio" name="ordine" id="radio2"  value="migliori">
             <label class="form-chekc-label" for="radio2"> Migliori valutazioni</label>
           </div>
-          <div class="ratio ratio-1x1 m-2" id="iframe-container">
+          <div class="ratio ratio-1x1 m-2 mt-4 " id="iframe-container">
             <iframe src="https://www.google.com/maps/d/embed?mid=1vOuy-wYqzy1Yro3Jtp78XFdKmWWrXpU&hl=it&ehbc=2E312F" ></iframe>
           </div>
 

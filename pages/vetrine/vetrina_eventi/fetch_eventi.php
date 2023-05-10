@@ -68,7 +68,7 @@ if(isset($_GET['giorni']) AND $_GET['giorni'] != NULL) {
 
 
 $query = "SELECT * FROM v_ingaggio WHERE ". $condition ." ORDER BY ".$ordine." LIMIT $limit OFFSET $start" ;
-$query_2 = "SELECT COUNT(id_ingaggio) FROM ingaggio WHERE ". $condition ."";
+$query_2 = "SELECT COUNT(id_ingaggio) FROM v_ingaggio WHERE ". $condition ."";
 
 
 //echo $query;
@@ -80,8 +80,8 @@ $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
         $display .= '<div class="item-list-fed">';
-        if(str_starts_with($row['immagine'], "https://") || str_starts_with($row['immagine'], "http://")){
-            $display .= '<img id="foto_profilo" src='. $row['immagine'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
+        if((str_starts_with($row['immagine'], "https://") || str_starts_with($row['immagine'], "http://") )|| $row['immagine'] == NULL){
+            $display .= '<img id="foto_profilo" src="../../../site_images/placeholder-image.webp" alt="foto profilo"  class="flex-shrink-0 me-3" />';
         }else{
             $display .= '<img id="foto_profilo" src="../../../user_data/'.$row['immagine'] .'" alt="foto profilo"  class="img-fluid" />';
         }

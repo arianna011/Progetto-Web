@@ -90,8 +90,9 @@ $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
         $display .= '<div class="item-list-fed">';
-        if(str_starts_with($row['foto_profilo'], "https://") || str_starts_with($row['foto_profilo'], "http://")){
-            $display .= '<img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
+        if((str_starts_with($row['foto_profilo'], "https://") || str_starts_with($row['foto_profilo'], "http://" )) || $row['foto_profilo'] == NULL){
+            //$display .= '<img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
+            $display .= '<img id="foto_profilo" src="../../../site_images/placeholder-image.webp" alt="foto profilo"  class="img-fluid" />';
         }else{
             $display .= '<img id="foto_profilo" src="../../../user_data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="img-fluid" />';
         }
