@@ -25,7 +25,7 @@
               <a class="nav-link" href="/pages/vetrine/vetrina_locali/Host.php"><span class="text-white"> Host </span></a>
             </li>
           </ul>
-          <a href="/pages/login/login_page.php" class="d-flex btn btn-outline-secondary">
+          <a href="/pages/login/login.php" class="d-flex btn btn-outline-secondary">
             Accedi/Registrati
           </a>
           <!-- da rendere dinamico -->
