@@ -66,6 +66,10 @@ if(isset($_GET['giorni']) AND $_GET['giorni'] != NULL) {
     $condition .= ")";
 }
 
+if(isset($_GET['citta']) AND $_GET['citta'] != NULL) {
+    $citta = $_GET['citta'];
+    $condition .= " AND id_citta = '".pg_escape_string($dbconn, $citta )."'";
+}
 
 $query = "SELECT * FROM v_ingaggio WHERE ". $condition ." ORDER BY ".$ordine." LIMIT $limit OFFSET $start" ;
 $query_2 = "SELECT COUNT(id_ingaggio) FROM v_ingaggio WHERE ". $condition ."";
@@ -102,10 +106,10 @@ if($count_artisti> 0) {
             }
             if($row["nome_locale"] != NULL){
                 $query_2 = "SELECT nome_citta FROM v_profilo_locale WHERE nome_locale = '". $row["nome_locale"] ."'";
-                $display .= '<h5 class="mb-0 text-secondary" > '. $row['nome_locale'] .' </h5>';
+                $display .= '<h5 class="mb-0 text-secondary" style="text-align:end" > '. $row['nome_locale'] .' </h5>';
                 $result_2 = pg_query($dbconn, $query_2) or die('Query failed: ' . pg_last_error());
                 $row_2 = pg_fetch_array($result_2);
-                $display .= '<h6 class="mb-0" > <i class="bi bi-geo-alt-fill"></i> '. $row_2['nome_citta'] .' </h6>';
+                $display .= '<h6 class="mb-0" style="text-align:end"> <i class="bi bi-geo-alt-fill"></i> '. $row_2['nome_citta'] .' </h6>';
                 
             }
                 // <p class="text-body-secondary small"> '. $row['indirizzo'] .' </p> 

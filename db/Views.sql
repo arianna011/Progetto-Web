@@ -265,7 +265,11 @@ SELECT
 
 	(SELECT nome_locale
 	FROM Profilo_locale
-	WHERE id_locale = id_luogo) AS nome_locale
+	WHERE id_locale = id_luogo) AS nome_locale,
+
+	(SELECT id_citta
+	FROM Profilo_locale
+	WHERE id_locale = id_luogo) AS id_citta
 
 FROM Ingaggio i
 JOIN Profilo_utente ON datore = id_utente

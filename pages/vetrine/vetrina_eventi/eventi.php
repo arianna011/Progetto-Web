@@ -29,7 +29,7 @@ include '../../../connection.php';
 
     <div class= "row align-items-start" id="row2">
         <div class="col-3 width-100">
-          <form class="row g-2" method="post" id="search-form">
+          <form class="row" method="post" id="search-form">
           <div class="col-9">
             <input type="search" class="form-control" id="inputsearch" placeholder="Cerca" name="search">
           </div>
@@ -306,11 +306,6 @@ $("#prev1").on('click', function() {
   fetch_data(1);
 });
 
-/*
-$(document).on('click', '.day', function() {
-  $(".day").css("background-color", "white");
-});
-*/
 
 $(".day").on('click', function() {
   if ($(this).css("background-color") == "rgb(255, 165, 0)") {
