@@ -45,7 +45,7 @@
 
 .my-text-muted
 {
-    color: #2b012adc;
+    color: rgba(255,255,255,0.3);
 }
 
 .mycontainer

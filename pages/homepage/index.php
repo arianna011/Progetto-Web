@@ -273,7 +273,7 @@
 
   <?php include './events.php' ?>
 
-  <div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="row row-cols-1 row-cols-md-2 g-0">
   <div class="col">
     <div class="card m-3">
       <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event1["nick_datore"] ?> </span> </i> </h6></div>
@@ -349,7 +349,7 @@
   </div>
 
 
-  <footer class="footer pt-lg-5 pt-4 pb-4 mt-4">
+  <footer>
     <?php include '../common/footer.php' ?>
   </footer>
 

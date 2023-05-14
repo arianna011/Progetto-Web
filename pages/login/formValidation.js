@@ -7,7 +7,7 @@
     // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
       form.addEventListener('submit', event => {
-        if (!checkValidity(form)) {
+        if (!form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
         }
@@ -16,12 +16,6 @@
       }, false)
     })
   })()
-
-  function checkValidity(form)
-  {
-    var nome = form.inputName.value;
-    return  nome != "";
-  }
 
 
 

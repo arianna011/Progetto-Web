@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="/bootstrap-icons-1.10.4/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/pages/common/style.css" />
   <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="formValidation.js"></script> 
 
 </head>
 
@@ -21,16 +20,16 @@
    <header class="bg-purple">
      <?php include '../common/navbar.php' ?>
    </header>
-   <div class="col-12 position-relative" style="background: url('../../../site_images/login.jpg') no-repeat; background-size: cover; height:300px;">
+   <div class="position-relative mb-1" style="background: url('../../../site_images/login.jpg') no-repeat; background-size: cover; height:300px;">
      <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Accedi a NotaMi</h1>
    </div>
-    <br>
-    <h2 class="text-purple text-center m-3"> <i class="bi bi-person-lines-fill"></i> Registrazione </h2>
+    <h2 class="text-purple text-center m-3 mt-4"> <i class="bi bi-person-lines-fill"></i> Registrazione </h2>
         <p class="text-center">Registrati per creare un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</p>
 
-    <br>
 
-    <form id="registration" class="row g-3 px-3 needs-validation" method="POST" onSubmit="return validaForm()" novalidate>
+    <div class="mt-2 mb-2 p-3">
+    <div class="container">
+    <form id="registration" class="row g-4 px-3 needs-validation" method="POST" novalidate>
         <h4 class="text-orange">Dati personali </h4>
         <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
@@ -89,24 +88,21 @@
             <label for="inputPassword" class="form-label">Password</label>
             <input type="password" class="form-control" name="password" id="inputPassword" minlength="8" maxlength="15" placeholder="Crea una password"  required>
             <div class="form-text">La password deve contenere almeno 8 caratteri</div>
-            <div class="invalid-feedback">Campo obbligatorio </div>      
+            <div class="invalid-feedback">Password non valida </div>      
         </div>
         <div class="col-12">
             <label for="inputBio" class="form-label">Bio  <i class="text-grey"> Opzionale </i> </label>
             <textarea class="form-control" name="bio" id="inputBio" maxlength="1024" placeholder="Scrivi qualcosa su di te..."></textarea>
         </div>
 
+        <script src="formValidation.js"></script> 
   
-  <div class="col-12 text-center">
-    <button type="submit" class="btn btn-primary">Invia</button>
-  </div>
-</form>
-
-              
- 
-  
-  <br>
-
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Invia</button>
+      </div>
+    </form>
+    </div>
+    </div>
   <footer class="footer pt-lg-5 pt-4 pb-4">
     <?php include '../common/footer.php' ?>
   </footer>
