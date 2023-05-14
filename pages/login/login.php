@@ -20,9 +20,11 @@
   <header class="bg-purple">
     <?php include '../common/navbar.php' ?>
   </header>
-  <div class="col-12 position-relative" style="background: url('../../../site_images/login.jpg') no-repeat; background-size: cover; height:300px;">
+  <div class="position-relative" style="background: url('../../../site_images/login.jpg') no-repeat; background-size: cover; height:300px;">
     <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Accedi a NotaMi</h1>
   </div>
+
+  <div class="container">
   <div class="row m-2">
     <div class="col m-3 p-3">
       <form name="login" action="login.php" method="POST" class="form-signin m-auto" >
@@ -46,24 +48,19 @@
     
     <div class="d-none d-md-block col m-3 p-3">
     <h2 class="text-purple mb-3"> <i class="bi bi-person-exclamation"></i> Non hai ancora un account?</h2>
-        <span>Registrati per creare un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</span>
-
-        <br><br>
-        
+      <div class="mb-4">Registrati per gestire un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</div>
         <a href="/pages/login/registration.php" class="btn btn-primary">Registrati</a>
     </div>
   </div>
   
   <div class="d-block d-md-none col m-3 p-3">
     <h2 class="text-purple mb-3"><i class="bi bi-person-exclamation"></i> Non hai ancora un account?</h2>
-        <span>Registrati per gestire un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</span>
-
-        <br><br>
-        
+        <div class="mb-2">Registrati per gestire un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</div>
+        <br>
         <a href="/pages/login/registration.php" class="btn btn-primary">Registrati</a>
   </div>
   
-  <br>
+ </div>
 
   <footer class="footer pt-lg-5 pt-4 pb-4">
     <?php include '../common/footer.php' ?>

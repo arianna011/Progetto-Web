@@ -1,8 +1,8 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-purple">
       <div class="container-fluid">
         <a class="navbar-brand" href="/pages/homepage/index.php">
-          <img class="d-none d-md-block" src="images/logo.png" alt="NotaMi">
-          <img class="d-block d-md-none" src="images/logo-mobile.png" alt="NotaMi">
+          <img class="d-none d-md-block" height=50 src="/site_images/logo.png" alt="NotaMi">
+          <img class="d-block d-md-none" height=40 src="/site_images/logo-mobile.png" alt="NotaMi">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
