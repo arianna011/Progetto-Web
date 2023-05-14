@@ -18,13 +18,17 @@
 
 </head>
 
-<body class="bg-beige">
+<body>
+  
+  <div class="bg-beige">
 
   <header class="bg-purple">
     <?php include '../common/navbar.php' ?>
   </header>
 
-  <div id="presentation" class="carousel slide" data-bs-ride="carousel">
+  
+
+  <div id="presentation" class="carousel slide mb-6" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="w-100 d-none d-md-block" style="background: url('../../site_images/pres1.jpg') no-repeat; background-size: cover; height:400px;"></div>
@@ -77,16 +81,15 @@
     </button>
   </div>
   
-  <br><br>
+  <div class="container">
 
+  <div class="mt-5 mb-4">
   <span class="text-purple text-center text-title"><h1>Find Bands&Stages</h1></span>
   <p class="text-center text-descr d-none d-md-block"> <b>NotaMi</b> è una piattaforma italiana dedicata ad artisti e host di eventi musicali:
      <br> il suo obiettivo è quello di far conoscere band emergenti e facilitare l'ingaggio di gruppi per vivacizzare le serate nei locali</p>
   <p class="text-center text-descr-mob d-block d-md-none"> <b>NotaMi</b> è una piattaforma italiana dedicata ad artisti e host di eventi musicali:
       il suo obiettivo è quello di far conoscere band emergenti e facilitare l'ingaggio di gruppi per vivacizzare le serate nei locali</p>
-
-  <br>
-
+  </div>
 
   <div>
 
@@ -273,7 +276,7 @@
 
   <?php include './events.php' ?>
 
-  <div class="row row-cols-1 row-cols-md-2 g-0">
+  <div class="row row-cols-1 row-cols-md-2 g-0 mb-4">
   <div class="col">
     <div class="card m-3">
       <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event1["nick_datore"] ?> </span> </i> </h6></div>
@@ -348,10 +351,12 @@
   </div>
   </div>
 
-
+  </div>
+  
   <footer>
     <?php include '../common/footer.php' ?>
   </footer>
+  </div>
 
 </body>
 
