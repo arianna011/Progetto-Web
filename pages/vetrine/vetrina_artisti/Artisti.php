@@ -30,7 +30,7 @@
 
     <div class= "row align-items-start" id="row2">
         <div class="col-3 width-100">
-        <form class="row g-2" method="post" id="search-form">
+        <form class="row" method="post" id="search-form">
         <div class="col-9">
           <input type="search" class="form-control" id="inputsearch" placeholder="Cerca" name="search">
         </div>
