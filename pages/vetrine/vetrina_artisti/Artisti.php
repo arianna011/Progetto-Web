@@ -26,7 +26,7 @@
   <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/guitar-2.jpg') no-repeat; background-size: cover; height:500px;">
           <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Artisti</h1>
   </div>
-  <div class="container-fed">
+  <div class="container cont-event mt-4 p-2">
 
     <div class= "row align-items-start" id="row2">
         <div class="col-3 width-100">
@@ -155,7 +155,7 @@
             </div>
 
          </div>
-        <div class="col-9 width-100" id="pull_data"></div>
+        <div class="col-9 width-100 max-sec" id="pull_data"></div>
     </div>
   </div>
 

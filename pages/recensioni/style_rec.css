@@ -1,0 +1,56 @@
+.bi-star-fill:hover {
+    color: orange;
+}
+
+.rate {
+    display: inline-block;
+    border: 0;
+}
+
+.rate > input {
+    display: none;
+}
+
+.rate > .star-label {
+    float: right;
+}
+
+.rate > .star-label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    display: inline-block;
+    content: "\F586";
+    font-family: "Bootstrap-Icons";
+}
+
+.rate > input:checked ~ .star-label {
+    color: orange;
+}
+
+/* Zero stars rating */
+.rate > .star-label:last-child:before {
+    content: "\F588 "; /* empty star outline */
+}
+/* Half star trick */
+.rate .half:before {
+    content: "\F587 "; /* half star no outline */
+    position: absolute;
+    padding-right: 0;
+}
+/* Click + hover color */
+input:checked ~ .star-label, /* color current and previous stars on checked */
+.star-label:hover, .star-label:hover ~ .star-label { color: orange;  } /* color previous stars on hover */
+
+/* Hover highlights */
+input:checked + .star-label:hover, input:checked ~ .star-label:hover, /* highlight current and previous stars */
+input:checked ~ .star-label:hover ~ .star-label, /* highlight previous selected stars for new rating */
+.star-label:hover ~ input:checked ~ .star-label /* highlight previous selected stars */ { color: orange;  } 
+
+.foto-recensione {
+    width: 50px;
+    height: 50px;
+}
+
+.text-recensione {
+    border-color: #640062;
+}

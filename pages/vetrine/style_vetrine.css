@@ -1,6 +1,8 @@
 
 .container-fed {
     padding: 2%;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -13,7 +15,7 @@
     display: flex; 
     flex-direction: row;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -72,9 +74,10 @@
 
 
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 767px) {
     .item-list-fed {
         flex-direction: column;
+        margin-top: 20px;
     }
 
     .width-100 {
@@ -95,7 +98,7 @@
       height: 50%;
     }
   }
-  @media screen and (min-width: 600px) and (max-width: 1000px) {
+  @media screen and (min-width: 768px) and (max-width: 1000px) {
     #row2 {
         flex-direction: column;
     }
@@ -107,8 +110,10 @@
     #iframe-container {
       width:50%;
     }
-      
-   
+    .item-list-fed {
+      margin-top: 20px;
+    }
+
   }      
 
   @media screen and (min-width:1000px) and (max-width: 1248px) {
@@ -117,8 +122,14 @@
     }
 
     .calendar {
-      width: 240px;
-      padding: 2px;
+      width: 238px;
+      padding-top: 3px;
+      padding-left: 1px;
+      padding-right: 1px;
+    }
+
+    .cont-event {
+      max-width: 97%;
     }
 
     .day {
@@ -126,3 +137,13 @@
     }
   }
 
+  @media screen and (min-width:1248px) and (max-width: 1400px) {
+    .cont-event {
+      max-width: 97%;
+    }
+  
+  }
+
+  html,body{
+    overflow-x: hidden;
+}

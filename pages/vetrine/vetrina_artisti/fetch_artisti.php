@@ -136,7 +136,7 @@ if($count_artisti> 0) {
             $display .= '<p> '. $row['descrizione'] .' </p> '; 
         }
         $display .= '
-          <a href="profilo.php?id='. $row['id_artista'] .'" class="btn btn-primary"> Vedi profilo </a>
+          <a href="/pages/recensioni/recensioni.php?id='. $row['id_artista'] .'" class="btn btn-primary"> Vedi profilo </a>
         </div>
         <div class="col-md-3 p-4">
             <h5 style="color:#fd7e14; margin-top:5%; text-align:end"> '. $row['min_prezzo'] .' - '. $row['max_prezzo'] .' € </h5>';
