@@ -64,12 +64,13 @@
        
         <div class="col-md-6"> 
             <label for="inputNick" class="form-label">Nickname</label>
-            <div class="input-group">
-            <span class="input-group-text">@</span>
-            <input type="text" class="form-control" id="inputNick" name="nickname" placeholder="Nickname" maxlength="15" required>
+            <div class="input-group has-validation">
+              <span class="input-group-text">@</span>
+              <input type="text" class="form-control" id="inputNick" name="nickname" placeholder="Nickname" maxlength="15" required>
+              <div class="invalid-feedback">Campo obbligatorio</div>
             </div>
             <div class="form-text">Scegli un nickname non ancora in uso</div>
-            <div class="invalid-feedback">Nickname già in uso</div>
+           
         </div>
         <div class="col-md-6">
           <label for="inputPicture" class="form-label">Foto Profilo <i class="text-grey"> Opzionale </i></label>
@@ -87,8 +88,8 @@
         <div class="col-md-6">
             <label for="inputPassword" class="form-label">Password</label>
             <input type="password" class="form-control" name="password" id="inputPassword" minlength="8" maxlength="15" placeholder="Crea una password"  required>
-            <div class="form-text">La password deve contenere almeno 8 caratteri</div>
-            <div class="invalid-feedback">Password non valida </div>      
+            <div class="invalid-feedback">Password non valida </div>   
+            <div class="form-text">La password deve contenere almeno 8 caratteri</div>   
         </div>
         <div class="col-12">
             <label for="inputBio" class="form-label">Bio  <i class="text-grey"> Opzionale </i> </label>
