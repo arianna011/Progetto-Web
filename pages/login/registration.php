@@ -23,13 +23,13 @@
    <div class="position-relative mb-1" style="background: url('../../../site_images/login.jpg') no-repeat; background-size: cover; height:300px;">
      <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Accedi a NotaMi</h1>
    </div>
+   <div class="container">
     <h2 class="text-purple text-center m-3 mt-4"> <i class="bi bi-person-lines-fill"></i> Registrazione </h2>
         <p class="text-center">Registrati per creare un profilo host, band o artista e ottenere la possibilità di scrivere recensioni.</p>
 
-
     <div class="mt-2 mb-2 p-3">
-    <div class="container">
-    <form id="registration" class="row g-4 px-3 needs-validation" method="POST" novalidate>
+    
+    <form id="registration" class="row g-4 px-3 needs-validation" method="POST" action="./registerUser.php" novalidate>
         <h4 class="text-orange">Dati personali </h4>
         <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
@@ -42,14 +42,14 @@
             <div class="invalid-feedback">Campo obbligatorio </div>
         </div>
         <div class="col-md-6">
-            <label for="inputBirthdate" class="form-label">Data di nascita <i class="text-grey"> Opzionale </i> </label>
-            <input type="date" class="form-control" id="inputBirthdate" name="datanascita">
-            <div class="invalid-feedback">Data di nascita non valida</div>
+            <label for="inputBirthdate" class="form-label">Data di nascita </label>
+            <input type="date" class="form-control" id="inputBirthdate" name="datanascita" required>
+            <div class="invalid-feedback">Campo obbligatorio</div>
         </div>
         <div class="col-md-6">
             <label for="inputCity" class="form-label">Città di residenza <i class="text-grey"> Opzionale </i> </label>
             <select class="form-select" name="citta" id="inputCity">
-                <option selected>Seleziona la tua città</option>
+                <option value='0' selected>Seleziona la tua città</option>
                 <?php
                   include "../../connection.php";
                   $query = "SELECT * FROM citta Order by nome_citta ASC";
@@ -95,13 +95,27 @@
             <label for="inputBio" class="form-label">Bio  <i class="text-grey"> Opzionale </i> </label>
             <textarea class="form-control" name="bio" id="inputBio" maxlength="1024" placeholder="Scrivi qualcosa su di te..."></textarea>
         </div>
-
-        <script src="formValidation.js"></script> 
-  
+        <input id="controlla" name="controlla" type="hidden" value="si"/>
+      
       <div class="col-12 text-center">
         <button type="submit" class="btn btn-primary">Invia</button>
       </div>
     </form>
+    <script src="formValidation.js"></script> 
+    <?php 
+      if (isset($_GET["erroreCaratteri"]))
+        echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>';
+      if (isset($_GET["erroreMail"]))
+          echo '<script> alert ("La mail inserita non è valida"); </script>';
+      if (isset($_GET["erroreData"]))
+        echo '<script> alert ("La data di nascita inserita non è valida"); </script>';
+      if (isset($_GET["errorePropic"]))
+          echo '<script> alert ("L\'immagine profilo fornita non è valida"); </script>';
+      if (isset($_GET["mailUsata"]))
+        echo '<script> alert ("Esiste già un account registrato con l\'email fornita"); </script>';
+      if (isset($_GET["nickUsato"]))
+        echo '<script> alert ("Il nickname fornito è già in uso"); </script>';
+    ?>
     </div>
     </div>
   <footer class="footer pt-lg-5 pt-4 pb-4">

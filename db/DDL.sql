@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Profilo_utente(
 	cognome			VARCHAR(64)	NOT NULL,
 	dataN			DATE		NOT NULL,
 	nickname		VARCHAR(64) UNIQUE NOT NULL,
-	passwd			VARCHAR(32)	UNIQUE NOT NULL,
+	passwd			VARCHAR(32) NOT NULL,
 	mail			VARCHAR(64)	--nullable
 					CONSTRAINT validazione_mail
 					CHECK(mail LIKE '%_@%_.__%'),
@@ -73,7 +73,8 @@ CREATE TABLE IF NOT EXISTS Profilo_utente(
 	/*galleria_utente	INT			--nullable
 					REFERENCES Raccolta_immagini(id_raccolta),*/
 	
-	descrizione		VARCHAR(1024) --nullable
+	descrizione		VARCHAR(1024), --nullable
+	univoco			VARCHAR(70) UNIQUE
 );
 
 --ROBA ARTISTI

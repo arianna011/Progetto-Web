@@ -81,7 +81,7 @@
     </button>
   </div>
   
-  <div class="container">
+  <div class="container-xxl">
 
   <div class="mt-5 mb-4">
   <span class="text-purple text-center text-title"><h1>Find Bands&Stages</h1></span>
