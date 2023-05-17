@@ -25,12 +25,41 @@
               <a class="nav-link" href="/pages/vetrine/vetrina_locali/Host.php"><span class="text-white"> Host </span></a>
             </li>
           </ul>
-          <a href="/pages/login/login.php" class="d-flex btn btn-outline-secondary">
-            Accedi/Registrati
-          </a>
-          <!-- da rendere dinamico -->
-          <a class="d-flex btn btn-outline-secondary d-none" href="#"> <i class="bi bi-person-circle"></i> <span class="ms-2"> Il mio Profilo </span> </a>
+          <?php 
 
+          if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
+          else $univoco = "";
+          
+          #cookie non valido
+          if ($univoco=="" || preg_match("([<>&(),%'?+])", $univoco) || preg_match('/"/', $univoco))  
+          {
+              echo ' <a href="/pages/login/login.php" class="d-flex btn btn-outline-secondary">
+                    Accedi/Registrati </a>';
+          }
+          #cookie valido
+          else
+          {
+              include '../../connection.php';
+              $query = "SELECT id_utente, nickname FROM profilo_utente WHERE univoco = '$univoco'";
+              $result = pg_query($dbconn, $query);
+              $num = pg_num_rows($result);
+              if ($num != 1) 
+              {
+                  echo ' <a href="/pages/login/login.php" class="d-flex btn btn-outline-secondary">
+                      Accedi/Registrati </a>';
+              }
+              else
+              {
+                  $utente = pg_fetch_row($result);
+                  $id = $utente[0];
+                  $nickname = $utente[1];
+                  echo '<a class="d-flex btn btn-outline-secondary" href="/pages/profili/profilo.php?id=', $id ,'"> <i class="bi bi-person-circle"></i> 
+                        <span class="ms-2">', $nickname, '</span> </a>';
+
+              }
+          }
+  
+          ?>
         </div>
       </div>
     </nav>

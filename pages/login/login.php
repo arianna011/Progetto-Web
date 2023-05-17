@@ -27,24 +27,43 @@
   <div class="container">
   <div class="row m-2">
     <div class="col m-3 p-3">
-      <form name="login" action="login.php" method="POST" class="form-signin m-auto" >
+      <form name="login" action="login_action.php" method="POST" class="form-signin m-auto needs-validation" novalidate>
       
+      <div class="mb-4">
       <h2 class="text-purple mb-3"><i class="bi bi-person-circle"></i> <span class="ms-1"> Login </span></h2>
       <span>Inserisci i tuoi dati per accedere al profilo personale.</span>
-
-      <br><br>
-        
+      </div>
+     
+      <div>
       <input type="email" placeholder="Indirizzo e-mail" name="inputEmail" max-length="80"
-            class="form-control" required autofocus>
+            class="form-control mb-1" required autofocus>
+      <div class="invalid-feedback">Email non valida</div>
+      </div>
     
+      <div class="mb-4">
       <input type="password" placeholder="Password" name="inputPassword"
-            class="form-control" required>
-        
-      <br>
+            class="form-control mt-1" required>
+      <div class="invalid-feedback">Password non valida</div>
+      </div>
+  
+      <input id="controlla" name="controlla" type="hidden" value="si"/>
       <button type="submit" class="btn btn-primary">Accedi</button>
+
+      <script src="formValidation.js"></script> 
   
     </form>
     </div>
+
+    <?php 
+      if (isset($_GET["erroreCaratteri"]))
+        echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>';
+      if (isset($_GET["erroreMail"]))
+          echo '<script> alert ("La mail inserita non è valida"); </script>';
+      if (isset($_GET["erroreDati"]))
+        echo '<script> alert ("Non esiste un utente con i dati inseriti"); </script>';
+      if (isset($_GET["reg"]) && $_GET["reg"]=="ok")
+          echo '<script> alert ("Registrazione effettuata"); </script>';
+    ?>
     
     <div class="d-none d-md-block col m-3 p-3">
     <h2 class="text-purple mb-3"> <i class="bi bi-person-exclamation"></i> Non hai ancora un account?</h2>
