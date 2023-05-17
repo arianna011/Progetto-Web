@@ -19,7 +19,8 @@
 </head>
 
 <body>
-  
+  <?php include '../../connection.php'?>  
+
   <div class="bg-beige">
 
   <header class="bg-purple">

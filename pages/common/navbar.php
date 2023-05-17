@@ -39,7 +39,7 @@
           #cookie valido
           else
           {
-              include '../../connection.php';
+              #include '../../connection.php'; -> non necessario: include posto in ogni file in cui appare la navbar
               $query = "SELECT id_utente, nickname FROM profilo_utente WHERE univoco = '$univoco'";
               $result = pg_query($dbconn, $query);
               $num = pg_num_rows($result);

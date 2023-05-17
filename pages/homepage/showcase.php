@@ -1,5 +1,4 @@
 <?php
-    include "../../connection.php";
     
     #band
     $query1 = "SELECT foto_profilo, nome_band, descrizione, valutazione_media, generi_musicali, sede, min_prezzo, max_prezzo 

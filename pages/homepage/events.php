@@ -1,5 +1,5 @@
 <?php
-    include "../../connection.php";
+   
     $query = "SELECT nick_datore, immagine, titolo, descrizione, data_ingaggio, compenso_indicativo, nome_locale, indirizzo,
               AGE(data_ingaggio, CURRENT_DATE) AS data_diff, to_char(data_ingaggio, 'dd/mm/yyyy') as stringa_data
               FROM v_ingaggio
