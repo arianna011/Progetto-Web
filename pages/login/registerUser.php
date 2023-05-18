@@ -1,4 +1,5 @@
 <?php
+
     #dati form
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];
@@ -6,8 +7,6 @@
     $id_citta =  $_POST['citta'];
 
     $nick = $_POST['nickname'];
-    if (isset($_FILES['picture'])) $propic =  $_FILES['picture']['name'];
-    else $propic = "";
     $email = $_POST['email'];
     $password = $_POST['password'];
     $bio =  $_POST['bio'];
@@ -17,7 +16,6 @@
     $erroreCaratteri = 0;
     $erroreMail = 0;
     $erroreData = 0;
-    $errorePropic = 0;
     
     $mailUsata = 0;
     $nickUsato = 0;
@@ -37,10 +35,9 @@
 
         if ($data_nascita_d > $data_corrente) { $erroreData = 1; }
 
-        #controllo estensione e dimensioni foto profilo
     }
 
-    if ($erroreCaratteri != 1 && $erroreMail != 1 && $erroreData != 1 && $errorePropic != 1 && $controlla == "si") 
+    if ($erroreCaratteri != 1 && $erroreMail != 1 && $erroreData != 1 && $controlla == "si") 
     {
         include '../../connection.php';
 
@@ -58,18 +55,15 @@
         if ($mailUsata==0 && $nickUsato==0)
         {
            include './generaUnivoco.php';
-
-           if ($id_citta==0) $id_citta = "NULL";
-           if (empty($propic)) $propic = "NULL";
-
            $data = date('Y/m/d', strtotime($data_nascita));
 
-           $insert="INSERT INTO profilo_utente (nome, cognome, datan, nickname, id_citta, foto_profilo, descrizione, mail, passwd, univoco) VALUES ('$nome','$cognome','$data','$nick',$id_citta,$propic,'$bio','$email','$password','$univoco')";
-           $resultInsert = pg_query($dbconn, $insert) or die('Query failed: ' . pg_last_error());
-            
-            header("Location: login.php?reg=ok");
+           if ($id_citta==0) $id_citta = "NULL";
+          
+            $insert="INSERT INTO profilo_utente (nome, cognome, datan, nickname, id_citta, foto_profilo, descrizione, mail, passwd, univoco) VALUES ('$nome','$cognome','$data','$nick',$id_citta,NULL,'$bio','$email','$password','$univoco')";
+            $resultInsert = pg_query($dbconn, $insert) or die('Query failed: ' . pg_last_error());
+            header("Location: login.php?reg=ok");           
         }
-        
+      
     }
 
     if($erroreCaratteri == 1) header("Location: registration.php?erroreCaratteri=1");

@@ -73,11 +73,7 @@
            
         </div>
         <div class="col-md-6">
-          <label for="inputPicture" class="form-label">Foto Profilo <i class="text-grey"> Opzionale </i></label>
-          <div class="input-group">
-          <label class="input-group-text" for="inputPicture"><i class="bi bi-file-earmark-person"></i></label>
-          <input type="file" name="picture" class="form-control" id="inputPicture">
-          </div>
+          
         </div>
         <div class="col-md-6">
             
