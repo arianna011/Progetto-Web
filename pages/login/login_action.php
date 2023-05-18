@@ -39,6 +39,9 @@
             $univoco = pg_fetch_row($result)[0];
             
             setcookie("univoco", $univoco,  time() + 86400, "/");
+            if(isset($_POST["back"])) { header("Location: ../recensioni/recensioni.php?id=".$_POST["back"]);
+            echo $_POST["back"]; }
+            else
             header("Location: ../homepage/index.php");
         }
     }

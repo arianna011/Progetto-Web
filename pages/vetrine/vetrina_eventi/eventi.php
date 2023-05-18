@@ -25,9 +25,9 @@ include '../../../connection.php';
   <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/vetrina-evento-01.jpg') no-repeat; background-size: cover; height:500px;">
           <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big" > Eventi </h2>
   </div>
-  <div class="container cont-event mt-4 p-2">
+  <div class="container cont-event p-3">
 
-    <div class= "row align-items-start" id="row2">
+    <div class= "row align-items-start mt-4" id="row2">
         <div class="col-3 width-100">
           <form class="row" method="post" id="search-form">
           <div class="col-9">
@@ -183,6 +183,7 @@ $("#next").on('click',function() {
 
 $("#next1").on('click', function(){
   let year = parseInt($("#year").text());
+  anno = year;
   //let month = $("#month").innerHTML;
   let month = $("#month").text();
   if(month == "Gennaio"){
@@ -243,6 +244,7 @@ $("#next1").on('click', function(){
   else if(month == "Dicembre"){
     $("#month").text("Gennaio");
     $("#year").text(year+1);
+    anno = year+1;
     mese = "01";
   }
   fetch_data(1);
@@ -254,6 +256,7 @@ $("#prev1").on('click', function() {
   let month = $("#month").text();
   if(month == "Gennaio"){
     $("#year").text(year-1);
+    anno = year-1;
     $("#month").text("Dicembre");
     mese = "12";
   }else if(month == "Febbraio"){

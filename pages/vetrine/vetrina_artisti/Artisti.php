@@ -26,9 +26,9 @@
   <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/guitar-2.jpg') no-repeat; background-size: cover; height:500px;">
           <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " >Artisti</h1>
   </div>
-  <div class="container cont-event mt-4 p-2">
+  <div class="container cont-event p-3">
 
-    <div class= "row align-items-start" id="row2">
+    <div class= "row align-items-start mt-4" id="row2">
         <div class="col-3 width-100">
         <form class="row" method="post" id="search-form">
         <div class="col-9">
@@ -188,6 +188,12 @@ function fetch_data(page){
 fetch_data();
 
 get_page();
+
+$("#search-form").submit(function(event) {
+  search = $('#inputsearch').val();
+  fetch_data(1);
+  event.preventDefault();
+});
 
 $(".form-select").change(function() {
   if($(this).val() == "0"){

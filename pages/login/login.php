@@ -16,7 +16,7 @@
 </head>
 
 <body class="bg-beige">
-
+  <?php include '../../connection.php'?>  
   <header class="bg-purple">
     <?php include '../common/navbar.php' ?>
   </header>
@@ -48,6 +48,8 @@
   
       <input id="controlla" name="controlla" type="hidden" value="si"/>
       <button type="submit" class="btn btn-primary">Accedi</button>
+
+      <?php if(isset($_GET["back"])) ?> <input type="hidden" name="back" value=<?= $_GET["back"] ?> />
 
       <script src="formValidation.js"></script> 
   

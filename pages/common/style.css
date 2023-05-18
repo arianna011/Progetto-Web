@@ -73,22 +73,3 @@ footer
     color: rgb(179, 178, 178);
     font-size: large;
 }
-
-.container-fed {
-    padding: 2%;
-}
-
-
-.section-fed {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.item-list-fed {
-    display: flex; 
-    flex-direction: row;
-    background-color: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}

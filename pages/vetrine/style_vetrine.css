@@ -74,7 +74,7 @@
 
 
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 767.98px) {
     .item-list-fed {
         flex-direction: column;
         margin-top: 20px;
@@ -98,7 +98,7 @@
       height: 50%;
     }
   }
-  @media screen and (min-width: 768px) and (max-width: 1000px) {
+  @media screen and (min-width: 768px) and (max-width: 999.98px) {
     #row2 {
         flex-direction: column;
     }
@@ -114,9 +114,15 @@
       margin-top: 20px;
     }
 
+    .cont-event {
+      max-width: 97%;
+    }
+
+
+
   }      
 
-  @media screen and (min-width:1000px) and (max-width: 1248px) {
+  @media screen and (min-width:1000px) and (max-width: 1247.98px) {
     .section-fed {
         grid-template-columns: 1fr;
     }
