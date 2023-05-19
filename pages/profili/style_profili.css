@@ -1,0 +1,133 @@
+
+/*per vedere bene bordi*/
+.profile div {
+    margin: 10px;
+    padding: 10px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.p-card{
+    border-radius: 10px;
+    background-color: rgb(98, 46, 98);
+}
+.p-info-card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: start;
+
+    color: #fd7e14;
+}
+.p-info-card>div{
+    padding: 0;
+    margin: 5px;
+}
+
+.p-desc .p-desc-body{
+    padding-top: 0%;
+}
+
+
+/*per tutte le immagini nel profilo*/
+.profile img {
+
+    /*fix: immagini responsive (si adattano al contenitore)
+    attenzione: riscalare le immagini per renderle responsive è dispendioso! Usare soltanto per immagini importanti.
+    Per grafiche non contestuali (eg sfondi) è preferibile usare css background
+    */
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/*IMPORTANTE: foto profilo e infocard devono avere la stessa altezza*/
+.p-avatar{
+    height: 40vh;
+    width: 40vh;
+}
+
+
+/*foto profilo*/
+.p-avatar, .profile .p-avatar {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-shrink: 0;
+}
+.p-avatar img {
+    border-radius: 50%;
+}
+
+/*galleria*/
+.p-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.p-g-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.p-g-images > * {
+    /*
+    dim immagine regolate in base all'altezza dello schermo 
+    (in modo che siano sempre visibili 3/4 img alla volta scorrendo in verticale).
+    Per qualche motivo regolare max-width piuttosto che max-height impedisce l'overflow dell'img contenuta 
+    (avrà a che fare con la flex-direction)
+    */
+    max-width: 20vh;
+}
+
+/*util*/
+.clickable-icon {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/* On screens that are 769px or less */
+@media screen and (min-width: 769px) {
+
+    .p-card{
+        display: flex;
+        flex-direction: row;
+    }
+    .p-info-card{
+        flex-grow: 1; /*quando in orizzontale, la info card occupa tutto lo spazio rimanente a destra dell'avatar*/
+    }
+
+    .p-g-images {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+    
+    /*selettore duplicato per aumentare il punteggio ;)*/
+    .p-g-images.p-g-images > * {
+        /*
+        su desktop è piu importante ridimensionare in base alla larghezza
+        */
+        width: 20vw;
+        padding: 0%;
+
+        margin: 3vw;
+    }
+
+    .p-g-images img{
+        transition: transform 0.2s ease-in-out;
+    }
+    .p-g-images img:hover{
+          transform: scale(1.5);
+    }
+}
