@@ -44,4 +44,5 @@ $imgs = fromPgArray($row["foto_galleria"]);
 
 
 require_once "profilo_template.php";
+include $_SERVER['DOCUMENT_ROOT'].'/pages/recensioni/recensioni.php';
 ?>

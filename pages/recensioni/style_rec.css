@@ -2,6 +2,10 @@
     color: orange;
 }
 
+.container-profile {
+    margin: 2%;
+}
+
 .rate {
     display: inline-block;
     border: 0;

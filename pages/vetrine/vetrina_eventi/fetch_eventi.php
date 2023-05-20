@@ -1,5 +1,6 @@
 <?php
 include '../../../connection.php'; 
+require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php';
 $limit = 5;
 $page = 0;
 $display = "";
@@ -40,13 +41,7 @@ foreach($q as $text) {
 }
 $condition = substr($condition, 0, -4);
 
-/*
-if(isset($_GET['citta']) AND $_GET['citta'] != NULL) {
-    $citta = $_GET['citta'];
-    $condition .= " AND id_luogo = '".pg_escape_string($dbconn, $citta )."'";
-}
-*/
-    
+
 if(isset($_GET['anno']) AND $_GET['anno'] != NULL) {
     $anno = $_GET['anno'];
     $condition .= " AND EXTRACT(YEAR FROM data_ingaggio) = '".pg_escape_string($dbconn, $anno )."'";
@@ -112,8 +107,6 @@ if($count_artisti> 0) {
                 $display .= '<h6 class="mb-0" style="text-align:end"> <i class="bi bi-geo-alt-fill"></i> '. $row_2['nome_citta'] .' </h6>';
                 
             }
-                // <p class="text-body-secondary small"> '. $row['indirizzo'] .' </p> 
-           // $display .= '<p class="text-body-secondary small"> '. $row['data_ingaggio'] .' </p>
            $s = explode("-",$row['data_ingaggio']);
                 $display .= '<h4 class="text-end mt-2"> '. $s[2] .' ';
                 switch($s[1]) {
@@ -154,7 +147,6 @@ if($count_artisti> 0) {
                         $mese = "Dicembre";
                         break;
                 }
-                //$display .= '<h5 class="text-center text-secondary"> '. $mese .' </h5>
                 $display .= ' '.$mese.' '.$s[0].' </h4>';
                 if($row['ora_inizio'] != NULL){
                     if($row['ora_fine'] != NULL) {
@@ -174,31 +166,9 @@ if($count_artisti> 0) {
 $total_pages = ceil($count_artisti / $limit);
 
 
-$display .= '    <nav aria-label="Page navigation">
-                    <ol class="pagination justify-content-end">';
-    if($page > 1) {
-        $previous = $page - 1;  
-        $display .= '<li class="page-item" id="1" ><a class="page-link" target="_top" > << </a></li>';    
-        $display .='  <li class="page-item" id="'.$previous.'" ><a class="page-link" > < </a></li>';
-    }
-   for($i=1; $i<= $total_pages; $i++) {
-        $active_class = "";
-        if($i == $page) {
-            $active_class = "active";
-        }
-        if($i == $page-1 || $i == $page || $i == $page+1 || $i == $page+2 || $i == $page-2) {
-            $display .= '<li class="page-item '.$active_class.'" id="'.$i.'" ><a class="page-link" >'.$i.'</a></li>';
-        }
-   }
-   if($page < $total_pages) {
-        $page++;
-        $display .= '<li class="page-item"  id="'.$page.'"><a class="page-link" > > </a></li>';
-        $display .= '<li class="page-item" id="'.$total_pages.'" ><a class="page-link" > >> </a></li>';
-   }
+$display .= pagination($page, $total_pages);
 
-   $display .='</ol> </nav>';
-
-   echo $display;
+echo $display;
 
 
 

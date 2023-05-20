@@ -28,14 +28,14 @@ include '../../connection.php';
                 ?>
             <div class="row">
                 <div class="col-12 my-4">
-                     <?php echo '<a href="../login/login.php?back='.$_GET['id'].'&ptype=2" class="btn btn-primary">Accedi per scrivere una recensione</a>' ?>
+                     <?php echo '<a href="../login/login.php?back='.$_GET['id'].'" class="btn btn-primary">Accedi per scrivere una recensione</a>' ?>
                 </div>
             </div>
         <?php }  else { 
             $query_utente = "SELECT id_utente FROM profilo_utente WHERE univoco = '$univoco'";
             $result_utente = pg_query($dbconn, $query_utente);
             $row_utente = pg_fetch_row($result_utente);
-            $check_recensione = "SELECT * FROM recensione_artista WHERE id_utente = $row_utente[0] AND id_oggetto = $_GET[id]";
+            $check_recensione = "SELECT * FROM recensione_band WHERE id_utente = $row_utente[0] AND id_oggetto = $_GET[id]";
             $result_check = pg_query($dbconn, $check_recensione);
             $check = pg_fetch_row($result_check);
             ?>
@@ -59,7 +59,7 @@ include '../../connection.php';
                 <textarea class="form-control text-recensione" name="recensione" rows="3"><?php if ($check!= NULL) echo $check[1] ?></textarea>
                 <input type="hidden" name="id_oggetto" value="<?php echo $_GET['id']; ?>">
                 <input type="hidden" name="id_utente" value="<?php echo  $row_utente[0]?>">
-                <input type="hidden" name="tipo" value="2">
+                <input type="hidden" name="tipo" value="3">
             </div>
             <div class="col-12">
                 <?php if($check!= NULL) { echo '<button class="btn btn-primary mr-2 my-1" type="submit" name="modifica">Modifica recensione</button>';}
@@ -73,7 +73,7 @@ include '../../connection.php';
 
     <?php
         $id = $_GET['id'];
-        $sql = "SELECT * FROM recensione_artista WHERE id_oggetto = $id";
+        $sql = "SELECT * FROM recensione_band WHERE id_oggetto = $id";
         $result = pg_query($dbconn, $sql);
         ?>
         <div>
@@ -132,4 +132,3 @@ include '../../connection.php';
 
 </body>
 </html>
-

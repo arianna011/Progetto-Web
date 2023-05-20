@@ -1,5 +1,6 @@
 <?php
 include '../../../connection.php'; 
+require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php'; 
 $limit = 5;
 $page = 0;
 $display = "";
@@ -136,38 +137,14 @@ if($count_artisti> 0) {
             $display .= '<p> '. $row['descrizione'] .' </p> '; 
         }
         $display .= '
-          <a href="/pages/recensioni/recensioni.php?id='. $row['id_artista'] .'" class="btn btn-primary"> Vedi profilo </a>
+          <a href="/pages/profili/profilo.php?id='. $row['id_artista'] .'" class="btn btn-primary"> Vedi profilo </a>
         </div>
         <div class="col-md-3 p-4">
             <h5 style="color:#fd7e14; margin-top:5%; text-align:end"> '. $row['min_prezzo'] .' - '. $row['max_prezzo'] .' € </h5>';
-
-          $s = explode(",",substr($row['strumenti_musicali'],1,-1));
-          foreach($s as $str) {
-            if ($str != ""){
-                if($str[0] == '"' && $str[-1] =='"')
-                $str = substr($str,1,-1);
-                $display .= '<span class="badge bg-secondary text-wrap"> '. $str .' </span>';
-            }
-          }
-
-          $s = explode(",",substr($row['generi_musicali'],1,-1));
-            foreach($s as $str) {
-                if ($str != "") {
-                    if($str[0] == '"' && $str[-1] =='"')
-                    $str = substr($str,1,-1);
-                    $display .= '<span class="badge bg-info text-wrap"> '. $str .' </span>';
-                }
-          }
-
-            $s = explode(",",substr($row['servizi_forniti'],1,-1));
-            foreach($s as $str) {
-                if ($str != ""){
-                    if($str[0] == '"' && $str[-1] =='"')
-                    $str = substr($str,1,-1);
-                    $display .= '<span class="badge bg-danger text-wrap"> '. $str .' </span>';
-                }
-            }
-
+        // funzione che crea i badge per strumenti, generi e servizi si trova in /pages/common/util.php
+        $display .= toBadges($row["strumenti_musicali"], "bg-secondary");
+        $display .= toBadges($row["generi_musicali"], "bg-info");
+        $display .= toBadges($row["servizi_forniti"], "bg-danger");
 
         $display .= '
         </div>
@@ -180,31 +157,9 @@ if($count_artisti> 0) {
 $total_pages = ceil($count_artisti / $limit);
 
 
-$display .= '    <nav aria-label="Page navigation">
-                    <ol class="pagination justify-content-end">';
-    if($page > 1) {
-        $previous = $page - 1;  
-        $display .= '<li class="page-item" id="1" ><a class="page-link" > << </a></li>';    
-        $display .='  <li class="page-item" id="'.$previous.'" ><a class="page-link" > < </a></li>';
-    }
-   for($i=1; $i<= $total_pages; $i++) {
-        $active_class = "";
-        if($i == $page) {
-            $active_class = "active";
-        }
-        if($i == $page-1 || $i == $page || $i == $page+1 || $i == $page+2 || $i == $page-2) {
-            $display .= '<li class="page-item '.$active_class.'" id="'.$i.'" ><a class="page-link" >'.$i.'</a></li>';
-        }
-   }
-   if($page < $total_pages) {
-        $page++;
-        $display .= '<li class="page-item"  id="'.$page.'"><a class="page-link" > > </a></li>';
-        $display .= '<li class="page-item" id="'.$total_pages.'" ><a class="page-link" > >> </a></li>';
-   }
+$display .= pagination($page, $total_pages);
 
-   $display .='</ol> </nav>';
-
-   echo $display;
+echo $display;
 
 
 

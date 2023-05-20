@@ -49,7 +49,12 @@
       <input id="controlla" name="controlla" type="hidden" value="si"/>
       <button type="submit" class="btn btn-primary">Accedi</button>
 
-      <?php if(isset($_GET["back"])) echo '<input type="hidden" name="back" value="',$_GET["back"],'"/>' ?>
+      <?php if(isset($_GET["back"]) && isset($_GET["ptype"])) { 
+        $id = $_GET["back"];
+        $ptype = $_GET["ptype"];
+        echo '<input type="hidden" name="back" value="'.$id.'"/>';
+        echo '<input type="hidden" name="ptype" value="'.$ptype.'"/>';
+       } ?>
 
       <script src="formValidation.js"></script> 
   
