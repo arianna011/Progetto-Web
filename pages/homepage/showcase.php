@@ -1,7 +1,7 @@
 <?php
     
     #band
-    $query1 = "SELECT foto_profilo, nome_band, descrizione, valutazione_media, generi_musicali, sede, min_prezzo, max_prezzo 
+    $query1 = "SELECT id_band, foto_profilo, nome_band, descrizione, valutazione_media, generi_musicali, sede, min_prezzo, max_prezzo 
               FROM v_profilo_band 
               WHERE valutazione_media IS NOT NULL
               ORDER BY valutazione_media DESC;";
@@ -93,7 +93,7 @@
     }
 
     #artisti
-    $query2 = "SELECT foto_profilo, nome, descrizione, valutazione_media, generi_musicali, nome_citta, min_prezzo, max_prezzo 
+    $query2 = "SELECT id_artista, foto_profilo, nome, descrizione, valutazione_media, generi_musicali, nome_citta, min_prezzo, max_prezzo 
               FROM v_profilo_artista 
               ORDER BY valutazione_media DESC;";
     
