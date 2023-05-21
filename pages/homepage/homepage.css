@@ -75,3 +75,39 @@
     color: green;
     font-style: bold;
 }
+
+.animate-area-1
+{
+    background: url('../../site_images/band.jpg') no-repeat; 
+    background-size: cover; 
+    height:400px;
+}
+
+.animate-area-1:hover
+{
+    background-size: 170%;
+}
+
+.animate-area-2
+{
+    background: url('../../site_images/artista.jpg') no-repeat; 
+    background-size: cover; 
+    height:400px;
+}
+
+.animate-area-2:hover
+{
+    background-size: 170%;
+}
+
+.animate-area-3
+{
+    background: url('../../site_images/evento.jpg') no-repeat; 
+    background-size: cover; 
+    height:400px;
+}
+
+.animate-area-3:hover
+{
+    background-size: 150%;
+}
