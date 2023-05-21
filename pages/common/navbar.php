@@ -53,7 +53,7 @@
                   $utente = pg_fetch_row($result);
                   $id = $utente[0];
                   $nickname = $utente[1];
-                  echo '<a class="d-flex btn btn-outline-secondary" href="/pages/profili/profilo_utente.php?id=', $id ,'"> <i class="bi bi-person-circle"></i> 
+                  echo '<a class="d-flex btn btn-outline-secondary" href="/pages/profili/profilo.php?id=', $id ,'&ptype=1"> <i class="bi bi-person-circle"></i> 
                         <span class="ms-2">', $nickname, '</span> </a>';
 
               }

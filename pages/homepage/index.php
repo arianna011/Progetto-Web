@@ -225,7 +225,7 @@
           </ul>
           </div>
           <div class="card-footer">
-          <?php  echo '<a class="btn btn-primary m-3 mt-0" href="/pages/profili/profilo_artista.php?id=', $art1["id_artista"],'"> Vedi profilo</a>' ?>
+          <?php  echo '<a class="btn btn-primary m-3 mt-0" href="/pages/profili/profilo.php?id=', $art1["id_artista"],'&ptype=2"> Vedi profilo</a>' ?>
           </div>
         </div>
 
@@ -242,7 +242,7 @@
           </ul>
           </div>
           <div class="card-footer">
-          <?php  echo '<a class="btn btn-primary m-3 mt-0" href="/pages/profili/profilo_artista.php?id=', $art2["id_artista"],'"> Vedi profilo</a>' ?>
+          <?php  echo '<a class="btn btn-primary m-3 mt-0" href="/pages/profili/profilo.php?id=', $art2["id_artista"],'&ptype=2"> Vedi profilo</a>' ?>
           </div>
         </div>
 
@@ -259,7 +259,7 @@
           </ul>
         </div>
         <div class="card-footer">
-          <?php  echo '<a class="btn btn-primary m-3 mt-0" href="/pages/profili/profilo_artista.php?id=', $art3["id_artista"],'"> Vedi profilo</a>' ?>
+          <?php  echo '<a class="btn btn-primary m-3 mt-0" href="/pages/profili/profilo.php?id=', $art3["id_artista"],'&ptype=2"> Vedi profilo</a>' ?>
         </div>
       </div>
     
@@ -291,7 +291,7 @@
               <li class="list-group-item"> <?php echo $retribution[0] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-            <?php echo '<a href="/pages/profili/profilo_utente.php?id=', $event1["id_datore"] ,'" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
+            <?php echo '<a href="/pages/profili/profilo.php?id=', $event1["id_datore"] ,'&ptype=1" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
         </div>
       </div>
     </div>
@@ -309,7 +309,7 @@
               <li class="list-group-item"> <?php echo $retribution[1] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-        <?php echo '<a href="/pages/profili/profilo_utente.php?id=', $event2["id_datore"] ,'" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
+        <?php echo '<a href="/pages/profili/profilo.php?id=', $event2["id_datore"] ,'&ptype=1" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
         </div>
       </div>
   </div>
@@ -327,7 +327,7 @@
               <li class="list-group-item"> <?php echo $retribution[2] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-        <?php echo '<a href="/pages/profili/profilo_utente.php?id=', $event3["id_datore"] ,'" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
+        <?php echo '<a href="/pages/profili/profilo.php?id=', $event3["id_datore"] ,'&ptype=1" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
         </div>
       </div>
   </div>
@@ -345,7 +345,7 @@
               <li class="list-group-item"> <?php echo $retribution[3] ?> </li>
         </ul>
         <div class="card-footer" style="text-align: center;">
-        <?php echo '<a href="/pages/profili/profilo_utente.php?id=', $event4["id_datore"] ,'" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
+        <?php echo '<a href="/pages/profili/profilo.php?id=', $event4["id_datore"] ,'&ptype=1" class="btn btn-primary m-3 mt-0"> Partecipa </a>' ?>
         </div>
       </div>
   </div>
