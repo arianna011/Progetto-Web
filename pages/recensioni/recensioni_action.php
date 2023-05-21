@@ -11,7 +11,7 @@ if($valutazione == NULL || $testo == NULL) {
     exit;
 }
 
-if(isset($_POST['elimina'])  ) {
+if(isset($_POST['elimina'])) {
     switch($tipo) {
         case 2:
             $delete = "DELETE FROM recensione_artista WHERE id_utente = $id_utente AND id_oggetto = $id_oggetto";

@@ -25,9 +25,19 @@ if (!$result) { echo pg_last_error($dbconn); exit; }
 $row = pg_fetch_assoc($result);
 if (!$row) { echo "artista non trovato: ".pg_last_error($dbconn); exit; }
 
-pg_close($dbconn);
+//controlli per verificare che l'utente abbia fatto il login
+if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
+else $univoco = ""; 
 
+$check_utente = "select * from profilo_utente where id_utente = ".$row["id_artista"]." and univoco = '".$univoco."'";
+$result = pg_fetch_row(pg_query($dbconn, $check_utente));
 
+if ($result) $isUtente = true;
+else $isUtente = false;
+
+pg_close($dbconn); 
+
+$id = $row["id_artista"];
 $avatarSrc = $row["foto_profilo"];
 $description = $row["descrizione"];
 $name = $row["nome"];

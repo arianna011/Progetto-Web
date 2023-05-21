@@ -90,6 +90,9 @@
     cursor: pointer;
 }
 
+.p-input {
+    max-width: 400px;
+}
 
 
 
