@@ -14,8 +14,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style_profili.css">
     <link rel="stylesheet" href="/pages/common/style.css" />
+    <link rel="stylesheet" href="../../bootstrap/scss/bootstrap.css" >
 
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        /*
+        $(document).ready(function() {
+
+            $("#p-modify").click(function() {
+                $("#p-name").html('<input type="text" class="form-control p-input" name="name" id="name" value="<?php echo $name ?>">'
+                );
+            });
+        });
+        */
+    </script>
 
 </head>
 
@@ -28,8 +41,15 @@
 
             <div class="p-info-card">
                 <div id="p-name" style="color:whitesmoke"> <h1> <b> <?php echo $name ?> </b></h1></div>
-                <?php foreach ($infos as $info) echo "<div>".$info."</div>"; ?>
+                <?php foreach ($infos as $info) echo '<div class="info">'.$info.'</div>'; ?>
             </div>
+
+            <?php if($isUtente) { ?>
+            <div class="col-auto">
+                <?php echo ' <a href="modifica_profilo.php?id='.$id.'" type="button" class="btn btn-light" id="p-modify"> Modifica profilo <i class="bi bi-pencil-square"></i> </a>' ?>
+            </div>
+            <?php } ?>
+
         </div>
 
 
