@@ -95,6 +95,15 @@
                 $(".bookmarks>div").removeClass("active-tab");
                 $(this).addClass("active-tab");
             });
+
+            $("#nav-locali").click(function () {
+                $("#nav-tab-content").load("<?php echo 'locali_per_utente.php?id=' . $_GET['id'] ?>", function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "error")
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                });
+                $(".bookmarks>div").removeClass("active-tab");
+                $(this).addClass("active-tab");
+            });
         });
 
 

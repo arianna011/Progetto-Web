@@ -23,7 +23,7 @@ $result = pg_execute($dbconn, "", array($id));
 if (!$result) { echo pg_last_error($dbconn); exit; }
 
 $row = pg_fetch_assoc($result);
-if (!$row) { echo "artista non trovato: ".pg_last_error($dbconn); exit; }
+if (!$row) { echo "<h3 style='padding: 30px; font-size=large;'>profilo artista non trovato ¯\_(ツ)_/¯</h3> ".pg_last_error($dbconn); exit; }
 
 //controlli per verificare che l'utente abbia fatto il login
 if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
@@ -42,7 +42,7 @@ $avatarSrc = $row["foto_profilo"];
 $description = $row["descrizione"];
 $name = $row["nome"];
 $infos = [
-    $row["nome_citta"],
+    $row["nome_citta"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>'.$row["nome_citta"] : "",
     "<h3>{$row["min_prezzo"]} - {$row["max_prezzo"]} €</h3>",
     toStars($row["valutazione_media"]),
     toBadges($row["strumenti_musicali"], "bg-secondary"),

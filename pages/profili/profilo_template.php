@@ -1,4 +1,6 @@
-
+<?php 
+$isUtente ??= false; //per la retrocompatibilità ;)
+?>
 
 <!DOCTYPE html>
 <html lang="en">

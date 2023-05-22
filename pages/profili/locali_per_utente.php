@@ -13,9 +13,17 @@ $id = $_GET['id'];
 
 //uso di prepared statement per prevenire SQL injection (si spera)
 $query = "
-SELECT *
-FROM v_band_per_artista
-WHERE id_profilo = $1";
+SELECT
+    id_locale,
+    nome_locale,
+    valutazione_media,
+    nome_citta,
+    indirizzo,
+    foto_profilo
+FROM v_profilo_locale
+WHERE id_titolare = $1
+";
+
 
 $result = pg_prepare($dbconn, "", $query);
 if (!$result) {
@@ -53,26 +61,26 @@ if (!$result) {
 </style>
 <body>
     <div class="main" style="padding: 30px">
-        <h1 style="margin: 40px 40px 0px 0px">Band di cui faccio parte</h1>
-        <div class="band-list" style="margin: 30px 10px 50px 10px">
+        <h1 style="margin: 40px 40px 0px 0px">Lista locali</h1>
+        <div class="lista-locali" style="margin: 30px 10px 50px 10px">
             <?php
             $row = pg_fetch_assoc($result);
             if (!$row) {
-                echo "nessuna band trovata " . pg_last_error($dbconn);
+                echo "nessun locale trovato; " . pg_last_error($dbconn);
                 exit;
             }
 
             while ($row) {
-                $title = $row["nome_band"];
+                $title = $row["nome_locale"];
                 $img = $row["foto_profilo"] ?? "../../site_images/placeholder-image.jpg";
                 $infos1 = [
                     isset($row["valutazione_media"]) ?
-                    toStars($row["valutazione_media"]) :
-                    "<div class='text-grey' style='font-weight:50'> nessuna valutazione </div>",
-                    toBadges("[{$row['ruolo']}]", "bg-secondary")
+                        toStars($row["valutazione_media"]) :
+                        "<div class='text-grey' style='font-weight:50'> nessuna valutazione </div>",
+                    $row["indirizzo"].", ".$row["nome_citta"]
                 ];
                 $infos2 = [
-                    "<a href='/pages/profili/profilo_band.php?id=" . $row["id_band"] . "' class='btn btn-primary'> Vedi profilo </a>"
+                    "<a href='/pages/profili/profilo_locale.php?id=" . $row["id_locale"] . "' class='btn btn-primary'> Vedi profilo </a>"
                 ];
 
                 include("searchcard_template.php");
