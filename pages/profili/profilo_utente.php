@@ -12,7 +12,7 @@ $id = $_GET['id'];
 
 //uso di prepared statement per prevenire SQL injection (si spera)
 $query = "
-SELECT nickname, descrizione, foto_profilo, nome_citta, mail
+SELECT id_utente, nickname, descrizione, foto_profilo, nome_citta, mail
 FROM v_profilo_utente
 WHERE id_utente = $1";
 
@@ -37,7 +37,7 @@ else $isUtente = false;
 
 pg_close($dbconn);
 
-$id = $row["id_artista"];
+$id = $utente["id_utente"];
 $avatarSrc = $utente["foto_profilo"];
 $description = $utente["descrizione"];
 $name = $utente["nickname"];
