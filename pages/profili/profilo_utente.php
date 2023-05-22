@@ -42,8 +42,8 @@ $avatarSrc = $utente["foto_profilo"];
 $description = $utente["descrizione"];
 $name = $utente["nickname"];
 $infos = array(
-    $utente["nome_citta"],
-    $utente["mail"]
+    $utente["nome_citta"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>'.$utente["nome_citta"] : "",
+    '<i class="bi bi-envelope-fill" style="margin-right:5px""></i>'.$utente["mail"]
 );
 $imgs = array();
     

@@ -42,12 +42,12 @@ if (!$result) {
 <style>
     .band-list{
         display: flex;
-        flex-wrap: wrap;
         flex-direction: column;
         align-items: stretch;
     }
     .search-card{
         margin: 20px;
+        max-height: 30vh;
     }
 
 </style>
@@ -58,7 +58,7 @@ if (!$result) {
             <?php
             $row = pg_fetch_assoc($result);
             if (!$row) {
-                echo "nessuna band trovata; " . pg_last_error($dbconn);
+                echo "nessuna band trovata " . pg_last_error($dbconn);
                 exit;
             }
 
