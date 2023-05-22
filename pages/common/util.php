@@ -4,7 +4,7 @@
 function toStars(int $rating)
 {
     
-    if (!$rating) return false;
+    if (!isset($rating)) return false;
 
     $display = '';
     for ($i = 1; $i < $rating; $i += 2) {

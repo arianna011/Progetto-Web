@@ -23,7 +23,7 @@ $result = pg_execute($dbconn, "usr", array($id));
 if (!$result) { echo pg_last_error($dbconn); exit; }
 
 $utente = pg_fetch_assoc($result);
-if (!$utente) { echo "utente non trovato: ".pg_last_error($dbconn); exit; }
+if (!$utente) { echo "utente non trovato; ".pg_last_error($dbconn); exit; }
 
 //controlli per verificare che l'utente abbia fatto il login
 if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
