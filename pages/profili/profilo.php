@@ -63,6 +63,7 @@
 
     <link rel="stylesheet" href="/bootstrap/scss/bootstrap.css" />
     <link rel="stylesheet" href="/pages/common/style.css" />
+    <link rel="stylesheet" href="../../../bootstrap-icons-1.10.4/font/bootstrap-icons.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -79,6 +80,15 @@
 
             $("#nav-artista").click(function () {
                 $("#nav-tab-content").load("<?php echo 'profilo_artista.php?id=' . $_GET['id'] ?>", function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "error")
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                });
+                $(".bookmarks>div").removeClass("active-tab");
+                $(this).addClass("active-tab");
+            });
+
+            $("#nav-band").click(function () {
+                $("#nav-tab-content").load("<?php echo 'band_per_utente.php?id=' . $_GET['id'] ?>", function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error")
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                 });

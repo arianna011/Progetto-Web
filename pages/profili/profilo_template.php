@@ -23,7 +23,7 @@
     <div class="profile">
         <div class="p-card">
             <div class="p-img p-avatar">
-                <img src="<?php echo $avatarSrc?>">
+                <img src="<?php echo $avatarSrc ?? "../../site_images/placeholder_profile.jpg"; ?>">
             </div>
 
             <div class="p-info-card">
@@ -38,7 +38,7 @@
                 <h2> Descrizione </h2>
             </div>
             <div class="p-desc-body">
-                <?php echo $description ?>
+                <?php echo $description ?? "<h3 class='text-grey' style='font-weight:50'> nessuna descrizione... </h3>" ?>
             </div>
         </div>
 
