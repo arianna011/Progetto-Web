@@ -13,12 +13,17 @@
 .p-card{
     border-radius: 10px;
     background-color: rgb(98, 46, 98);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+    display: flex;
+    flex-direction: column;
 }
 .p-info-card{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
+    align-items: center;
 
     color: #fd7e14;
 }
@@ -91,11 +96,6 @@
 }
 
 
-
-
-
-
-
 /* On screens that are 769px or less */
 @media screen and (min-width: 769px) {
 
@@ -105,6 +105,7 @@
     }
     .p-info-card{
         flex-grow: 1; /*quando in orizzontale, la info card occupa tutto lo spazio rimanente a destra dell'avatar*/
+        align-items: start;
     }
 
     .p-g-images {
@@ -128,6 +129,6 @@
         transition: transform 0.2s ease-in-out;
     }
     .p-g-images img:hover{
-          transform: scale(1.5);
+        transform: scale(1.5);
     }
 }
