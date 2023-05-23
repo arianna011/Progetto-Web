@@ -96,37 +96,35 @@
 
     <div class="card-group">
       <div class="card">
-        <figure class="img-top">
-          <img src="../../site_images/band.jpg"/>
-        </figure>
-        
+        <div style="background-image: url('../../site_images/band.jpg'); background-size: cover; height:300px;"> </div>
         <div class="card-body">
           <h5 class="card-title">Ingaggia Band</h5>
           <p class="card-text">Trova il gruppo con il sound migliore per le tue necessità</p>
-          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_band/band.php">Vai</a>
         </div>
+          <div class="card-footer mb-2">
+          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_band/band.php">Vai</a>
+    </div>
       </div>
 
       <div class="card">
-      <figure class="img-top">
-          <img src="../../site_images/artista.jpg"/>
-
-      </figure>
+    
+      <div style="background-image: url('../../site_images/artista.jpg'); background-size: cover; height:300px;"> </div>
         <div class="card-body">
           <h5 class="card-title">Trova Artisti</h5>
           <p class="card-text">Scopri nuovi componenti per la tua band</p>
-          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_artisti/Artisti.php">Vai</a>
         </div>
+          <div class="card-footer mb-2">
+          <a class="btn btn-outline-secondary" href="../vetrine/vetrina_artisti/Artisti.php">Vai</a>
+          </div>
       </div>
 
       <div class="card">
-      <figure class="img-top">
-          <img src="../../site_images/evento.jpg">
-      </figure>
-       
+      <div style="background-image: url('../../site_images/evento.jpg'); background-size: cover; height:300px;"></div>
         <div class="card-body">
           <h5 class="card-title">Cerca Eventi</h5>
           <p class="card-text">Trova il palco su cui esibirti</p>
+        </div>
+          <div class="card-footer mb-2">
           <a class="btn btn-outline-secondary" href="../vetrine/vetrina_eventi/eventi.php">Vai</a>
         </div>
       </div>
