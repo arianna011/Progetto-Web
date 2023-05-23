@@ -92,6 +92,7 @@ $isProfiloArtista ??= false;
                  if(str_starts_with($img, "http")) {
                  echo '<div class="contain-image"> <a class="hidden-button btn btn-danger px-2 py-0 mb-2" href="/pages/profili/modifiche/elimina_immagine.php?id='.$id.'&ptype=6&del='.$img.'" hidden >  <i class="bi bi-x"></i> </a> <img src= "'.$img.'"> </div>';
                  } else {
+                    if (empty($img)) continue;
                     $img_2 = "/user_data/$img";
                     echo '<div class="contain-image"> <a class="hidden-button btn btn-danger px-2 py-0 mb-2" href="/pages/profili/modifiche/elimina_immagine.php?id='.$id.'&ptype=6&del='.$img.'" hidden >  <i class="bi bi-x"></i> </a> <img src= "'.$img_2.'"> </div>';
                     }
