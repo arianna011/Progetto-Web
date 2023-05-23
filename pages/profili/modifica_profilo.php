@@ -135,6 +135,9 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
       </div>
     </form>
     <script src="formValidation.js"></script> 
+
+    <?php include './modifica_immagine.php' ?>
+
     <?php 
       if (isset($_GET["erroreCaratteri"]))
         echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>';

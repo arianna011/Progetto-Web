@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<html lang="it">
-<html>
+<h4 class="text-orange mt-4 mb-4">Immagini </h4>
 
-<head>
-    <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Prova</title>
-  
-  <link rel="stylesheet" href="/bootstrap/scss/bootstrap.css" />
-  <link rel="stylesheet" href="/bootstrap-icons-1.10.4/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="/pages/common/style.css" />
-  <link rel="stylesheet" href="/pages/homepage/homepage.css" />
-  <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/pages/homepage/jquery.js"></script>
-  <script src="/pages/homepage/animations.js"></script>
-</head>
-
-<body>
-
-<form action="modifica_immagine.php" method="post" enctype="multipart/form-data">
-  Select image to upload:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload Image" name="submit">
+<form id="caricaProfiloUtente" action="./caricaImmagine.php" method="POST" enctype="multipart/form-data">
+  <div class="col-md-6"> 
+  <label class="form-label" for="profiloUtente"> Immagine Profilo Utente </label>
+      <div class="input-group">
+      <input type="file" class="form-control" id="profiloUtente" name="profiloUtente">
+      <input type="submit" class="btn btn-outline-secondary" name="caricaProfiloUtente">
+      </div>
+      <div class="form-text">Scegli un'immagine di dimensione minima 200 x 200 pixel</div>
+          
+  </div>
 </form>
 
-
-</body>
-
-</html>
