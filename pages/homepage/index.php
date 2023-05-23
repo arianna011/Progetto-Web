@@ -157,7 +157,7 @@
     <div class="card-group">
       
       <div class="card m-3">
-        <?php echo '<div style="background: url(', $band1["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
+        <?php echo '<div style="background: url(', $band1["foto_profilo"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band1["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
@@ -176,7 +176,7 @@
       </div>
 
       <div class="card m-3">
-        <?php echo '<div style="background: url(', $band2["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
+        <?php echo '<div style="background: url(', $band2["foto_profilo"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band2["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
@@ -193,7 +193,7 @@
       </div>
 
       <div class="card m-3">
-        <?php echo '<div style="background: url(', $band3["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
+        <?php echo '<div style="background: url(', $band3["foto_profilo"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:200px;"></div>' ?>
         <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $band3["nome_band"] ?> </h5>
           <ul class="list-group list-group-flush">
@@ -217,7 +217,7 @@
       <div class="card-group">
       
         <div class="card m-3">
-          <?php echo '<div style="background: url(', $art1["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
+          <?php echo '<div style="background: url(', $art1["foto_profilo"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:200px;"></div>' ?>
           <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $art1["nome"] ?> </h5>
           <ul class="list-group list-group-flush">
@@ -236,7 +236,7 @@
         </div>
 
         <div class="card m-3">
-          <?php echo '<div style="background: url(', $art2["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
+          <?php echo '<div style="background: url(', $art2["foto_profilo"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:200px;"></div>' ?>
           <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $art2["nome"] ?> </h5>
           <ul class="list-group list-group-flush">
@@ -253,7 +253,7 @@
         </div>
 
         <div class="card m-3">
-          <?php echo '<div style="background: url(', $art3["foto_profilo"], ') no-repeat; background-position: center center; height:200px;"></div>' ?>
+          <?php echo '<div style="background: url(', $art3["foto_profilo"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:200px;"></div>' ?>
           <div class="card-body">
           <h5 class="card-title showcase-title"> <?php echo $art3["nome"] ?> </h5>
           <ul class="list-group list-group-flush">
@@ -287,7 +287,7 @@
   <div class="col">
     <div class="card m-3">
       <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event1["nick_datore"] ?> </span> </i> </h6></div>
-      <?php echo '<div style="background: url(', $event1["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
+      <?php echo '<div style="background: url(', $event1["immagine"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event1["titolo"] ?></h5>
         <p class="card-text showcase-date mx-2"> <?php echo $event1["stringa_data"] ?> </p>
@@ -305,7 +305,7 @@
   <div class="col">
   <div class="card m-3">
   <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event2["nick_datore"] ?> </span> </i> </h6></div>
-      <?php echo '<div style="background: url(', $event2["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
+      <?php echo '<div style="background: url(', $event2["immagine"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event2["titolo"] ?></h5>
         <p class="card-text showcase-date mx-2"> <?php echo $event2["stringa_data"] ?> </p>
@@ -323,7 +323,7 @@
   <div class="col">
   <div class="card m-3">
   <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event3["nick_datore"] ?> </span> </i> </h6></div>
-      <?php echo '<div style="background: url(', $event3["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
+      <?php echo '<div style="background: url(', $event3["immagine"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event3["titolo"] ?></h5>
         <p class="card-text showcase-date mx-2"> <?php echo $event3["stringa_data"] ?> </p>
@@ -341,7 +341,7 @@
   <div class="col">
   <div class="card m-3">
   <div class="m-2 bg-trans-purple"> <h6 class="text-purple m-2"> <i class="bi bi-person-circle me-1"><span class="ms-1"> <?php echo $event4["nick_datore"] ?> </span> </i> </h6></div>
-      <?php echo '<div style="background: url(', $event4["immagine"], ') no-repeat; background-position: center center; height:300px;"></div>' ?>
+      <?php echo '<div style="background: url(', $event4["immagine"] ?? "../../site_images/placeholder-image.webp", ') no-repeat; background-position: center center; height:300px;"></div>' ?>
       <div class="card-body">
         <h5 class="card-title showcase-title mx-2"> <?php echo $event4["titolo"] ?></h5>
         <p class="card-text showcase-date mx-2"> <?php echo $event4["stringa_data"] ?> </p>

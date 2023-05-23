@@ -47,8 +47,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
     <h2 class="text-purple text-center m-3 mt-4"> <i class="bi bi-pencil-square"></i> Modifica profilo utente </h2>
     <div class="mt-2 mb-2 p-3">
     
-    <form id="modifica_profilo" class="row g-4 px-3 needs-validation" method="POST" action="./applica_modifica.php" novalidate>
-        <h4 class="text-orange"> Dati utente </h4>
+   <?php echo '<form id="modifica_profilo" class="row g-4 px-3 needs-validation" method="POST" action="./applica_modifica_utente.php?id=', $id, '"novalidate>' ?>
+           <h4 class="text-orange"> Dati utente </h4>
         <div class="col-md-6">
             <label for="inputName" class="form-label">Nome</label>
             <input type="text" class="form-control" id="inputName" name="nome" maxlength="20" placeholder="Inserisci il tuo nome" value="<?=$row["nome"]?>" required>
@@ -68,7 +68,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
             <label for="inputCity" class="form-label" >Città di residenza <i class="text-grey"> Opzionale </i> </label>
             <select class="form-select" name="citta" id="inputCity">
                  <?php if($row["id_citta"] != null) { ?> 
-                <option value="<?=$row["id_citta"]?>" selected> <?=$row["nome_citta"]?> </option>
+                  <option value="0"> Nessuna città </option>
+                 <option value="<?=$row["id_citta"]?>" selected> <?=$row["nome_citta"]?> </option>
                 <?php } else { ?>
                 <option value="0" selected> Seleziona la tua città </option>
                 <?php } ?>
@@ -109,7 +110,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
         </div>
         <div class="col-12">
             <label for="inputBio" class="form-label">Bio  <i class="text-grey"> Opzionale </i> </label>
-            <textarea class="form-control" name="bio" id="inputBio" maxlength="1024" placeholder="Scrivi qualcosa su di te..."> <?= $row["descrizione"] ?> </textarea>
+            <textarea class="form-control" name="bio" id="inputBio" maxlength="1024" placeholder="Scrivi qualcosa su di te..."> <?= trim($row["descrizione"]) ?> </textarea>
         </div>
         <input id="controlla" name="controlla" type="hidden" value="si"/>
 
@@ -123,14 +124,16 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
 
 
     <?php 
+      if (isset($_GET["erroreVuoto"]))
+       echo '<script> alert ("Inserire tutti i valori dei campi obbligatori"); </script>';
       if (isset($_GET["erroreCaratteri"]))
         echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>';
       if (isset($_GET["erroreMail"]))
           echo '<script> alert ("La mail inserita non è valida"); </script>';
+      if (isset($_GET["errorePassword"]))
+        echo '<script> alert ("La password inserita non raggiunge la lunghezza minima specificata"); </script>';
       if (isset($_GET["erroreData"]))
         echo '<script> alert ("La data di nascita inserita non è valida"); </script>';
-      if (isset($_GET["errorePropic"]))
-          echo '<script> alert ("L\'immagine profilo fornita non è valida"); </script>';
       if (isset($_GET["mailUsata"]))
         echo '<script> alert ("Esiste già un account registrato con l\'email fornita"); </script>';
       if (isset($_GET["nickUsato"]))

@@ -2,6 +2,7 @@
 $isUtente ??= false; //per la retrocompatibilità ;)
 $isProfiloUtente ??= false;
 $isProfiloArtista ??= false;
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,7 @@ $isProfiloArtista ??= false;
 </head>
 
 <body>
+    
     <div class="profile">
         <div class="p-card">
             <div class="p-img p-avatar">
