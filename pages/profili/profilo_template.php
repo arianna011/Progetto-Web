@@ -22,6 +22,18 @@ $isProfiloArtista ??= false;
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+    <script>
+        $(".contain-image").on("click", function() {
+            if ($(".hidden-button").attr("hidden")) {
+                $(".hidden-button").removeAttr("hidden");
+            } else {
+                $(".hidden-button").attr("hidden", "true");
+            }
+            
+            
+        });
+    </script>
+
 
 </head>
 
@@ -35,6 +47,17 @@ $isProfiloArtista ??= false;
             <div class="p-info-card">
                 <div id="p-name" style="color:whitesmoke"> <h1> <b> <?php echo $name ?> </b></h1></div>
                 <?php foreach ($infos as $info) echo '<div class="info">'.$info.'</div>'; ?>
+                <?php if($isUtente) { ?>
+                <?php if ($isProfiloUtente) { ?>
+                    <div class="col-auto">
+                        <?php echo ' <a href="/pages/profili/modifiche/modifica_immagine.php?id='.$id.'&ptype=1" type="button" class="btn btn-light my-2"> Modifica immagine profilo <i class="bi bi-plus-circle-fill"></i> </a>' ?>
+                    </div>
+                    <?php } if ($isProfiloArtista) { ?>
+                        <div class="col-auto">
+                        <?php echo ' <a href="/pages/profili/modifiche/modifica_immagine.php?id='.$id.'&ptype=2" type="button" class="btn btn-light my-2"> Modifica immagine profilo <i class="bi bi-plus-circle-fill"></i> </a>' ?>
+                    </div>
+                            <?php
+                    } } ?>
             </div>
 
             <?php if($isUtente) { ?>
@@ -63,9 +86,18 @@ $isProfiloArtista ??= false;
 
         <div class="p-gallery">
             <div class="p-g-images">
-                <?php foreach ($imgs as $img) echo '<div> <img src= "'.$img.'"> </div>'; ?> 
+                <?php foreach ($imgs as $img) {
+                 if(!str_starts_with($img, "http"))
+                    $img = "/user_data/$img";
+                 echo '<div class="contain-image"> <a class="hidden-button btn btn-danger px-2 py-0 mb-2" href="/pages/profili/modifiche/carica_immagine.php?id='.$id.'&ptype=6&del='.$img.'" hidden >  <i class="bi bi-x"></i> </a> <img src= "'.$img.'"> </div>';
+                 } ?> 
+            <?php if($isUtente) { ?>
+                <?php if ($isProfiloArtista) { ?>
+                <a href = "/pages/profili/modifiche/modifica_immagine.php?id=<?php echo $id ?>&ptype=6">
+            <i class="bi bi-plus-circle-fill clickable-icon" style="font-size:xx-large;"></i>
+            </a>
+            <?php } } ?>
             </div>
-            <i class="bi bi-plus-circle-fill clickable-icon" style="font-size:xx-large;" hidden></i>
         </div>
     </div>
 

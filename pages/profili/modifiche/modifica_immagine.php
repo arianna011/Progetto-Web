@@ -1,27 +1,33 @@
+
 <?php
-$target_dir = "../../user_data/";
-$target_file = $target_dir . basename($_FILES["profiloUtente"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// Controllo se il file è un'immagine
-if(isset($_POST["caricaProfiloUtente"])) {
-  $check = getimagesize($_FILES["profiloUtente"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  } 
-}
+include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
 ?>
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NotaMi</title>
+  
+  <link rel="stylesheet" href="/bootstrap/scss/bootstrap.css" />
+  <link rel="stylesheet" href="/bootstrap-icons-1.10.4/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/pages/common/style.css" />
+  <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+<body class="bg-beige">
+
+   <header class="bg-purple">
+     <?php include '../../common/navbar.php' ?>
+   </header>
 
 
 
-<h4 class="text-orange mt-4 mb-4">Immagini </h4>
-
-<form id="caricaProfiloUtente"  method="POST" enctype="multipart/form-data">
+<form class="container mb-5" id="caricaProfiloUtente"  method="POST" enctype="multipart/form-data" action="./carica_immagine.php?id=<?=$_GET["id"]?>&ptype=<?=$_GET["ptype"]?>">
+  <h4 class="text-orange mt-4 mb-4">Modifica immagine </h4>
   <div class="col-md-6"> 
   <label class="form-label" for="profiloUtente"> Immagine Profilo Utente </label>
       <div class="input-group">
@@ -33,3 +39,8 @@ if(isset($_POST["caricaProfiloUtente"])) {
   </div>
 </form>
 
+<footer class="footer pt-lg-5 pt-4 pb-4">
+    <?php include '../../common/footer.php' ?>
+</footer>
+
+</body>
