@@ -46,7 +46,10 @@
         {
             $resetNome = "UPDATE profilo_artista SET nomedarte = NULL WHERE id_artista =" . $id . ";";
             $resultResetNome =  pg_query($dbconn, $resetNome) or die('Query failed: ' . pg_last_error()); 
+        }
 
+        if (strlen(trim($descr)) == 0)
+        {
             $resetDescr = "UPDATE profilo_artista SET descrizione = NULL WHERE id_artista =" . $id . ";";
             $resultResetDescr =  pg_query($dbconn, $resetDescr) or die('Query failed: ' . pg_last_error()); 
         }
