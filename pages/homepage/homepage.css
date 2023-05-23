@@ -76,38 +76,21 @@
     font-style: bold;
 }
 
-.animate-area-1
+.img-top
 {
-    background: url('../../site_images/band.jpg') no-repeat; 
-    background-size: cover; 
-    height:400px;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
 }
 
-.animate-area-1:hover
+.img-top img
 {
-    background-size: 170%;
+    width: 100%;
+    transition: all 0.2s ease-in;
+}
+.img-top img:hover
+{
+    width: 110%;
 }
 
-.animate-area-2
-{
-    background: url('../../site_images/artista.jpg') no-repeat; 
-    background-size: cover; 
-    height:400px;
-}
 
-.animate-area-2:hover
-{
-    background-size: 170%;
-}
-
-.animate-area-3
-{
-    background: url('../../site_images/evento.jpg') no-repeat; 
-    background-size: cover; 
-    height:400px;
-}
-
-.animate-area-3:hover
-{
-    background-size: 150%;
-}

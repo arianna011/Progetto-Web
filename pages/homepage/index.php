@@ -96,8 +96,10 @@
 
     <div class="card-group">
       <div class="card">
-        <div class="animate-area-1 w-100 d-none d-md-block"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/band.jpg') no-repeat; background-size: cover; height:300px;"></div>
+        <figure class="img-top">
+          <img src="../../site_images/band.jpg"/>
+        </figure>
+        
         <div class="card-body">
           <h5 class="card-title">Ingaggia Band</h5>
           <p class="card-text">Trova il gruppo con il sound migliore per le tue necessità</p>
@@ -106,8 +108,10 @@
       </div>
 
       <div class="card">
-        <div class="animate-area-2 w-100 d-none d-md-block"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/artista.jpg') no-repeat; background-size: cover; height:300px;"></div>
+      <figure class="img-top">
+          <img src="../../site_images/artista.jpg"/>
+
+      </figure>
         <div class="card-body">
           <h5 class="card-title">Trova Artisti</h5>
           <p class="card-text">Scopri nuovi componenti per la tua band</p>
@@ -116,8 +120,10 @@
       </div>
 
       <div class="card">
-        <div class="animate-area-3 w-100 d-none d-md-block"></div>
-        <div class="w-100 d-block d-md-none" style="background: url('../../site_images/evento.jpg') no-repeat; background-size: cover; height:300px;"></div>
+      <figure class="img-top">
+          <img src="../../site_images/evento.jpg">
+      </figure>
+       
         <div class="card-body">
           <h5 class="card-title">Cerca Eventi</h5>
           <p class="card-text">Trova il palco su cui esibirti</p>
