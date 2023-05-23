@@ -45,11 +45,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
         <h2 class="text-purple text-center m-3 mt-4"> <i class="bi bi-pencil-square"></i> Modifica profilo artista </h2>
         <div class="mt-2 mb-2 p-3">
         
-        <form id="modifica_artista" class="row g-4 px-3 needs-validation" method="POST" action="./applica_modifica_artista.php" novalidate>
+        <?php echo '<form id="modifica_profilo_artista" class="row g-4 px-3" method="POST" action="./applica_modifica_artista.php?id=', $id, '">' ?>
         <h4 class="text-orange">Dati artista </h4>
         <div class="col-md-6"> 
             <label for="inputNomedarte" class="form-label">Nome d'arte</label>
-            <div class="input-group has-validation">
+            <div class="input-group">
               <span class="input-group-text"> <i class="bi bi-music-note-beamed"></i> </span>
               <input type="text" class="form-control" id="inputNomedarte" name="nickname" placeholder="Nome d'arte" maxlength="15"  value="<?= $row_art["nomedarte"]?>" >
             </div>
@@ -67,7 +67,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
                             foreach ($strumenti as $strumento) {
                               ?> 
                               <div class="form-check form-check-inline" >
-                              <input class="form-check-input" type="checkbox" name="strumento" id="<?= $strumento['id_strumento']; ?>" value="<?= $strumento['nome_strumento']; ?>" 
+                              <input class="form-check-input" type="checkbox" name="strumenti[]" id="<?= $strumento['id_strumento']; ?>" value="<?= $strumento['nome_strumento']; ?>" 
                               <?php if(str_contains($row_art_2["strumenti_musicali"], $strumento['nome_strumento']))echo "checked";?>/>
                               <label class="form-check-label" for="<?= $strumento['id_strumento']; ?>"> <?= $strumento['nome_strumento']; ?> </label>
                               </div>
@@ -158,6 +158,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
                         </div>
                         </div>
     <script src="formValidation.js"></script> 
+    <?php if (isset($_GET["erroreCaratteri"]))
+        echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>'; 
+        if (isset($_GET["errorePrezzi1"]))
+        echo '<script> alert ("Il prezzo minimo deve essere minore o uguale al prezzo massimo"); </script>';
+        if (isset($_GET["errorePrezzi2"]))
+        echo '<script> alert ("Specificare sia il prezzo minimo che il prezzo massimo"); </script>'; ?>
 
     <footer class="footer pt-lg-5 pt-4 pb-4">
     <?php include '../../common/footer.php' ?>
