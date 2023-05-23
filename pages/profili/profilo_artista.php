@@ -36,10 +36,14 @@ $result = pg_fetch_row(pg_query($dbconn, $check_utente));
 if ($result) $isUtente = true;
 else $isUtente = false;
 
+
 pg_close($dbconn); 
 
 $id = $row["id_artista"];
 $avatarSrc = $row["foto_profilo"];
+if(!str_starts_with($row["foto_profilo"], "http" ) ){
+    $avatarSrc = "/user_data/$row[foto_profilo]";
+}
 $description = $row["descrizione"];
 $name = $row["nome"];
 if ($row["valutazione_media"]==NULL) $valutazione = 0;

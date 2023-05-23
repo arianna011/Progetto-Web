@@ -35,14 +35,15 @@ if (!$row) {
     exit;
 }
 
-
+if ($row["valutazione_media"]==NULL) $valutazione = 0;
+else $valutazione = $row["valutazione_media"];
 $avatarSrc = $row["foto_profilo"];
 $description = $row["descrizione"];
 $name = $row["nome_band"];
 $infos = [
     $row["sede"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>'.$row["sede"] : "",
     "<h3>{$row["min_prezzo"]} - {$row["max_prezzo"]} €</h3>",
-    toStars($row["valutazione_media"]),
+    toStars($valutazione),
     toBadges($row["generi_musicali"], "bg-info"),
     toBadges($row["servizi_forniti"], "bg-danger"),
 ];
@@ -95,7 +96,7 @@ $imgs = array();
     }
 
 
-    pg_close($dbconn); //il risultato ce l'ho, posso anche chiudere :T
+    //pg_close($dbconn); //il risultato ce l'ho, posso anche chiudere :T
     
     ?>
 

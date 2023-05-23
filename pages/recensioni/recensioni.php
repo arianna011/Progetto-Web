@@ -38,6 +38,7 @@ include '../../connection.php';
             $check_recensione = "SELECT * FROM recensione_artista WHERE id_utente = $row_utente[0] AND id_oggetto = $_GET[id]";
             $result_check = pg_query($dbconn, $check_recensione);
             $check = pg_fetch_row($result_check);
+            if ( $row_utente[0] != $_GET['id']) {
             ?>
             <form class="row" action="/pages/recensioni/recensioni_action.php" method="POST">
             <div class="col-12">            
@@ -67,10 +68,10 @@ include '../../connection.php';
                  ?>
                 <?php if($check!= NULL) echo '<button class="btn btn-danger my-1" type="submit" name="elimina">Cancella recensione</button>' ?>
             </div>
-            </form>
+            </form> 
         <?php }
+        }
     ?>
-
     <?php
         $id = $_GET['id'];
         $sql = "SELECT * FROM recensione_artista WHERE id_oggetto = $id";
@@ -93,7 +94,9 @@ include '../../connection.php';
                     $row_utente = pg_fetch_row($result_utente);
                     
                     if( $row_utente == False || $row['id_utente']  != $row_utente[0]  )  { ?>
+                    
                     <div class="row mt-3 recensione"> 
+                        <hr class="col-10 mb-4">
                         <div class="row">
                             <div class="col-1">
                                 <?php if($row_utente_recensione['foto_profilo'] == NULL || str_starts_with( $row_immagine['src'], "http")) { ?>
@@ -120,7 +123,7 @@ include '../../connection.php';
                             </h6>
                              <p><?php echo $row['data_recensione']; ?></p>
                              <p><?php echo $row['testo']; ?></p>
-                            <hr>
+                            
                         </div> 
                     </div>
                 <?php }

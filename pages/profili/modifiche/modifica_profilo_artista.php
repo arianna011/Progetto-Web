@@ -67,7 +67,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
                             foreach ($strumenti as $strumento) {
                               ?> 
                               <div class="form-check form-check-inline" >
-                              <input class="form-check-input" type="checkbox" name="strumenti[]" id="<?= $strumento['id_strumento']; ?>" value="<?= $strumento['nome_strumento']; ?>" 
+                              <input class="form-check-input" type="checkbox" name="strumenti[]" id="<?= $strumento['id_strumento']; ?>" value="<?= $strumento['id_strumento']; ?>" 
                               <?php if(str_contains($row_art_2["strumenti_musicali"], $strumento['nome_strumento']))echo "checked";?>/>
                               <label class="form-check-label" for="<?= $strumento['id_strumento']; ?>"> <?= $strumento['nome_strumento']; ?> </label>
                               </div>
@@ -90,7 +90,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
                           foreach ($generi as $genere) {
                             ?> 
                             <div class="form-check form-check-inline" >
-                            <input class="form-check-input" type="checkbox" name="genere" id="<?= $genere['id_genere']; ?>" value="<?= $genere['nome_genere']; ?>"
+                            <input class="form-check-input" type="checkbox" name="genere[]" id="<?= $genere['id_genere']; ?>" value="<?= $genere['id_genere']; ?>"
                             <?php if(str_contains($row_art_2["generi_musicali"], $genere['nome_genere']))echo "checked";?>/>
                             <label class="form-check-label" for="<?= $genere['id_genere']; ?>"> <?= $genere['nome_genere']; ?> </label>
                             </div>
@@ -114,7 +114,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
                           foreach ($servizi as $servizio) {
                             ?> 
                             <div class="form-check form-check-inline" >
-                            <input class="form-check-input" type="checkbox" name="servizio" id="<?= $servizio['id_servizio'] ?>" value="<?= $servizio['nome_servizio']; ?>" 
+                            <input class="form-check-input" type="checkbox" name="servizio[]" id="<?= $servizio['id_servizio'] ?>" value="<?= $servizio['id_servizio']; ?>" 
                             <?php if(str_contains($row_art_2["servizi_forniti"], $servizio['nome_servizio']))echo "checked";?>/>
                             <label class="form-check-label" for="<?= $servizio['id_servizio']; ?>"> <?= $servizio['nome_servizio']; ?> </label>
                             </div>

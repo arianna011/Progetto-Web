@@ -41,6 +41,9 @@ pg_close($dbconn);
 
 $id = $utente["id_utente"];
 $avatarSrc = $utente["foto_profilo"];
+if(!str_starts_with($utente["foto_profilo"], "http" ) ){
+    $avatarSrc = "/user_data/$utente[foto_profilo]";
+}
 $description = $utente["descrizione"];
 $name = $utente["nickname"];
 $infos = array(
