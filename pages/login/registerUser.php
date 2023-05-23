@@ -58,9 +58,10 @@
            $data = date('Y/m/d', strtotime($data_nascita));
 
            if ($id_citta==0) $id_citta = "NULL";
-          
-            $insert="INSERT INTO profilo_utente (nome, cognome, datan, nickname, id_citta, foto_profilo, descrizione, mail, passwd, univoco) VALUES ('$nome','$cognome','$data','$nick',$id_citta,NULL,'$bio','$email','$password','$univoco')";
-            $resultInsert = pg_query($dbconn, $insert) or die('Query failed: ' . pg_last_error());
+
+           if (!empty($bio)) { $insert="INSERT INTO profilo_utente (nome, cognome, datan, nickname, id_citta, foto_profilo, descrizione, mail, passwd, univoco) VALUES ('$nome','$cognome','$data','$nick',$id_citta,NULL,'$bio','$email','$password','$univoco')"; }
+           else { $insert="INSERT INTO profilo_utente (nome, cognome, datan, nickname, id_citta, foto_profilo, descrizione, mail, passwd, univoco) VALUES ('$nome','$cognome','$data','$nick',$id_citta,NULL,NULL,'$email','$password','$univoco')";}
+           $resultInsert = pg_query($dbconn, $insert) or die('Query failed: ' . pg_last_error());
             header("Location: login.php?reg=ok");           
         }
       
@@ -69,7 +70,6 @@
     if($erroreCaratteri == 1) header("Location: registration.php?erroreCaratteri=1");
     if($erroreMail == 1) header("Location: registration.php?erroreMail=1");
     if($erroreData == 1) header("Location: registration.php?erroreData=1");
-    if($errorePropic == 1) header("Location: registration.php?errorePropic=1");
     if($mailUsata == 1) header("Location: registration.php?mailUsata=1");
     if($nickUsato == 1) header("Location: registration.php?nickUsato=1");
    

@@ -125,6 +125,11 @@
     <div id="nav-tab-content" style="background-color: whitesmoke; margin: 0 10px 10px 10px">
         <h3 style='padding: 30px; font-size=large;'>Link non valido :T</h3> 
     </div>
+
+     <!-- se provengo da una modifica effettuata con successo mando un alert -->
+     <?php if (isset($_GET["update"])) echo "<script> alert('Modifiche registrate con successo'); </script>"; ?>
+
+
     <footer class="bg-purple">
         <?php include '../common/footer.php' ?>
     </footer>
