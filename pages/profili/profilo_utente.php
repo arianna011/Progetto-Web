@@ -1,4 +1,6 @@
 <?php
+$isProfiloUtente = true;
+
 require_once  $_SERVER['DOCUMENT_ROOT'].'/connection.php'; 
 require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php'; 
 

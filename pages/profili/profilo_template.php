@@ -1,5 +1,7 @@
 <?php 
 $isUtente ??= false; //per la retrocompatibilità ;)
+$isProfiloUtente ??= false;
+$isProfiloArtista ??= false;
 ?>
 
 <!DOCTYPE html>
@@ -20,17 +22,6 @@ $isUtente ??= false; //per la retrocompatibilità ;)
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <script>
-        /*
-        $(document).ready(function() {
-
-            $("#p-modify").click(function() {
-                $("#p-name").html('<input type="text" class="form-control p-input" name="name" id="name" value="<?php echo $name ?>">'
-                );
-            });
-        });
-        */
-    </script>
 
 </head>
 
@@ -47,10 +38,16 @@ $isUtente ??= false; //per la retrocompatibilità ;)
             </div>
 
             <?php if($isUtente) { ?>
+                <?php if ($isProfiloUtente) { ?>
             <div class="col-auto">
-                <?php echo ' <a href="modifica_profilo.php?id='.$id.'" type="button" class="btn btn-light" id="p-modify"> Modifica profilo <i class="bi bi-pencil-square"></i> </a>' ?>
+                <?php echo ' <a href="/pages/profili/modifiche/modifica_profilo_utente.php?id='.$id.'" type="button" class="btn btn-light"> Modifica profilo <i class="bi bi-pencil-square"></i> </a>' ?>
             </div>
-            <?php } ?>
+            <?php } if ($isProfiloArtista) { ?>
+                <div class="col-auto">
+                <?php echo ' <a href="/pages/profili/modifiche/modifica_profilo_artista.php?id='.$id.'" type="button" class="btn btn-light"> Modifica profilo <i class="bi bi-pencil-square"></i> </a>' ?>
+            </div>
+                    <?php
+            } } ?>
 
         </div>
 

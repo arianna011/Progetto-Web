@@ -1,4 +1,5 @@
 <?php
+$isProfiloArtista = true;
 require_once  $_SERVER['DOCUMENT_ROOT'].'/connection.php'; 
 require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php'; 
 
@@ -23,7 +24,7 @@ $result = pg_execute($dbconn, "", array($id));
 if (!$result) { echo pg_last_error($dbconn); exit; }
 
 $row = pg_fetch_assoc($result);
-if (!$row) { echo "<h3 style='padding: 30px; font-size=large;'>profilo artista non trovato ¯\_(ツ)_/¯</h3> ".pg_last_error($dbconn); exit; }
+if (!$row) { echo '<div class="mt-0 p-4 bg-grey"> <a class="btn btn-primary" href="/pages/profili/modifiche/crea_profilo_artista.php?id='.$id.'" type="button"> <i class="bi bi-pencil-square"></i> Crea profilo artista </a> </div> </div>';exit; }
 
 //controlli per verificare che l'utente abbia fatto il login
 if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
@@ -41,10 +42,12 @@ $id = $row["id_artista"];
 $avatarSrc = $row["foto_profilo"];
 $description = $row["descrizione"];
 $name = $row["nome"];
+if ($row["valutazione_media"]==NULL) $valutazione = 0;
+else $valutazione = $row["valutazione_media"];
 $infos = [
     $row["nome_citta"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>'.$row["nome_citta"] : "",
     "<h3>{$row["min_prezzo"]} - {$row["max_prezzo"]} €</h3>",
-    toStars($row["valutazione_media"]),
+    toStars($valutazione),
     toBadges($row["strumenti_musicali"], "bg-secondary"),
     toBadges($row["generi_musicali"], "bg-info"),
     toBadges($row["servizi_forniti"], "bg-danger"),
