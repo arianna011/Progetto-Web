@@ -44,6 +44,7 @@ $avatarSrc = $row["foto_profilo"];
 if(!str_starts_with($row["foto_profilo"], "http" ) ){
     $avatarSrc = "/user_data/$row[foto_profilo]";
 }
+if ($row["foto_profilo"]==NULL) $avatarSrc = NULL;
 $description = $row["descrizione"];
 $name = $row["nome"];
 if ($row["valutazione_media"]==NULL) $valutazione = 0;
