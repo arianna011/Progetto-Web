@@ -173,7 +173,7 @@ let search;
 let citta;
 let servizi = new Array();
 
-
+//funzione per prendere i dati da visualizzare
 function fetch_data(page){
   $.ajax({
     url:"./fetch_artisti.php",
@@ -185,9 +185,11 @@ function fetch_data(page){
   })
 };
 
+
 fetch_data();
 
 get_page();
+
 
 $("#search-form").submit(function(event) {
   search = $('#inputsearch').val();

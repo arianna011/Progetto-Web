@@ -52,11 +52,11 @@ $isProfiloArtista ??= false;
                 <?php if($isUtente) { ?>
                 <?php if ($isProfiloUtente) { ?>
                     <div class="col-auto">
-                        <?php echo ' <a href="/pages/profili/modifiche/modifica_immagine.php?id='.$id.'&ptype=1" type="button" class="btn btn-light my-2"> Modifica immagine profilo <i class="bi bi-plus-circle-fill"></i> </a>' ?>
+                        <?php echo ' <a href="/pages/profili/modifiche/modifica_immagine.php?id='.$id.'&ptype=1" type="button" class="btn btn-light my-2"> Modifica immagine <i class="bi bi-plus-circle-fill"></i> </a>' ?>
                     </div>
                     <?php } if ($isProfiloArtista) { ?>
                         <div class="col-auto">
-                        <?php echo ' <a href="/pages/profili/modifiche/modifica_immagine.php?id='.$id.'&ptype=2" type="button" class="btn btn-light my-2"> Modifica immagine profilo <i class="bi bi-plus-circle-fill"></i> </a>' ?>
+                        <?php echo ' <a href="/pages/profili/modifiche/modifica_immagine.php?id='.$id.'&ptype=2" type="button" class="btn btn-light my-2"> Modifica immagine <i class="bi bi-plus-circle-fill"></i> </a>' ?>
                     </div>
                             <?php
                     } } ?>
@@ -89,9 +89,12 @@ $isProfiloArtista ??= false;
         <div class="p-gallery">
             <div class="p-g-images">
                 <?php foreach ($imgs as $img) {
-                 if(!str_starts_with($img, "http"))
-                    $img = "/user_data/$img";
-                 echo '<div class="contain-image"> <a class="hidden-button btn btn-danger px-2 py-0 mb-2" href="/pages/profili/modifiche/carica_immagine.php?id='.$id.'&ptype=6&del='.$img.'" hidden >  <i class="bi bi-x"></i> </a> <img src= "'.$img.'"> </div>';
+                 if(str_starts_with($img, "http")) {
+                 echo '<div class="contain-image"> <a class="hidden-button btn btn-danger px-2 py-0 mb-2" href="/pages/profili/modifiche/elimina_immagine.php?id='.$id.'&ptype=6&del='.$img.'" hidden >  <i class="bi bi-x"></i> </a> <img src= "'.$img.'"> </div>';
+                 } else {
+                    $img_2 = "/user_data/$img";
+                    echo '<div class="contain-image"> <a class="hidden-button btn btn-danger px-2 py-0 mb-2" href="/pages/profili/modifiche/elimina_immagine.php?id='.$id.'&ptype=6&del='.$img.'" hidden >  <i class="bi bi-x"></i> </a> <img src= "'.$img_2.'"> </div>';
+                    }
                  } ?> 
             <?php if($isUtente) { ?>
                 <?php if ($isProfiloArtista) { ?>
