@@ -53,6 +53,8 @@ CREATE TABLE IF NOT EXISTS Citta
 CREATE TABLE IF NOT EXISTS Profilo_utente(
 	PRIMARY KEY (id_utente),
 	id_utente		INT			GENERATED ALWAYS AS IDENTITY,
+	univoco			VARCHAR(70), --nullable --usata per tenere traccia delle sessioni (cookie)
+	
 	nome			VARCHAR(64)	NOT NULL,
 	cognome			VARCHAR(64)	NOT NULL,
 	dataN			DATE		NOT NULL,
@@ -73,8 +75,7 @@ CREATE TABLE IF NOT EXISTS Profilo_utente(
 	/*galleria_utente	INT			--nullable
 					REFERENCES Raccolta_immagini(id_raccolta),*/
 	
-	descrizione		VARCHAR(1024), --nullable
-	univoco			VARCHAR(70) UNIQUE
+	descrizione		VARCHAR(1024) --nullable
 );
 
 --ROBA ARTISTI
@@ -216,8 +217,8 @@ CREATE TABLE IF NOT EXISTS Profilo_band
 	id_sede			INT				--nullable
 					REFERENCES Citta(id_citta)	--sede principale della band
 					ON DELETE SET NULL
-					ON UPDATE CASCADE
-
+					ON UPDATE CASCADE,
+ 	descrizione		VARCHAR(1024) --nullable
 );
 
 --necessaria per rappresentare anche membri senza profilo
@@ -351,7 +352,10 @@ CREATE TABLE IF NOT EXISTS Ingaggio
 	titolo					VARCHAR(64)		NOT NULL,
 	descrizione				VARCHAR(512)	NOT NULL,
 	data_ingaggio			DATE			NOT NULL,
-	--ora evento?
+	ora_inizio 				TIME,			--nullable(aggiunto dopo)
+	ora_fine 				TIME,			--nullable(aggiunto dopo)
+	
+	indirizzo	 			VARCHAR(64),
 	id_luogo				INT				--nullable
 							REFERENCES Profilo_locale(id_locale)
 							ON DELETE NO ACTION

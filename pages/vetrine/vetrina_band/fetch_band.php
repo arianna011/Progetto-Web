@@ -125,7 +125,7 @@ if($count_artisti> 0) {
                 $display .= '<p> '. $row['descrizione'] .' </p> '; 
             }
         $display .= '
-            <a href="profilo_band.php?id='. $row['id_band'] .'" class="btn btn-primary  style="padding:2%;"> Vedi profilo </a>
+            <a href="/pages/profili/profilo_band.php?id='. $row['id_band'] .'" class="btn btn-primary  style="padding:2%;"> Vedi profilo </a>
         </div>
         <div class="col-md-3 p-4">
             <h5 style="color:#fd7e14; margin-top:5%; text-align:end"> '. $row['min_prezzo'] .' - '. $row['max_prezzo'] .' € </h5>';

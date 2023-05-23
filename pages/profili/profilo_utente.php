@@ -12,7 +12,7 @@ $id = $_GET['id'];
 
 //uso di prepared statement per prevenire SQL injection (si spera)
 $query = "
-SELECT nickname, descrizione, foto_profilo, nome_citta, mail
+SELECT id_utente, nickname, descrizione, foto_profilo, nome_citta, mail
 FROM v_profilo_utente
 WHERE id_utente = $1";
 
@@ -23,7 +23,7 @@ $result = pg_execute($dbconn, "usr", array($id));
 if (!$result) { echo pg_last_error($dbconn); exit; }
 
 $utente = pg_fetch_assoc($result);
-if (!$utente) { echo "utente non trovato: ".pg_last_error($dbconn); exit; }
+if (!$utente) { echo "utente non trovato; ".pg_last_error($dbconn); exit; }
 
 //controlli per verificare che l'utente abbia fatto il login
 if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
@@ -37,13 +37,13 @@ else $isUtente = false;
 
 pg_close($dbconn);
 
-$id = $row["id_artista"];
+$id = $utente["id_utente"];
 $avatarSrc = $utente["foto_profilo"];
 $description = $utente["descrizione"];
 $name = $utente["nickname"];
 $infos = array(
-    $utente["nome_citta"],
-    $utente["mail"]
+    $utente["nome_citta"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>'.$utente["nome_citta"] : "",
+    '<i class="bi bi-envelope-fill" style="margin-right:5px""></i>'.$utente["mail"]
 );
 $imgs = array();
     

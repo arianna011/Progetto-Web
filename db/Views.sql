@@ -30,8 +30,8 @@ SELECT
 	usr.descrizione
 
 FROM Profilo_utente usr
-JOIN Citta USING(id_citta)
-JOIN Immagine ON foto_profilo = id_immagine;
+LEFT JOIN Citta USING(id_citta)
+LEFT JOIN Immagine ON foto_profilo = id_immagine;
 
 
 
@@ -175,9 +175,10 @@ SELECT
 
 FROM Profilo_artista pa
 JOIN v_profilo_utente ON id_utente = id_artista
-JOIN Immagine fp ON pa.foto_profilo = id_immagine
-JOIN v_raccolta_immagini ON galleria_artista = id_raccolta
+LEFT JOIN Immagine fp ON pa.foto_profilo = id_immagine
+LEFT JOIN v_raccolta_immagini ON galleria_artista = id_raccolta
 
+--left join non necessario perchè la tabella è gia valorizzata per valori nulli
 JOIN v_strumenti_musicali_per_artista USING (id_artista)
 JOIN v_generi_musicali_per_artista USING (id_artista)
 JOIN v_servizi_musicali_per_artista USING (id_artista)
@@ -205,11 +206,12 @@ SELECT
 	nome_citta AS sede,
 	
 	generi_musicali,
-	servizi_forniti
+	servizi_forniti,
+	descrizione
 
 FROM Profilo_band
-JOIN Immagine fp ON foto_profilo = id_immagine
-JOIN Citta ON id_sede = id_citta
+LEFT JOIN Immagine fp ON foto_profilo = id_immagine
+LEFT JOIN Citta ON id_sede = id_citta
 JOIN v_generi_musicali_per_band USING (id_band)
 JOIN v_servizi_musicali_per_band USING (id_band)
 LEFT JOIN valutazioni_band USING(id_band)		--una valutazione media null indica che non ha ancora avuto recensioni
@@ -240,9 +242,9 @@ SELECT
 
 FROM Profilo_locale pl
 JOIN Profilo_utente ON titolare = id_utente
-JOIN Immagine fp ON pl.foto_profilo = id_immagine
-JOIN v_raccolta_immagini imgs ON galleria_locale = id_raccolta
-JOIN Citta ON pl.id_citta = Citta.id_citta
+LEFT JOIN Immagine fp ON pl.foto_profilo = id_immagine
+LEFT JOIN v_raccolta_immagini imgs ON galleria_locale = id_raccolta
+LEFT JOIN Citta ON pl.id_citta = Citta.id_citta
 LEFT JOIN valutazioni_locale USING(id_locale)		--una valutazione media null indica che non ha ancora avuto recensioni
 ;
 
@@ -273,8 +275,39 @@ SELECT
 
 FROM Ingaggio i
 JOIN Profilo_utente ON datore = id_utente
-JOIN Immagine ON i.immagine = id_immagine
+LEFT JOIN Immagine ON i.immagine = id_immagine
 ;
+
+
+CREATE OR REPLACE VIEW v_membro_band AS
+SELECT 
+	id_membro,
+	id_band,
+	COALESCE (
+		art.nome,
+		memb.nome || ' ' || memb.cognome
+	) AS nome,
+	profilo AS id_profilo,
+	nome_strumento AS ruolo,
+	valutazione_media
+FROM Membro_band memb
+JOIN Partecipazione_band USING(id_membro)
+JOIN Strumento_musicale ON id_ruolo = id_strumento
+LEFT JOIN v_profilo_artista art ON profilo = id_artista
+;
+
+CREATE OR REPLACE VIEW v_band_per_artista AS
+SELECT
+	id_profilo,
+	id_band,
+	nome_band,
+	bnd.foto_profilo,
+	bnd.valutazione_media,
+	ruolo
+FROM v_membro_band
+JOIN v_profilo_band bnd USING(id_band)
+WHERE id_profilo IS NOT NULL;
+
 
 
 
