@@ -18,8 +18,19 @@
       }
 
     $band = array($band1, $band2, $band3);
-    $stars_band = array("", "", "");
+    
+    $img_band = array(NULL, NULL, NULL);
+    foreach ($band as $x => $b)
+    {
+      $img = $band[$x]["foto_profilo"];
+      if ($img != NULL && !str_starts_with($img, "https"))
+      { 
+        $img_band[$x] = '/user_data//' . $img;
+      }
+      else $img_band[$x] = $img;
+    }
 
+    $stars_band = array("", "", "");
     foreach ($band as $x => $b)
     {
       if($b['valutazione_media'])
@@ -95,6 +106,7 @@
     #artisti
     $query2 = "SELECT id_artista, foto_profilo, nome, descrizione, valutazione_media, generi_musicali, nome_citta, min_prezzo, max_prezzo 
               FROM v_profilo_artista 
+              WHERE valutazione_media IS NOT NULL
               ORDER BY valutazione_media DESC;";
     
     $result2 = pg_query($dbconn, $query2);
@@ -109,6 +121,18 @@
       }
 
     $artist = array($art1, $art2, $art3);
+
+    $img_art = array(NULL, NULL, NULL);
+    foreach ($artist as $x => $a)
+    {
+      $img = $artist[$x]["foto_profilo"];
+      if ($img != NULL && !str_starts_with($img, "https"))
+      { 
+        $img_art[$x] = '/user_data//' . $img;
+      }
+      else $img_art[$x] = $img;
+    }
+
     $stars_artist = array("", "", "");
   
     foreach ($artist as $x => $a)
