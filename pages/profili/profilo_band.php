@@ -35,13 +35,15 @@ if (!$row) {
     exit;
 }
 
-if ($row["valutazione_media"]==NULL) $valutazione = 0;
-else $valutazione = $row["valutazione_media"];
+if ($row["valutazione_media"] == NULL)
+    $valutazione = 0;
+else
+    $valutazione = $row["valutazione_media"];
 $avatarSrc = $row["foto_profilo"];
 $description = $row["descrizione"];
 $name = $row["nome_band"];
 $infos = [
-    $row["sede"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>'.$row["sede"] : "",
+    $row["sede"] ? '<i class="bi bi-geo-alt-fill" style="margin-right:5px"></i>' . $row["sede"] : "",
     "<h3>{$row["min_prezzo"]} - {$row["max_prezzo"]} €</h3>",
     toStars($valutazione),
     toBadges($row["generi_musicali"], "bg-info"),
@@ -60,9 +62,14 @@ $imgs = array();
     <title>Document</title>
 
     <style>
-        .search-card{
+        .search-card {
             margin: 20px;
-            max-height: 30vh;
+        }
+
+        @media screen and (min-width: 769px) {
+            .search-card {
+                max-height: 30vh;
+            }
         }
     </style>
 </head>

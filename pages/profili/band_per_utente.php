@@ -40,17 +40,23 @@ if (!$result) {
     <title>Band per utente</title>
 </head>
 <style>
-    .band-list{
+    .band-list {
         display: flex;
         flex-direction: column;
         align-items: stretch;
     }
-    .search-card{
+
+    .search-card {
         margin: 20px;
-        max-height: 30vh;
     }
 
+    @media screen and (min-width: 769px) {
+        .search-card {
+            max-height: 30vh;
+        }
+    }
 </style>
+
 <body>
     <div class="main" style="padding: 30px">
         <h1 style="margin: 40px 40px 0px 0px">Band di cui faccio parte</h1>
