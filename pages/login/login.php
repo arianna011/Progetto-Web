@@ -49,6 +49,7 @@
       <input id="controlla" name="controlla" type="hidden" value="si"/>
       <button type="submit" class="btn btn-primary">Accedi</button>
 
+      <!-- ridirezione a profili !-->
       <?php if(isset($_GET["back"]) && isset($_GET["ptype"])) { 
         $id = $_GET["back"];
         $ptype = $_GET["ptype"];
@@ -61,6 +62,7 @@
     </form>
     </div>
 
+    <!-- alert relativi agli errori ottenuti tramite $_GET !-->
     <?php 
       if (isset($_GET["erroreCaratteri"]))
         echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>';

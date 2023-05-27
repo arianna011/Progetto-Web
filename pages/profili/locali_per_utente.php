@@ -48,17 +48,23 @@ if (!$result) {
     <title>Band per utente</title>
 </head>
 <style>
-    .band-list{
+    .band-list {
         display: flex;
         flex-direction: column;
         align-items: stretch;
     }
-    .search-card{
+
+    .search-card {
         margin: 20px;
-        max-height: 30vh;
     }
 
+    @media screen and (min-width: 769px) {
+        .search-card {
+            max-height: 30vh;
+        }
+    }
 </style>
+
 <body>
     <div class="main" style="padding: 30px">
         <h1 style="margin: 40px 40px 0px 0px">Lista locali</h1>
@@ -75,9 +81,9 @@ if (!$result) {
                 $img = $row["foto_profilo"] ?? "../../site_images/placeholder-image.jpg";
                 $infos1 = [
                     isset($row["valutazione_media"]) ?
-                        toStars($row["valutazione_media"]) :
-                        "<div class='text-grey' style='font-weight:50'> nessuna valutazione </div>",
-                    $row["indirizzo"].", ".$row["nome_citta"]
+                    toStars($row["valutazione_media"]) :
+                    "<div class='text-grey' style='font-weight:50'> nessuna valutazione </div>",
+                    $row["indirizzo"] . ", " . $row["nome_citta"]
                 ];
                 $infos2 = [
                     "<a href='/pages/profili/profilo_locale.php?id=" . $row["id_locale"] . "' class='btn btn-primary'> Vedi profilo </a>"

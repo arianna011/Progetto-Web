@@ -1,10 +1,10 @@
 (() => {
     'use strict'
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    //Estrazione delle form su cui si vuole applicare la validazione
     const forms = document.querySelectorAll('.needs-validation')
   
-    // Loop over them and prevent submission
+    //Ciclo sulle form e blocco dell'invio dei dati in caso di errori
     Array.from(forms).forEach(form => {
       form.addEventListener('submit', event => {
         if (!form.checkValidity()) {
@@ -16,22 +16,3 @@
       }, false)
     })
   })()
-
-
-
-
-// function validaForm()
-// {
-//     var form = document.getElementById("registration");
-//     window.alert("validazione");
-//     if (checkDataNascita()) {window.alert("data non valida"); form.classList.add("was-validated");}
-//     return checkDataNascita();
-// }
-
-// function checkDataNascita()
-// {
-//     var dataNascita = document.registration.inputBirthdate.value;
-//     var dataCorrente = new Date();
-//     if (dataNascita > dataCorrente) return false;
-//     return true;
-// }

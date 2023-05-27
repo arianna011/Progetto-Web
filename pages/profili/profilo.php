@@ -91,7 +91,7 @@
                 ["#nav-utente", 'profilo_utente.php?id=' + id],
                 ["#nav-artista", 'profilo_artista.php?id=' + id],
                 ["#nav-band", 'band_per_utente.php?id=' + id],
-                ["#nav-locali", 'locali_per_utente.php?id=' + id]
+                ["#nav-locali", 'locali_e_ingaggi.php?id=' + id],
             ]);
 
             for (const [selector, action] of actionLookup) {
@@ -119,7 +119,7 @@
         <div id="nav-utente">Profilo utente</div>
         <div id="nav-artista">Profilo artista</div>
         <div id="nav-band">Band</div>
-        <div id="nav-locali">Locali</div>
+        <div id="nav-locali">Locali e ingaggi</div>
     </div>
 
     <div id="nav-tab-content" style="background-color: whitesmoke; margin: 0 10px 10px 10px">

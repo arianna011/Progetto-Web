@@ -14,8 +14,11 @@ $id = $_GET['id'];
 //uso di prepared statement per prevenire SQL injection (si spera)
 $query = "
 SELECT *
-FROM v_band_per_artista
-WHERE id_profilo = $1";
+FROM v_ingaggio
+LEFT JOIN Citta USING(id_citta)
+WHERE id_datore = $1
+";
+
 
 $result = pg_prepare($dbconn, "", $query);
 if (!$result) {
@@ -40,7 +43,7 @@ if (!$result) {
     <title>Band per utente</title>
 </head>
 <style>
-    .band-list {
+    .lista-ingaggi {
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -52,33 +55,43 @@ if (!$result) {
 
     @media screen and (min-width: 769px) {
         .search-card {
-            max-height: 30vh;
+            max-height: none;
+        }
+        .s-info1>div{
+            margin-bottom: 10px;
         }
     }
 </style>
 
+<link rel="stylesheet" href="../homepage/homepage.css" >
+
 <body>
     <div class="main" style="padding: 30px">
-        <h1 style="margin: 40px 40px 0px 0px">Band di cui faccio parte</h1>
-        <div class="band-list" style="margin: 30px 10px 50px 10px">
+        <h1 style="margin: 40px 40px 0px 0px">Ingaggi disponibili</h1>
+        <div class="lista-ingaggi" style="margin: 30px 10px 50px 10px">
             <?php
             $row = pg_fetch_assoc($result);
             if (!$row) {
-                echo "nessuna band trovata " . pg_last_error($dbconn);
+                echo "nessun ingaggio trovato; " . pg_last_error($dbconn);
                 exit;
             }
 
             while ($row) {
-                $title = $row["nome_band"];
-                $img = $row["foto_profilo"] ?? "../../site_images/placeholder-image.jpg";
+                $title = '<div class="text-purple">' . $row["titolo"] . '</div>';
+
+                $img = $row["immagine"] ?? "../../site_images/placeholder-image.jpg";
                 $infos1 = [
-                    isset($row["valutazione_media"]) ?
-                    toStars($row["valutazione_media"]) :
-                    "<div class='text-grey' style='font-weight:50'> nessuna valutazione </div>",
-                    toBadges("[{$row['ruolo']}]", "bg-secondary")
+                    '<p class="card-text showcase-date mx-2">' . $row["data_ingaggio"] . ($row["ora_inizio"] ? "," . $row["ora_inizio"] . " - " . $row["ora_fine"] : "")  . '</p>',
+                    $row["compenso_indicativo"] ? '<span class = "showcase-retr mb-3">' . $row["compenso_indicativo"] . " € </span>" : "<span class='text-grey' style = 'font-style: italic;'> compenso non specificato </span>",
+                    
+                    $row["indirizzo"] && $row["nome_citta"] ? 
+                        $row["indirizzo"] . ", " . $row["nome_citta"]
+                    : $row["nome_citta"] ?? "",
+
+                    $row["descrizione"]
                 ];
                 $infos2 = [
-                    "<a href='/pages/profili/profilo_band.php?id=" . $row["id_band"] . "' class='btn btn-primary'> Vedi profilo </a>"
+                    "<a href='/pages/profili/profilo_locale.php?id=" . $row["id_ingaggio"] . "' class='btn btn-primary'> Vedi profilo </a>"
                 ];
 
                 include("searchcard_template.php");
