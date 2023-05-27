@@ -28,7 +28,7 @@
   </header>
 
   
-
+  <!-- carosello di presentazione !-->
   <div id="presentation" class="carousel slide mb-6" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -84,6 +84,7 @@
   
   <div class="container-xxl">
 
+  <!-- descrizione testuale del sito !-->
   <div class="mt-5 mb-4">
   <span class="text-purple text-center text-title"><h1>Find Bands&Stages</h1></span>
   <p class="text-center text-descr d-none d-md-block"> <b>NotaMi</b> è una piattaforma italiana dedicata ad artisti e host di eventi musicali:
@@ -94,6 +95,7 @@
 
   <div>
 
+  <!-- link alle sezioni del sito !-->
     <div class="card-group">
       <div class="card">
         <div style="background-image: url('../../site_images/band.jpg'); background-size: cover; height:300px;"> </div>
@@ -133,11 +135,13 @@
 
   </div>
 
+  <!-- vetrina di migliori band e artisti !-->
   <br><br class="d-none d-md-block">
   <span class="text-purple text-center text-title"><h1>In primo piano </h1></span>
   <p class="text-center text-descr d-none d-md-block">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti</p>
   <p class="text-center text-descr-mob d-block d-md-none">I <b>migliori gruppi</b> e artisti musicali registrati sul sito secondo le recensioni degli utenti<br></p>
   
+  <!-- inclusione file per il caricamento dei dati di band e artisti dal database !-->
   <?php include './showcase.php' ?>
 
   <div class="card text-center bg-beige">
@@ -273,12 +277,13 @@
   </div>
   </div>
   
-
+  <!-- vetrina dei prossimi eventi !-->
   <br><br>
   <span class="text-purple text-center text-title"><h1>Eventi imminenti</h1></span>
   <p class="text-center text-descr d-none d-md-block">Le prossime <b>occasioni</b> di ingaggio per musica dal vivo da non perdere</p>
   <p class="text-center text-descr-mob d-block d-md-none">Le prossime <b>occasioni</b> di ingaggio per musica dal vivo da non perdere</p></p>
 
+  <!-- inclusione file per il caricamento dei dati degli eventi dal database !-->
   <?php include './events.php' ?>
 
   <div class="row row-cols-1 row-cols-md-2 g-0 mb-4">

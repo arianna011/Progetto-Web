@@ -64,6 +64,7 @@
 
     $no_descr = '<span class="text-grey mb-3"> <i> Nessuna descrizione </i> </span>';
     $descr_band = array($no_descr,$no_descr,$no_descr);
+    #lunghezza massima per la visualizzazione di una descrizione
     $max_descr = 100;
     foreach ($band as $x => $b)
     {

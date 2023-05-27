@@ -30,6 +30,7 @@
         #controllo validità email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { $erroreMail = 1; }
         
+        #controllo validità data
         $data_corrente = new DateTime(date('Y/m/d'));
         $data_nascita_d = new DateTime(date('Y/m/d', strtotime($data_nascita)));
 
@@ -49,6 +50,7 @@
         $resultNick = pg_query($dbconn, $queryNick) or die('Query failed: ' . pg_last_error());
         $numNick = pg_num_rows($resultNick);
         
+        #controllo presenza di email o nick duplicati
         if ($numEmail > 0) $mailUsata = 1;
         if ($numNick > 0) $nickUsato = 1;
 
@@ -67,6 +69,7 @@
       
     }
 
+    #impostazione delle variabili di errore in $_GET
     if($erroreCaratteri == 1) header("Location: registration.php?erroreCaratteri=1");
     if($erroreMail == 1) header("Location: registration.php?erroreMail=1");
     if($erroreData == 1) header("Location: registration.php?erroreData=1");
