@@ -1,11 +1,3 @@
-<?php
-/* $title = "Title";
-$img = "https://picsum.photos/1000/1000?random=0";
-$infos1 = array("Hello there", "General Kenobi", "You're a bold one!");
-$infos2 = ["2,55 - 7,45€"] */
-    ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
