@@ -27,9 +27,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/connection.php';
 
 
 <form class="container mb-5" id="caricaProfiloUtente"  method="POST" enctype="multipart/form-data" action="./carica_immagine.php?id=<?=$_GET["id"]?>&ptype=<?=$_GET["ptype"]?>">
-  <h4 class="text-orange mt-4 mb-4">Modifica immagine </h4>
+  <h4 class="text-orange mt-4 mb-4">Aggiungi immagine </h4>
   <div class="col-md-6"> 
-  <label class="form-label" for="profiloUtente"> Immagine Profilo Utente </label>
       <div class="input-group">
       <input type="file" class="form-control" id="profiloUtente" name="profiloUtente">
       <input type="submit" class="btn btn-outline-secondary" name="caricaProfiloUtente">

@@ -22,6 +22,7 @@ include '../../../connection.php';
  <header>
   <?php include '../../common/navbar.php'; ?>
   </header>
+    <!-- immagine copertina -->
   <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/vetrina-evento-01.jpg') no-repeat; background-size: cover; height:500px;">
           <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big" > Eventi </h2>
   </div>
@@ -42,6 +43,7 @@ include '../../../connection.php';
           <select class="form-select" id="citta">
             <option value="0" selected>Seleziona una città</option>
             <?php
+              // estrazione delle città dal database
               $query = "SELECT * FROM citta Order by nome_citta ASC";
               $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
               $citta = pg_fetch_all($result);
@@ -52,14 +54,17 @@ include '../../../connection.php';
               }
             ?>
           </select> 
+          <!-- calendario per selezionare le date -->
           <div class="col-10 calendar bg-primary mt-4 pt-2 text-center"  >
           <div class="row">
+            <!-- freccia per tornare all'anno precedente -->
             <div class="col-auto">
             <i class="bi bi-chevron-left" id="prev" style="color:white;"></i> 
             </div>
             <div class="col-auto">
             <h5 class="text-center text-white " id="year" >2023</h5>  
             </div>
+            <!-- freccia per andare all'anno successivo -->
             <div class="col-auto">
             <i class="bi bi-chevron-right" id="next" style="color:white;"></i>    
             </div>     
@@ -68,16 +73,19 @@ include '../../../connection.php';
           <div class="col-10 calendar bg-primary">
               <div class="row">
               <div class="col-1">
+              <!-- freccia per andare al mese precedente -->
               <i class="bi bi-chevron-left" id="prev1" style="color:white;"></i> 
               </div>
               <div class="col-5">
               <h5 class="text-center text-white pb-2" id="month" >Gennaio</h5>  
               </div>
+              <!-- freccia per andare al mese successivo -->
               <div class="col-2">
               <i class="bi bi-chevron-right" id="next1" style="color:white;"></i>    
               </div>  
             </div>       
           </div>
+          <!-- giorni del mese -->
           <div class= "col-10 calendar">
             <ul class="list-inline">
               <?php for($i=1; $i<=7; $i++) {  ?>
@@ -109,6 +117,8 @@ include '../../../connection.php';
             </ul>
           </div>
         </div>
+        <!-- fine colonna filtri -->
+        <!-- colonna risultati che saranno presi con la funzione fetch_data() definita nello script-->
         <div class="col-9 width-100" id="pull_data"></div>
     </div>
   </div>
@@ -119,7 +129,7 @@ include '../../../connection.php';
 </footer>
 
 <script>
-
+// inizializzo le variabili che serviranno per la ricerca
 let ordine ;
 let search;
 let citta;
@@ -127,7 +137,7 @@ let anno;
 let mese;
 let giorni = new Array();
 
-
+//funzione per prendere i dati da visualizzare 
 function fetch_data(page){
   $.ajax({
     url:"./fetch_eventi.php",
@@ -138,17 +148,17 @@ function fetch_data(page){
     }
   })
 };
-
+// chiamo una prima volta la funzione per visualizzare i risultati
 fetch_data();
-
+// questa funzione è definita in vetrine.js e serve per paginare i risultati
 get_page();
-
+// quando viene cliccato il bottone di ricerca assengno il valore dell'input alla variabile search e chiamo la funzione fetch_data() 
 $("#search-form").submit(function(event) {
   search = $('#inputsearch').val();
   fetch_data(1);
   event.preventDefault();
 });
-
+// quando viene cambiata la select per la città assengno il valore dell'input alla variabile citta e chiamo la funzione fetch_data()
 $(".form-select").change(function() {
   if($(this).val() == "0"){
     citta = "";
@@ -158,7 +168,7 @@ $(".form-select").change(function() {
   fetch_data(1);
 });
 
-
+// quando viene selezionato un bottone radio per l'ordine assengno il valore dell'input alla variabile ordine e chiamo la funzione fetch_data()
 document.getElementsByName("ordine").forEach(function(element) {
   element.addEventListener('click', function() {
     ordine = $(this).val();
@@ -166,25 +176,23 @@ document.getElementsByName("ordine").forEach(function(element) {
   });
 });
 
-
+// visualizzo anno precedente e chiamo la funzione fetch_data()
 $("#prev").on('click',function() {
   anno = (parseInt($("#year").text())) - 1;
   $("#year").text(anno);
   fetch_data(1);
 })
-
-
+// visualizzo anno successivo e chiamo la funzione fetch_data()
 $("#next").on('click',function() {
   anno = (parseInt($("#year").text())) + 1;
   $("#year").text(anno);
   fetch_data(1);
 })
 
-
+// quando si cambia mese si cambiano anche i giorni che vengono visualizzati in base al mese selezionato e chiamo la funzione fetch_data()
 $("#next1").on('click', function(){
   let year = parseInt($("#year").text());
   anno = year;
-  //let month = $("#month").innerHTML;
   let month = $("#month").text();
   if(month == "Gennaio"){
     $("#month").text("Febbraio");
@@ -309,7 +317,7 @@ $("#prev1").on('click', function() {
   fetch_data(1);
 });
 
-
+// è possibile selezionare uno o più giorni per la ricerca
 $(".day").on('click', function() {
   if ($(this).css("background-color") == "rgb(255, 165, 0)") {
     $(this).css("background-color", "white");
@@ -317,7 +325,6 @@ $(".day").on('click', function() {
     fetch_data(1);
   }else {
   $(this).css("background-color", "orange");
-  //let day = $(this).attr("id");
   giorni.push($(this).attr("id"));
   fetch_data(1);
   }

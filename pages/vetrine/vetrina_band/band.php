@@ -22,9 +22,11 @@
  <header>
   <?php include '../../common/navbar.php'; ?>
   </header>
+    <!-- immagine copertina -->
   <div class="col-12 position-relative" id="cover"  style="background: url('../../../site_images/band-vetrina.jpg') no-repeat; background-size: cover; height:500px;">
           <h1 class="text-center text-white position-absolute start-50 translate-middle-x bottom-0 big " > Band </h1>
   </div>
+
   <div class="container cont-event p-3">
 
     <div class= "row align-items-start mt-4" id="row2">
@@ -42,6 +44,7 @@
           <select class="form-select" id="citta">
           <option value="0" selected>Seleziona una città</option>
           <?php
+            // estrazione delle città dal database
             $query = "SELECT * FROM citta Order by nome_citta ASC";
             $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
             $citta = pg_fetch_all($result);
@@ -76,6 +79,7 @@
                   <div class="accordion-body">
                     <div class="section-fed" >
                       <?php
+                          // estrazione dei generi dal database
                           $query = "SELECT * FROM genere_musicale";
                           $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
                           $generi = pg_fetch_all($result);
@@ -105,6 +109,7 @@
                   <div class="accordion-body">
                     <div class="section-fed" >
                       <?php
+                          // estrazione dei servizi dal database
                           $query = "SELECT * FROM servizio_musicale";
                           $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
                           $servizi = pg_fetch_all($result);
@@ -123,8 +128,9 @@
                 </div>
               </div>
             </div>
-
          </div>
+          <!-- fine colonna filtri -->
+          <!-- colonna risultati che saranno presi con la funzione fetch_data() definita nello script-->
           <div class="col-9 width-100" id="pull_data"></div>
     </div>
   </div>
@@ -135,14 +141,14 @@
 </footer>
 
 <script>
-
+// inizializzo le variabili che serviranno per la ricerca
 let ordine ;
 let generi = new Array();
 let search;
 let citta;
 let servizi = new Array();
 
-
+//funzione per prendere i dati da visualizzare 
 function fetch_data(page){
   $.ajax({
     url:"./fetch_band.php",
@@ -154,18 +160,18 @@ function fetch_data(page){
   })
 };
 
-
+// chiamo una prima volta la funzione per visualizzare i risultati
 fetch_data();
-
+// questa funzione è definita in vetrine.js e serve per paginare i risultati
 get_page();
 
-
+// quando viene cliccato il bottone di ricerca assengno il valore dell'input alla variabile search e chiamo la funzione fetch_data() 
 $("#search-form").submit(function(event) {
   search = $('#inputsearch').val();
   fetch_data(1);
   event.preventDefault();
 });
-
+// quando viene cambiata la select per la città assengno il valore dell'input alla variabile citta e chiamo la funzione fetch_data()
 $(".form-select").change(function() {
   if($(this).val() == "0"){
     citta = "";
@@ -178,6 +184,7 @@ $(".form-select").change(function() {
 
 /*
   Ho usato getElementsByName perché è il metodo più veloce per selezionare un elemento
+  quando viene selezionato un bottone radio per l'ordine assengno il valore dell'input alla variabile ordine e chiamo la funzione fetch_data()
 */
 document.getElementsByName("ordine").forEach(function(element) {
   element.addEventListener('click', function() {
@@ -186,7 +193,7 @@ document.getElementsByName("ordine").forEach(function(element) {
   });
 });
 
-
+// quando viene selezionata una checkbox, aggiungo il valore della checkbox all'array generi e chiamo la funzione fetch_data()
 document.getElementsByName("genere").forEach(function(element) {
   element.addEventListener('change', function() {
     if(this.checked) {
@@ -198,7 +205,7 @@ document.getElementsByName("genere").forEach(function(element) {
     }
   });
 });
-
+// quando viene selezionata una checkbox, aggiungo il valore della checkbox all'array servizi e chiamo la funzione fetch_data()
 document.getElementsByName("servizio").forEach(function(element) {
   element.addEventListener('change', function() {
     if(this.checked) {

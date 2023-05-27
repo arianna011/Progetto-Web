@@ -15,7 +15,7 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 if(isset($_POST["caricaProfiloUtente"])) {
   
     $check = getimagesize($_FILES["profiloUtente"]["tmp_name"]);
-    if($check !== false) {
+    if($check !== false ) {
       $upload = move_uploaded_file($_FILES["profiloUtente"]["tmp_name"], $target_file);
       if ($upload) {
         $query = " INSERT INTO immagine(src) VALUES ('$name') RETURNING id_immagine";
@@ -40,9 +40,10 @@ if(isset($_POST["caricaProfiloUtente"])) {
     }
   
 
-  } else {
-    echo "File is not an image.";
+   else {
+      header("Location: ../profilo.php?id=".$id."&ptype=2");   
    
+  }
 }
 
 
