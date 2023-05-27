@@ -1,11 +1,3 @@
-<?php
-/* $title = "Title";
-$img = "https://picsum.photos/1000/1000?random=0";
-$infos1 = array("Hello there", "General Kenobi", "You're a bold one!");
-$infos2 = ["2,55 - 7,45€"] */
-    ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +89,7 @@ $infos2 = ["2,55 - 7,45€"] */
 
 </head>
 
-<body style="background-color: antiquewhite;">
+<body class=bg-beige>
     <div class="search-card">
         <div class="s-img">
             <img src=<?php echo $img ?>>

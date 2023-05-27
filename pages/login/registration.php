@@ -98,6 +98,8 @@
       </div>
     </form>
     <script src="formValidation.js"></script> 
+    
+    <!-- alert relativi ai messaggi di errore ottenuti tramite $_GET !-->
     <?php 
       if (isset($_GET["erroreCaratteri"]))
         echo '<script> alert ("Sono stati usati caratteri non permessi"); </script>';
