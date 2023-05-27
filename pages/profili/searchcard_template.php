@@ -89,7 +89,7 @@
 
 </head>
 
-<body style="background-color: antiquewhite;">
+<body class=bg-beige>
     <div class="search-card">
         <div class="s-img">
             <img src=<?php echo $img ?>>

@@ -18,6 +18,17 @@
     $event4 = pg_fetch_array($result, null, PGSQL_ASSOC);
 
     $events = array($event1, $event2, $event3, $event4 );
+    
+    $img_events = array(NULL,NULL,NULL,NULL);
+    foreach ($events as $i => $e)
+    {
+      $img = $events[$i]["immagine"];
+      if ($img && !str_starts_with($img, "http")) 
+      {
+        $img_events[$i] = '/user_data//' . $img;
+      }
+      else $img_events[$i] = $img;
+    }
 
     $no_descr = '<span class="text-grey mb-3"> <i> Nessuna descrizione </i> </span>';
     $descr_events = array($no_descr,$no_descr,$no_descr,$no_descr);

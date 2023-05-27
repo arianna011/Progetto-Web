@@ -17,6 +17,7 @@
     
     $returnString = generateRandomString();
 
+    #stringa univoca casuale di 70 caratteri (necessaria per la registrazione)
     $univoco = $returnString.sha1($unique);
 
 ?>
