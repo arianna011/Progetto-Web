@@ -1,16 +1,10 @@
-
-.container-fed {
-    padding: 2%;
-    align-items: center;
-    justify-content: center;
-}
-
-
+/* sezioni che contengo le checkbox */
 .section-fed {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
+/* item che rappresenta un profilo */
 .item-list-fed {
     display: flex; 
     flex-direction: row;
@@ -20,38 +14,36 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* cambio il colore degli accordion */
 .accordion-button {
     border:rgba(0, 0, 0, 0.19) 3px solid;
     background-color: #640062;
     color: #fff;
   }
-
 .accordion-body{
     background-color: #e6dde6;
     border: #4b4b4b 1px solid;
-
 }
-
 .accordion-button:focus{
     background-color: #640062; 
     color: #fff;
 }
 
+/* cambio il colore della paginazione */
 .pagination > li > a {
     background-color: #640062;
     color: #fff;
   }
-
   .pagination > li > a:hover {
     background-color: #fd7e14;
     color: #000;
   }
-
   .pagination .active > a {
     background-color: #fd7e14;
     color: #000;
   }
   
+
   #foto_profilo {
     width: 290px;
     height: 285px;
@@ -73,8 +65,10 @@
 }
 
 
-
+/* gestisco la disposizione degli elementi in base alla dimensione dello schermo */
+  /* per mobile */
   @media screen and (max-width: 767.98px) {
+    /* la foto appare sopra il testo invece che in riga */
     .item-list-fed {
         flex-direction: column;
         margin-top: 20px;
@@ -98,10 +92,8 @@
       height: 50%;
     }
   }
+  /* per tablet */
   @media screen and (min-width: 768px) and (max-width: 999.98px) {
-    #row2 {
-        flex-direction: column;
-    }
 
     .width-100 {
         width: 100%;
@@ -118,11 +110,10 @@
       max-width: 97%;
     }
 
-
-
   }      
-
+  /* per desktop di piccole dimensioni */
   @media screen and (min-width:1000px) and (max-width: 1247.98px) {
+    
     .section-fed {
         grid-template-columns: 1fr;
     }

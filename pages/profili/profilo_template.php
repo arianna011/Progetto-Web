@@ -26,7 +26,9 @@ $isProfiloArtista ??= false;
     <script>
         $(".contain-image").on("click", function() {
             if ($(".hidden-button").attr("hidden")) {
+                <?php if ($isUtente) { ?>
                 $(".hidden-button").removeAttr("hidden");
+                <?php } ?>
             } else {
                 $(".hidden-button").attr("hidden", "true");
             }

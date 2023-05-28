@@ -10,11 +10,11 @@
     display: inline-block;
     border: 0;
 }
-
+/* per nascondere i pulsanti radio */
 .rate > input {
     display: none;
 }
-
+/* per ordinare le stelle dal valore più basso*/
 .rate > .star-label {
     float: right;
 }
@@ -22,33 +22,34 @@
 .rate > .star-label:before {
     margin: 5px;
     font-size: 1.25em;
-    display: inline-block;
-    content: "\F586";
+    display: inline-block; 
+    content: "\F586"; /* stella piena */
     font-family: "Bootstrap-Icons";
 }
-
+/* colora di arancione la stella selezionata */
 .rate > input:checked ~ .star-label {
     color: orange;
 }
 
-/* Zero stars rating */
+/* valutazione per zero stelle */
 .rate > .star-label:last-child:before {
-    content: "\F588 "; /* empty star outline */
+    content: "\F588 "; /* stella vuota */
 }
-/* Half star trick */
+/* Per fare le mezze stelle */
 .rate .half:before {
-    content: "\F587 "; /* half star no outline */
+    content: "\F587 "; /* mezza stella*/
     position: absolute;
     padding-right: 0;
 }
-/* Click + hover color */
-input:checked ~ .star-label, /* color current and previous stars on checked */
-.star-label:hover, .star-label:hover ~ .star-label { color: orange;  } /* color previous stars on hover */
+/* colora la stella selezionata e quelle precedenti */
+input:checked ~ .star-label, 
+/* colora le stelle precedenti quando si passa con il mouse */
+.star-label:hover, .star-label:hover ~ .star-label { color: orange;  } 
 
-/* Hover highlights */
-input:checked + .star-label:hover, input:checked ~ .star-label:hover, /* highlight current and previous stars */
-input:checked ~ .star-label:hover ~ .star-label, /* highlight previous selected stars for new rating */
-.star-label:hover ~ input:checked ~ .star-label /* highlight previous selected stars */ { color: orange;  } 
+/* evidenzia le stelle precedenti quando si passa con il mouse */
+input:checked + .star-label:hover, input:checked ~ .star-label:hover, 
+input:checked ~ .star-label:hover ~ .star-label, 
+.star-label:hover ~ input:checked ~ .star-label  { color: orange;  } 
 
 .foto-recensione {
     width: 50px;

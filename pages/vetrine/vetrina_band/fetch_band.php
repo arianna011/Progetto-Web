@@ -1,12 +1,17 @@
 <?php
 include '../../../connection.php'; 
 require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php'; 
-$limit = 5;
+
+$limit = 5; // limita il numero di risultati per pagina
 $page = 0;
 $display = "";
 $strum = "";
 $gen = "";
 $serv = "";
+
+/*
+    controllo quali parametri sono stati passati e li salvo nelle variabili
+*/
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -19,7 +24,7 @@ if (isset($_GET['search'])) {
 }else{
     $search = "";
 }
-
+// se non è specificato l'ordine allora è per id_artista decrescente (dal più recente)
 if (isset($_GET['ordine'])) {
     if($_GET['ordine'] == "prezzo"){
         $ordine = "min_prezzo";
@@ -32,7 +37,7 @@ if (isset($_GET['ordine'])) {
     $ordine = "id_band DESC";
 }
 
-
+// se vengono specificati i generi scrivo la parte di query per i generi
 if(isset($_GET['generi'])) {
     $generi = $_GET['generi'];
     $gen = 'OR ';
@@ -41,7 +46,7 @@ if(isset($_GET['generi'])) {
     }
     $gen = substr($gen, 0, -4);
 }
-
+// se vengono specificati i generi scrivo la parte di query per i servizi
 if(isset($_GET['servizi'])) {
     $servizi = $_GET['servizi'];
     $serv = 'OR ';
@@ -50,17 +55,16 @@ if(isset($_GET['servizi'])) {
     }
     $serv = substr($serv, 0, -4);
 }
-
+// calcolo l'offset per la query in base alla pagina
 $start = ($page - 1) * $limit;
-
+// scrivo la condizione della query in base al contenuto della ricerca
 $condition = '';
-
 $q = explode(" ", $search);
 foreach($q as $text) {
     $condition .= "lower(nome_band) LIKE '%".pg_escape_string($dbconn, $text )."%' OR ";
 }
 $condition = substr($condition, 0, -4);
-
+// se è specificata la città la aggiungo alla condizione
 if(isset($_GET['citta']) AND $_GET['citta'] != NULL) {
     $citta = $_GET['citta'];
     $condition .= " AND id_sede = '".pg_escape_string($dbconn, $citta )."'";
@@ -82,24 +86,26 @@ if (isset($_GET['generi'])){
 }
 
 
-//echo $query;
+// serve per la paginazione e per controllare se ci sono artisti
 $count_artisti = pg_fetch_row(pg_query($dbconn, $query_2))[0];
 
 $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 
-
+// se ci sono artisti scrivo il contenuto html della pagina, utilizzando i dati della query
 if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
         $display .= '<div class="item-list-fed">';
+        // immagine profilo
         if((str_starts_with($row['foto_profilo'], "https://") || str_starts_with($row['foto_profilo'], "http://" )) || $row['foto_profilo'] == NULL){
-            //$display .= '<img id="foto_profilo" src='. $row['foto_profilo'] .' alt="foto profilo"  class="flex-shrink-0 me-3" />';
             $display .= '<img id="foto_profilo" src="../../../site_images/placeholder-image.webp" alt="foto profilo"  class="img-fluid" />';
         }else{
             $display .= '<img id="foto_profilo" src="../../../user_data/'.$row['foto_profilo'] .'" alt="foto profilo"  class="img-fluid" />';
         }
+        // nome band
         $display .= '
         <div class="col-md-4 p-4">
           <h5 class="nome artista"  >'. $row['nome_band'] .' </h5>';
+          // stelle valutazione media
             if($row['valutazione_media']){
                 $display .= '<h6 class="valutazione" style="color:#fd7e14">';
                  for ($i=1; $i < $row['valutazione_media']; $i+=2) { 
@@ -124,6 +130,7 @@ if($count_artisti> 0) {
             } else {
                 $display .= '<p> '. $row['descrizione'] .' </p> '; 
             }
+        // bottone per vedere il profilo
         $display .= '
             <a href="/pages/profili/profilo_band.php?id='. $row['id_band'] .'" class="btn btn-primary  style="padding:2%;"> Vedi profilo </a>
         </div>
@@ -140,12 +147,12 @@ if($count_artisti> 0) {
 } else {
     $display .= '<h3 style="text-align:center;"> Nessuna band trovata </h3>';
 }
-
+// calcolo il numero di pagine necessarie per la paginazione
 $total_pages = ceil($count_artisti / $limit);
 
-
+// funzione che crea la paginazione si trova in /pages/common/util.php
 $display .= pagination($page, $total_pages);
-
+// adesso $display contiene la lista delle band e la paginazione e viene stampato 
 echo $display;
 
 

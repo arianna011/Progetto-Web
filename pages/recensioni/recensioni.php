@@ -20,10 +20,12 @@ include '../../connection.php';
 <body>
     <div class="container-profile">
         <?php 
+            /* controllo se l'utente è loggato */
             $check;
             if (isset($_COOKIE["univoco"])) $univoco = $_COOKIE["univoco"];
             else $univoco = ""; 
             if  ($univoco=="" || preg_match("([<>&(),%'?+])", $univoco) || preg_match('/"/', $univoco))  
+            /* se non è loggato mostro il bottone per il login */
             { 
                 ?>
             <div class="row">
@@ -32,6 +34,7 @@ include '../../connection.php';
                 </div>
             </div>
         <?php }  else { 
+            /* se è loggato controllo se ha già scritto una recensione */
             $query_utente = "SELECT id_utente FROM profilo_utente WHERE univoco = '$univoco'";
             $result_utente = pg_query($dbconn, $query_utente);
             $row_utente = pg_fetch_row($result_utente);
@@ -40,6 +43,7 @@ include '../../connection.php';
             $check = pg_fetch_row($result_check);
             if ( $row_utente[0] != $_GET['id']) {
             ?>
+            <!-- mostro il form per la recensione e se è già stata scritta mostro i dati già inseriti -->
             <form class="row" action="/pages/recensioni/recensioni_action.php" method="POST">
             <div class="col-12">            
                 <div class="rate">
@@ -56,13 +60,16 @@ include '../../connection.php';
                     <input type="radio" id="rating0" name="rating" value="0" <?php if($check != NULL && $check[0]==0) echo "checked" ?>  /><label class="star-label"for="rating0" title="No star"></label>
                 </div>
             </div>
+        
             <div class=" mb-3">
-                <textarea class="form-control text-recensione" name="recensione" rows="3"><?php if ($check!= NULL) echo $check[1] ?></textarea>
+                <textarea class="form-control text-recensione" name="recensione" maxlength="1024" rows="3"><?php if ($check!= NULL) echo $check[1] ?></textarea>
+                <!-- aggiungo dei campi nascosti: l'id dell'artista da recensire, l'id dell'utente che scrive la recensione e il tipo di recensione (artista) -->
                 <input type="hidden" name="id_oggetto" value="<?php echo $_GET['id']; ?>">
                 <input type="hidden" name="id_utente" value="<?php echo  $row_utente[0]?>">
                 <input type="hidden" name="tipo" value="2">
             </div>
             <div class="col-12">
+                <!-- se è già stata scritta mostro il bottone per modificare o eliminare la recensione, altrimenti mostro il bottone per inviare la recensione -->
                 <?php if($check!= NULL) { echo '<button class="btn btn-primary mr-2 my-1" type="submit" name="modifica">Modifica recensione</button>';}
                     else {echo '<button class="btn btn-primary my-1" type="submit">Invia recensione</button>';}
                  ?>
@@ -79,8 +86,8 @@ include '../../connection.php';
         ?>
         <div>
             <?php
+                /* prendo i dati per mostrare tutte le recensioni del artista */
                 while($row = pg_fetch_array($result)) {
-
                     $query_utente = "SELECT nickname,foto_profilo FROM profilo_utente WHERE id_utente = $row[id_utente]";
                     $result_utente = pg_query($dbconn, $query_utente);
                     $row_utente_recensione = pg_fetch_array($result_utente);
@@ -94,7 +101,7 @@ include '../../connection.php';
                     $row_utente = pg_fetch_row($result_utente);
                     
                     if( $row_utente == False || $row['id_utente']  != $row_utente[0]  )  { ?>
-                    
+                    <!-- mostro le recensioni -->
                     <div class="row mt-3 recensione"> 
                         <hr class="col-10 mb-4">
                         <div class="row">
@@ -108,6 +115,7 @@ include '../../connection.php';
                             </div>
                         </div>
                         <div class="col-11">
+                            <!-- mostro le stelle in base alla valutazione -->
                             <h6 class="valutazione" style="color:#fd7e14"> <?php
                                 for ($i=1; $i < $row['valutazione']; $i+=2) { 
                                     ?> <i class="bi bi-star-fill"></i> <?php

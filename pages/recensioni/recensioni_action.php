@@ -1,17 +1,18 @@
 <?php
 include '../../connection.php';
 $valutazione = $_POST['rating'];
-$testo = $_POST['recensione'];
+$testo = $_POST['recensione'] ?? NULL;
 $id_oggetto = $_POST['id_oggetto'];
 $id_utente = $_POST['id_utente'];
 $tipo = $_POST['tipo'];
-
-if($valutazione == NULL || $testo == NULL) {
-    header("Location: /pages/profili/profilo.php?id=$id_oggetto&tipo=$tipo");
-    exit;
+/* una recensione con valutazione nulla non è valida */
+if($valutazione == NULL ) {
+    header("Location: /pages/profili/profilo.php?id=$id_oggetto&ptype=$tipo");
+    
 }
-
+/* se è stato usato il tasto elimina allora elimino la recensione */
 if(isset($_POST['elimina'])) {
+    /* a seconda del tipo di recensione elimino da una tabella o dall'altra */
     switch($tipo) {
         case 2:
             $delete = "DELETE FROM recensione_artista WHERE id_utente = $id_utente AND id_oggetto = $id_oggetto";
@@ -28,8 +29,9 @@ if(isset($_POST['elimina'])) {
 
     }
 }
-
+/* se è stato usato il tasto modifica allora modifico la recensione */
 if(isset($_POST['modifica'])) {
+    /* a seconda del tipo di recensione modifico una tabella o dall'altra */
     switch($tipo) {
         case 2:
             $update = "UPDATE recensione_artista SET valutazione = $valutazione, testo = '$testo', data_recensione = CURRENT_DATE WHERE id_utente = $id_utente AND id_oggetto = $id_oggetto";
@@ -46,8 +48,9 @@ if(isset($_POST['modifica'])) {
 
     }
 }
-
+/* altrimenti inserisco la recensione */
 if(!isset($_POST['elimina']) && !isset($_POST['modifica'])) {
+    /* a seconda del tipo di recensione inserisco in una tabella o dall'altra */
     switch($tipo) {
         case 2:
             $insert = "INSERT INTO recensione_artista (id_utente, id_oggetto, valutazione, testo, data_recensione) VALUES ($id_utente, $id_oggetto, $valutazione, '$testo', CURRENT_DATE)";

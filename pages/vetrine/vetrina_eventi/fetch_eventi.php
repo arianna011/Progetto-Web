@@ -1,12 +1,16 @@
 <?php
 include '../../../connection.php'; 
 require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php';
-$limit = 5;
+$limit = 5; // limita il numero di risultati per pagina
 $page = 0;
 $display = "";
 $strum = "";
 $gen = "";
 $serv = "";
+
+/*
+    controllo quali parametri sono stati passati e li salvo nelle variabili
+*/
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -19,7 +23,7 @@ if (isset($_GET['search'])) {
 }else{
     $search = "";
 }
-
+// se non è specificato l'ordine allora è per id_artista decrescente (dal più recente)
 if (isset($_GET['ordine'])) {
     if($_GET['ordine'] == "prezzo"){
         $ordine = "min_prezzo";
@@ -30,28 +34,28 @@ if (isset($_GET['ordine'])) {
     $ordine = "id_ingaggio DESC";
 }
 
-
+// calcolo l'offset per la query in base alla pagina
 $start = ($page - 1) * $limit;
-
+// scrivo la condizione della query in base al contenuto della ricerca
 $condition = '';
-
 $q = explode(" ", $search);
 foreach($q as $text) {
     $condition .= "lower(titolo) LIKE '%".pg_escape_string($dbconn, $text )."%' OR ";
 }
 $condition = substr($condition, 0, -4);
 
+/*
+    se sono stai modificati dati riguardanti la data aggiungo le condizioni alla query
+*/
 
 if(isset($_GET['anno']) AND $_GET['anno'] != NULL) {
     $anno = $_GET['anno'];
     $condition .= " AND EXTRACT(YEAR FROM data_ingaggio) = '".pg_escape_string($dbconn, $anno )."'";
 }
-
 if(isset($_GET['mese']) AND $_GET['mese'] != NULL) {
     $mese = $_GET['mese'];
     $condition .= " AND EXTRACT(MONTH FROM data_ingaggio) = '".pg_escape_string($dbconn, $mese )."'";
 }
-
 if(isset($_GET['giorni']) AND $_GET['giorni'] != NULL) {
     $giorni = $_GET['giorni'];
     $condition .= " AND (";
@@ -70,12 +74,12 @@ $query = "SELECT * FROM v_ingaggio WHERE ". $condition ." ORDER BY ".$ordine." L
 $query_2 = "SELECT COUNT(id_ingaggio) FROM v_ingaggio WHERE ". $condition ."";
 
 
-//echo $query;
+// serve per la paginazione e per controllare se ci sono artisti
 $count_artisti = pg_fetch_row(pg_query($dbconn, $query_2))[0];
 
 $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 
-
+// se ci sono artisti scrivo il contenuto html della pagina, utilizzando i dati della query
 if($count_artisti> 0) {
     while($row = pg_fetch_array($result)) {
         $display .= '<div class="item-list-fed">';
@@ -162,12 +166,12 @@ if($count_artisti> 0) {
 } else {
     $display .= '<h3 style="text-align:center;"> Nessun host trovato </h3>';
 }
-
+// calcolo il numero di pagine necessarie per la paginazione
 $total_pages = ceil($count_artisti / $limit);
 
-
+// funzione che crea la paginazione si trova in /pages/common/util.php
 $display .= pagination($page, $total_pages);
-
+// adesso $display contiene la lista degli eventi e la paginazione e viene stampato 
 echo $display;
 
 
