@@ -1,4 +1,5 @@
 <?php
+#pagina rappresentante l'elenco degli ingaggi per artisti pubblicati da un certo utente
 require_once $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pages/common/util.php';
 
@@ -11,6 +12,7 @@ if (!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
+#prendo tutti gli ingaggi aventi come datore l'id specificato in query string
 //uso di prepared statement per prevenire SQL injection (si spera)
 $query = "
 SELECT *
@@ -57,35 +59,41 @@ if (!$result) {
         .search-card {
             max-height: none;
         }
-        .s-info1>div{
+
+        .s-info1>div {
             margin-bottom: 10px;
         }
     }
 </style>
 
-<link rel="stylesheet" href="../homepage/homepage.css" >
+<link rel="stylesheet" href="../homepage/homepage.css">
 
 <body>
     <div class="main" style="padding: 30px">
         <h1 style="margin: 40px 40px 0px 0px">Ingaggi disponibili</h1>
         <div class="lista-ingaggi" style="margin: 30px 10px 50px 10px">
             <?php
+            
+            #controllo che sia presente almeno un risultato
             $row = pg_fetch_assoc($result);
             if (!$row) {
                 echo "nessun ingaggio trovato; " . pg_last_error($dbconn);
                 exit;
             }
 
+            #stampo i dati per ogni risultato trovato nel database
             while ($row) {
+
+                #preparo le variabili da usare nel template
                 $title = '<div class="text-purple">' . $row["titolo"] . '</div>';
 
                 $img = $row["immagine"] ?? "../../site_images/placeholder-image.jpg";
                 $infos1 = [
-                    '<p class="card-text showcase-date mx-2">' . $row["data_ingaggio"] . ($row["ora_inizio"] ? "," . $row["ora_inizio"] . " - " . $row["ora_fine"] : "")  . '</p>',
+                    '<p class="card-text showcase-date mx-2">' . $row["data_ingaggio"] . ($row["ora_inizio"] ? "," . $row["ora_inizio"] . " - " . $row["ora_fine"] : "") . '</p>',
                     $row["compenso_indicativo"] ? '<span class = "showcase-retr mb-3">' . $row["compenso_indicativo"] . " € </span>" : "<span class='text-grey' style = 'font-style: italic;'> compenso non specificato </span>",
-                    
-                    $row["indirizzo"] && $row["nome_citta"] ? 
-                        $row["indirizzo"] . ", " . $row["nome_citta"]
+
+                    $row["indirizzo"] && $row["nome_citta"] ?
+                    $row["indirizzo"] . ", " . $row["nome_citta"]
                     : $row["nome_citta"] ?? "",
 
                     $row["descrizione"]
@@ -94,7 +102,10 @@ if (!$result) {
                     "<a href='/pages/profili/profilo_locale.php?id=" . $row["id_ingaggio"] . "' class='btn btn-primary'> Vedi profilo </a>"
                 ];
 
+                #invoco il template
                 include("searchcard_template.php");
+
+                #faccio il fetch del prossimo risultato
                 $row = pg_fetch_array($result);
             }
             ?>

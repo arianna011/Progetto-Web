@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pages/common/util.php';
 
-
+#pagina rappresentante l'elenco dei locali di cui un certo utente è titolare
 
 //controllo che l'id sia presente
 if (!isset($_GET['id'])) {
@@ -11,6 +11,7 @@ if (!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
+#prendo tutti i locali aventi come titolare l'id specificato in query string
 //uso di prepared statement per prevenire SQL injection (si spera)
 $query = "
 SELECT
@@ -70,13 +71,18 @@ if (!$result) {
         <h1 style="margin: 40px 40px 0px 0px">Lista locali</h1>
         <div class="lista-locali" style="margin: 30px 10px 50px 10px">
             <?php
+
+            #controllo che sia presente almeno un risultato
             $row = pg_fetch_assoc($result);
             if (!$row) {
                 echo "nessun locale trovato; " . pg_last_error($dbconn);
                 exit;
             }
 
+            #stampo i dati per ogni risultato trovato nel database     
             while ($row) {
+
+                #preparo le variabili da usare nel template
                 $title = $row["nome_locale"];
                 $img = $row["foto_profilo"] ?? "../../site_images/placeholder-image.jpg";
                 $infos1 = [
@@ -89,7 +95,10 @@ if (!$result) {
                     "<a href='/pages/profili/profilo_locale.php?id=" . $row["id_locale"] . "' class='btn btn-primary'> Vedi profilo </a>"
                 ];
 
+                #invoco il template
                 include("searchcard_template.php");
+
+                #faccio il fetch del prossimo risultato            
                 $row = pg_fetch_array($result);
             }
             ?>

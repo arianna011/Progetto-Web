@@ -4,6 +4,8 @@ $isProfiloUtente = true;
 require_once  $_SERVER['DOCUMENT_ROOT'].'/connection.php'; 
 require_once  $_SERVER['DOCUMENT_ROOT'].'/pages/common/util.php'; 
 
+#pagina rappresentante il profilo di un utente del sito
+
 //controllo che l'id sia presente
 if (!isset($_GET['id'])) 
 {
@@ -24,6 +26,7 @@ if (!$result) { echo pg_last_error($dbconn); exit; }
 $result = pg_execute($dbconn, "usr", array($id));
 if (!$result) { echo pg_last_error($dbconn); exit; }
 
+#controllo che sia presente almeno un risultato
 $utente = pg_fetch_assoc($result);
 if (!$utente) { echo "utente non trovato; ".pg_last_error($dbconn); exit; }
 
@@ -39,6 +42,7 @@ else $isUtente = false;
 
 pg_close($dbconn);
 
+#preparo le variabili da usare nel template
 $id = $utente["id_utente"];
 $avatarSrc = $utente["foto_profilo"];
 if(!str_starts_with($utente["foto_profilo"], "http" ) ){
@@ -55,6 +59,6 @@ $imgs = array();
     
   
 
-
+#invoco il template
 require_once "profilo_template.php";
 ?>

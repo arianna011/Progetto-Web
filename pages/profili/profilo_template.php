@@ -1,3 +1,15 @@
+<!--Template di un profilo per un soggetto generico, con i seguenti parametri:
+$id             id univoco dell'entità cui il profilo appartiene
+$avatarSrc      foto profilo
+$infos          array delle informazioni più importanti, da visualizzare al fianco della foto profilo
+$description    descrizione testuale del profilo
+$imgs           array di immagini di un eventuale galleria
+
+Questa struttura comune è condivisa dai profili di utenti, locali, band e artisti
+Il template deve essere invocato tramite include/require di PHP.
+Le variabili sopracitate vanno valorizzate prima dell'invocazione.
+-->
+
 <?php 
 $isUtente ??= false; //per la retrocompatibilità ;)
 $isProfiloUtente ??= false;
@@ -24,6 +36,7 @@ $isProfiloArtista ??= false;
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <script>
+        //script usato per mostrare i pulsanti per l'eliminazione delle immagini della galleria
         $(".contain-image").on("click", function() {
             if ($(".hidden-button").attr("hidden")) {
                 <?php if ($isUtente) { ?>
@@ -41,8 +54,9 @@ $isProfiloArtista ??= false;
 </head>
 
 <body>
-    
+    <!--ogni sezione del profilo è valorizzata con le opportune variabili -->
     <div class="profile">
+        <!--card del profilo, contenente informazioni principali in maniera sintetica -->
         <div class="p-card">
             <div class="p-img p-avatar">
                 <img src="<?php echo $avatarSrc ?? "../../site_images/placeholder_profile.jpg"; ?>">

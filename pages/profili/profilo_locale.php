@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pages/common/util.php';
 
-
+#pagina rappresentante il profilo di un locale dove gli artisti possono esibirsi
 
 //controllo che l'id sia presente
 if (!isset($_GET['id'])) {
@@ -29,18 +29,20 @@ if (!$result) {
     exit;
 }
 
+#controllo che sia presente almeno un risultato
 $row = pg_fetch_assoc($result);
 if (!$row) {
     echo "locale non trovato: " . pg_last_error($dbconn);
     exit;
 }
 
+#preparo le variabili da usare nel template
 
 $avatarSrc = $row["foto_profilo"];
 $description = $row["descrizione_locale"];
 $name = $row["nome_locale"];
 
-$indirizzo =$row["indirizzo"];
+$indirizzo = $row["indirizzo"];
 $citta = $row["nome_citta"];
 
 $infos = [
@@ -75,6 +77,7 @@ $imgs = fromPgArray($row["foto_galleria"]);
     </header>
 
     <?php
+    #invoco il template
     require_once "profilo_template.php";
 
     /*     include $_SERVER['DOCUMENT_ROOT'] . '/pages/recensioni/recensioni_locale.php'; */

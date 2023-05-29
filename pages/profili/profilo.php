@@ -1,4 +1,11 @@
 <?php include('../../connection.php'); ?>
+
+<!-- pagina rappresentante il "profilo generale" di un utente, 
+raccoglie tutti gli altri profili in un'unica pagina.
+
+Riceve i seguenti parametri in queryString:
+id      id dell'utente
+ptype   progressivo rappresentante quale sezione del profilo da mostrare inizialmente, al caricamento della pagina -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,15 +74,17 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+    <!--Script usati per caricare il contenuto della pagina in maniera asincrona-->
     <script>
 
+        //dato il selettore (presumibilmente di un segnalibro) e il percorso di una pagina, carica la pagina indicata e imposta il segnalibro corrente come "attivo" (evidenziato in bianco)
         function loadInPage(navSelector, pathToLoad) {
             $("#nav-tab-content").load(pathToLoad, function (responseTxt, statusTxt, xhr) {
                 if (statusTxt == "error")
                     alert("Error: " + xhr.status + ": " + xhr.statusText);
             });
-            $(".bookmarks>div").removeClass("active-tab");
-            $(navSelector).addClass("active-tab");
+            $(".bookmarks>div").removeClass("active-tab");  //disattiva tutti gl ialtri segnalibri
+            $(navSelector).addClass("active-tab");  //attiva quello selezionato
         }
 
 
@@ -85,7 +94,8 @@
             id = <?php echo $_GET['id'] ?>;
             initialTabId = <?php echo $_GET['ptype']  ?? 1; ?> - 1; //se ptype non è specificato, carica il proflo utente per default
 
-
+            //vocabolario contentente le associazioni fra "segnalibri" (pulsanti) e pagine da caricare.
+            //NB: l'ordine di inserimento determina il valore di ptype da associare a una certa sezione del profilo
             //Aggiungere azioni qui vvvvv
             let actionLookup = new Map([
                 ["#nav-utente", 'profilo_utente.php?id=' + id],
@@ -94,12 +104,14 @@
                 ["#nav-locali", 'locali_e_ingaggi.php?id=' + id],
             ]);
 
+            //aggiungo i click listener ad ogni segnalibro
             for (const [selector, action] of actionLookup) {
                 $(selector).click(function () {
                     loadInPage(selector, action)
                 });
             }
 
+            //carico la sezione iniziale da mostrare in base al valore di ptype
             initialTab = Array.from(actionLookup.keys())[initialTabId];
 
             loadInPage(initialTab, actionLookup.get(initialTab));
@@ -122,6 +134,7 @@
         <div id="nav-locali">Locali e ingaggi</div>
     </div>
 
+    <!-- i profili vengono caricati qui dentro -->
     <div id="nav-tab-content" style="background-color: whitesmoke; margin: 0 10px 10px 10px">
         <h3 style='padding: 30px; font-size=large;'>Link non valido :T</h3> 
     </div>

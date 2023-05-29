@@ -1,4 +1,6 @@
 <?php
+#pagina rappresentante l'elenco delle band di cui un certo utente è membro
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pages/common/util.php';
 
@@ -11,7 +13,8 @@ if (!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
-//uso di prepared statement per prevenire SQL injection (si spera)
+#prendo tutte le band aventi l'id specificato in query string
+//uso di prepared statement per prevenire SQL injection
 $query = "
 SELECT *
 FROM v_band_per_artista
@@ -62,13 +65,16 @@ if (!$result) {
         <h1 style="margin: 40px 40px 0px 0px">Band di cui faccio parte</h1>
         <div class="band-list" style="margin: 30px 10px 50px 10px">
             <?php
+            #controllo che sia presente almeno un risultato
             $row = pg_fetch_assoc($result);
             if (!$row) {
                 echo "nessuna band trovata " . pg_last_error($dbconn);
                 exit;
             }
 
+            #stampo i dati per ogni risultato trovato nel database
             while ($row) {
+                #preparo le variabili da usare nel template
                 $title = $row["nome_band"];
                 $img = $row["foto_profilo"] ?? "../../site_images/placeholder-image.jpg";
                 $infos1 = [
@@ -81,7 +87,10 @@ if (!$result) {
                     "<a href='/pages/profili/profilo_band.php?id=" . $row["id_band"] . "' class='btn btn-primary'> Vedi profilo </a>"
                 ];
 
+                #invoco il template
                 include("searchcard_template.php");
+                
+                #faccio il fetch del prossimo risultato
                 $row = pg_fetch_array($result);
             }
             ?>

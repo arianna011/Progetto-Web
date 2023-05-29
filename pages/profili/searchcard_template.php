@@ -1,3 +1,11 @@
+<!--Template rappresentante il risultato (sintetico) di una ricerca
+$img        immagine del soggetto
+$title      titolo indicante il nome del risultato
+$infos1     array contenenti informazioni primarie (occupa parte sinistra in vista desktop)
+$infos2     array contenenti informazioni secondarie (occupa parte destra in vista desktop)
+
+Questo template è usato per visualizzare la lista membri band, lista locali, lista ingaggi, lista band (tutte all'intern odei profili)
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +18,7 @@
     <link rel="stylesheet" href="/bootstrap/scss/bootstrap.css" />
     <link rel="stylesheet" href="/pages/common/style.css" />
 
+    <!--Per massima adattabilità e fine-tuning, il template è realizzato con flexbox-->
     <style>
         .search-card {
             display: flex;

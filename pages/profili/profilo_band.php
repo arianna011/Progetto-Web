@@ -2,9 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pages/common/util.php';
 
+#pagina rappresentante il profilo di una band (formata da più artisti)
 
-
-//controllo che l'id sia presente
+//controllo che l'id (della band) sia presente
 if (!isset($_GET['id'])) {
     echo "id band non presente. Assicurati di aver raggiunto questa pagina tramite un link valido";
     exit;
@@ -29,11 +29,14 @@ if (!$result) {
     exit;
 }
 
+#controllo che sia presente almeno un risultato
 $row = pg_fetch_assoc($result);
 if (!$row) {
     echo "band non trovata: " . pg_last_error($dbconn);
     exit;
 }
+
+#preparo le variabili da usare nel template
 
 if ($row["valutazione_media"] == NULL)
     $valutazione = 0;
@@ -80,10 +83,11 @@ $imgs = array();
     </header>
 
     <?php
+    #invoco il template
     require_once "profilo_template.php";
 
 
-
+    #da qui in poi ci si occupa della lista membri della band
     /*query per prendere i membri della band*/
     $query = "
         SELECT *
@@ -112,13 +116,17 @@ $imgs = array();
 
 
         <?php
+        #controllo che sia presente almeno un risultato        
         $row = pg_fetch_assoc($result);
         if (!$row) {
             echo "nessun membro trovato: " . pg_last_error($dbconn);
             exit;
         }
 
+        #stampo i dati per ogni risultato trovato nel database
         while ($row) {
+
+            #preparo le variabili da usare nel template
             $title = $row["nome"];
             $img = $row["foto_profilo"] ?? "../../site_images/placeholder_profile.jpg";
             $infos1 = [
@@ -138,13 +146,17 @@ $imgs = array();
                 );
             }
 
+            #invoco il template        
             include("searchcard_template.php");
+
+            #faccio il fetch del prossimo risultato
             $row = pg_fetch_array($result);
         }
         ?>
     </div>
-
+    
     <?php
+    #sezione recensioni
     include $_SERVER['DOCUMENT_ROOT'] . '/pages/recensioni/recensioni_band.php';
     ?>
 
